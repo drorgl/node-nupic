@@ -1,0 +1,39 @@
+{
+  "name": "node-nupic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/arp.js",
+  "types": "./dist/arp.d.ts",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "install": "tsc",
+    "build": "tsc",
+    "tslint": "tslint -c tslint.json '.src/*.ts'",
+    "test": "tsc && ts-node test/arp_test.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drorgl/node-nupic.git"
+  },
+  "dependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/node": "^8.0.31",
+    "@types/tape": "^4.2.30",
+    "chalk": "^2.1.0",
+    "nan": "^2.7.0",
+    "tape": "^4.8.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3",
+    "node-addon-tracer": "drorgl/node-addon-tracer"
+  },
+  "devDependencies": {
+    "async": "^2.5.0",
+    "chalk": "^2.1.0",
+    "tape": "^4.8.0"
+  }
+}
