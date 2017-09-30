@@ -71,6 +71,19 @@
 				"src/init.cc",
 				"src/nupic/input.cc",
 				"src/nupic/input.h",
+				"src/nupic/dimensions.cc",
+				"src/nupic/dimensions.h",
+				"src/nupic/link.cc",
+				"src/nupic/link.h",
+				"src/nupic/nupic.cc",
+				"src/nupic/nupic.h",
+				"src/nupic/output.cc",
+				"src/nupic/output.h",
+				"src/nupic/region.cc",
+				"src/nupic/region.h",
+				"src/nupic/spec.cc",
+				"src/nupic/spec.h",
+
 				"src/nupic.h",
 				"src/safecast.h",
 
@@ -230,18 +243,17 @@
 
 			],
 			'dependencies': [
-				'<!@(nnbu-dependency --dependency ffmpegcpp)',
-				'<!@(nnbu-dependency --dependency opencv)',
+				'<!@(nnbu-dependency --dependency nupiccore)',
 				"<!(node -e \"require('node-overload-resolution')\"):node-overload-resolution",
 				"<!(node -e \"require('node-addon-tracer')\"):node-addon-tracer",
 			],
 			'include_dirs': [
-				'<!@(nnbu-dependency --headers opencv)',
+				#'<!@(nnbu-dependency --headers opencv)',
 				"<!(node -e \"require('nan')\")"
 			],
 			'link_settings': {
 				'libraries': [
-					'<!@(nnbu-dependency --lib-fix --libs opencv)',
+					#'<!@(nnbu-dependency --lib-fix --libs opencv)',
 				],
 			},
 			"conditions": [

@@ -1,0 +1,46 @@
+{
+	"platform": "win32",
+	"arch": "x64",
+	"toolset": "vc",
+	"toolset_version": "15.3.409",
+	"source_path": "./build.sources",
+	"dependencies": {
+		"apr": {
+			"source": "source",
+			"gyp_sources": [
+				"https://github.com/drorgl/apr.module.git@apr.gyp:apr"
+			]
+		},
+		"capnproto": {
+			"source": "source",
+			"gyp_sources": [
+				"https://github.com/drorgl/capnproto.module.git@capnproto.gyp:kj",
+				"https://github.com/drorgl/capnproto.module.git@capnproto.gyp:libcapnp"
+			]
+		},
+		"libexpat": {
+			"source": "source",
+			"gyp_sources": [
+				"https://github.com/drorgl/libexpat.module.git@libexpat.gyp:libexpat"
+			]
+		},
+		"nupiccore": {
+			"source": "source",
+			"gyp_sources": [
+				"https://github.com/drorgl/nupic.core.git@nupic.gyp:nupic_core"
+			]
+		},
+		"yamlcpp": {
+			"source": "source",
+			"gyp_sources": [
+				"https://github.com/drorgl/yaml-cpp.module.git@yaml-cpp.gyp:yaml-cpp"
+			]
+		},
+		"zlib": {
+			"source": "source",
+			"gyp_sources": [
+				"https://github.com/drorgl/zlib.module.git@zlib.gyp:zlib"
+			]
+		}
+	}
+}

@@ -10,6 +10,7 @@
   "scripts": {
     "install": "nnbu-configure",
     "configure-source": "nnbu-configure --force source && node-gyp configure",
+    "configure" : "npx node-gyp configure  --verbose",
     "build-binary": "nnbu-configure && node-gyp configure -- -Dwin_delay_load_hook=false --no-duplicate-basename-check  && node-gyp build",
     "test": "ts-node test/unit.ts",
     "build": "tsc",

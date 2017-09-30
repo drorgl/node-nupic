@@ -13,6 +13,8 @@
 
 #include "overload_resolution.h"
 
+#include <unordered_map>
+
 using namespace v8;
 
 

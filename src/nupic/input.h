@@ -4,9 +4,18 @@
 #include "../nupic.h"
 
 
-class input : public overres::ObjectWrap{
+#include "nupic/engine/Input.hpp"
+
+class Input : public overres::ObjectWrap{
 public:
-	static void Init(Handle<Object> target, std::shared_ptr<overload_resolution> overload);
+	static void Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload);
+
+	static Nan::Persistent<v8::FunctionTemplate> constructor;
+	virtual v8::Local<v8::Function> get_constructor();
+
+	static std::unordered_map<nupic::Input*, std::weak_ptr<Input>> _inputs;
+
+	std::shared_ptr<nupic::Input> _input;
 
 	static POLY_METHOD(New_region_type_level);
 	static POLY_METHOD(setName);
