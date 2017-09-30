@@ -1,0 +1,85 @@
+{
+	"node_gyp_configure_parameters" : "-- --no-duplicate-basename-check",
+    "binary" : {
+        "module_name": "nupic",
+        "module_paths" : ["build/Release/*.node","build/Release/*.dll","build/Release/*.so"] ,
+        "publish_repo" : "dror/node-nupic",
+        "package_name" : "{module_name}-v{version}-{node_abi}-{platform}-{arch}.7z"
+    },
+	"dependencies": {
+		"apr":{
+			"packages": [],
+			"pkgconfig": {},
+			"headers": {},
+			"libraries": {},
+			"sources":[
+				"https://github.com/drorgl/apr.module.git@apr.gyp:apr"
+			],
+			"archived_sources": [
+			 	"https://github.com/drorgl/apr.module/releases/download/v0.1.0/apr.module.v0.1.0.7z@apr.gyp:apr"
+			]
+		},
+		"capnproto":{
+			"packages": [],
+			"pkgconfig": {},
+			"headers": {},
+			"libraries": {},
+			"sources":[
+				"https://github.com/drorgl/capnproto.module.git@capnproto.gyp:kj",
+				"https://github.com/drorgl/capnproto.module.git@capnproto.gyp:libcapnp"
+			],
+			"archived_sources": [
+				 "https://github.com/drorgl/capnproto.module/releases/download/v0.1.0/capnproto.module.v0.1.0.7z@capnproto.gyp:kj",
+				 "https://github.com/drorgl/capnproto.module/releases/download/v0.1.0/capnproto.module.v0.1.0.7z@capnproto.gyp:libcapnp"
+			]
+		},
+		"libexpat":{
+			"packages": [],
+			"pkgconfig": {},
+			"headers": {},
+			"libraries": {},
+			"sources":[
+				"https://github.com/drorgl/libexpat.module.git@libexpat.gyp:libexpat"
+			],
+			"archived_sources": [
+			 	"https://github.com/drorgl/libexpat.module/releases/download/v0.1.0/libexpat.module.v0.1.0.7z@libexpat.gyp:libexpat"
+			]
+		},
+		"nupiccore":{
+			"packages": [],
+			"pkgconfig": {},
+			"headers": {},
+			"libraries": {},
+			"sources":[
+				"https://github.com/drorgl/nupic.core.git@nupic.gyp:nupic_core"
+			],
+			"archived_sources": [
+			 	"https://github.com/drorgl/nupic.core/releases/download/v0.1.0/nupic.core.v0.1.0.7z@nupic.gyp:nupic_core"
+			]
+		},
+		"yamlcpp":{
+			"packages": [],
+			"pkgconfig": {},
+			"headers": {},
+			"libraries": {},
+			"sources":[
+				"https://github.com/drorgl/yaml-cpp.module.git@yaml-cpp.gyp:yaml-cpp"
+			],
+			"archived_sources": [
+			 	"https://github.com/drorgl/yaml-cpp.module/releases/download/v0.1.0/yaml-cpp.v0.1.0.7z@yaml-cpp.gyp:yaml-cpp"
+			]
+		},
+		"zlib":{
+			"packages": [],
+			"pkgconfig": {},
+			"headers": {},
+			"libraries": {},
+			"sources":[
+				"https://github.com/drorgl/zlib.module.git@zlib.gyp:zlib"
+			],
+			"archived_sources": [
+			 	"https://github.com/drorgl/zlib.module/releases/download/v0.1.0/zlib.module.v0.1.0.7z@zlib.gyp:zlib"
+			]
+		}
+	}
+}

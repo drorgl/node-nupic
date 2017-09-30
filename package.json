@@ -8,10 +8,14 @@
     "node": "*"
   },
   "scripts": {
-    "install": "tsc",
+    "install": "nnbu-configure",
+    "configure-source": "nnbu-configure --force source && node-gyp configure",
+    "build-binary": "nnbu-configure && node-gyp configure -- -Dwin_delay_load_hook=false --no-duplicate-basename-check  && node-gyp build",
+    "test": "ts-node test/unit.ts",
     "build": "tsc",
-    "tslint": "tslint -c tslint.json '.src/*.ts'",
-    "test": "tsc && ts-node test/arp_test.ts"
+    "pack": "nnbu-pack --pack-binaries",
+    "test-tmp": "ts-node test/tmp.ts",
+    "demo-face_detection": "ts-node test/demos/face_detection.ts"
   },
   "author": "",
   "license": "MIT",
@@ -20,20 +24,23 @@
     "url": "https://github.com/drorgl/node-nupic.git"
   },
   "dependencies": {
+    "buffers": "0.1.1",
+    "nan": "^2.7.0",
+    "node-addon-tracer": "drorgl/node-addon-tracer",
+    "node-gyp": "drorgl/node-gyp",
+    "node-native-build-utilities": "drorgl/node-native-build-utilities",
+    "node-overload-resolution": "drorgl/node-overload-resolution",
+    "source-map-support": "^0.4.18",
+    "ts-node": "^3.3.0",
+    "typescript": "2.5.3",
     "@types/chalk": "^0.4.31",
     "@types/node": "^8.0.31",
     "@types/tape": "^4.2.30",
     "chalk": "^2.1.0",
-    "nan": "^2.7.0",
     "tape": "^4.8.0",
-    "ts-node": "^3.3.0",
-    "tslint": "^5.7.0",
-    "typescript": "^2.5.3",
-    "node-addon-tracer": "drorgl/node-addon-tracer"
+    "tslint": "^5.7.0"
   },
   "devDependencies": {
-    "async": "^2.5.0",
-    "chalk": "^2.1.0",
-    "tape": "^4.8.0"
+    "async": "^2.5.0"
   }
 }
