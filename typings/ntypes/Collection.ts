@@ -19,7 +19,9 @@
 //  * http://numenta.org/licenses/
 //  * ---------------------------------------------------------------------
 //  */
-
+import nupic_module from "../bindings";
+import { bool, pair ,size_t} from "../types/Types";
+import { NTA_CHECK, NTA_THROW } from "../utils/Log";
 // #ifndef NTA_COLLECTION_HPP
 // #define NTA_COLLECTION_HPP
 
@@ -35,92 +37,77 @@
 //   // and copies are also stored in a vector (it's Ok to use pointers).
 //   // You can add items using the add() method.
 //   //
-//   template <typename T>
-//   class Collection
-//   {
-//   public:
-// 	  Collection() {}
-// 	virtual ~Collection() {}
 
-//     size_t getCount() const {
-// 		return vec_.size();
-// 	}
+class Collection<T>
+{
+	private vec_: Array<pair<string, T>>;
 
-//     // This method provides access by index to the contents of the collection
-//     // The indices are in insertion order.
-//     //
+	public getCount(): size_t {
+		return this.vec_.length;
+	}
 
-//     const std::pair<std::string, T>& getByIndex(size_t index) const {
-// 		NTA_CHECK(index < vec_.size());
-// 		return vec_[index];
-// 	}
+	// This method provides access by index to the contents of the collection
+	// The indices are in insertion order.
+	//
 
-// 	std::pair<std::string, T>& getByIndex(size_t index)
-// 	{
-// 		NTA_CHECK(index < vec_.size());
-// 		return vec_[index];
-// 	}
+	public getByIndex(index: size_t): pair<string, T> {
+		NTA_CHECK(() => index < vec_.length);
+		return this.vec_[index];
+	}
 
-// 	bool contains(const std::string & name) const {
-// 		typename CollectionStorage::const_iterator i;
-// 		for (i = vec_.begin(); i != vec_.end(); i++)
-// 		{
-// 			if (i->first == name)
-// 				return true;
-// 		}
-// 		return false;
-// 	}
+	public contains(name: string): bool {
+		for (const i of this.vec_) {
+			if (i.first === name) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-//     T getByName(const std::string & name) const {
-// 		typename CollectionStorage::const_iterator i;
-// 		for (i = vec_.begin(); i != vec_.end(); i++)
-// 		{
-// 			if (i->first == name)
-// 				return i->second;
-// 		}
-// 		NTA_THROW << "No item named: " << name;
-// 	}
+	public getByName(name: string): T {
+		for (const i of this.vec_) {
 
-//     // TODO: move add/remove to a ModifiableCollection subclass
-//     // This method should be internal but is currently tested
-//     // in net_test.py in test_node_spec
-//     void add(const std::string & name, const T & item) {
-// 		// make sure we don't already have something with this name
-// 		typename CollectionStorage::const_iterator i;
-// 		for (i = vec_.begin(); i != vec_.end(); i++)
-// 		{
-// 			if (i->first == name)
-// 			{
-// 				NTA_THROW << "Unable to add item '" << name << "' to collection "
-// 					<< "because it already exists";
-// 		}
-// 	}
+			if (i.first === name) {
+				return i.second;
+			}
+		}
+		NTA_THROW("No item named: " + name);
+	}
 
-// 		// Add the new item to the vector
-// 		vec_.push_back(std::make_pair(name, item));
-//   }
+	// TODO: move add/remove to a ModifiableCollection subclass
+	// This method should be internal but is currently tested
+	// in net_test.py in test_node_spec
+	public add(name: string, item: T): void {
+		// make sure we don't already have something with this name
+		for (const i of this.vec_) {
+			if (i.first === name) {
+				NTA_THROW("Unable to add item '" + name + "' to collection "
+					+ "because it already exists");
+			}
+		}
 
-//     void remove(const std::string& name) {
-// 		typename CollectionStorage::iterator i;
-// 		for (i = vec_.begin(); i != vec_.end(); i++)
-// 		{
-// 			if (i->first == name)
-// 				break;
-// 	}
-// 		if (i == vec_.end())
-// 			NTA_THROW << "No item named '" << name << "' in collection";
+		// Add the new item to the vector
+		this.vec_.push(new pair(name, item));
+	}
 
-// 		vec_.erase(i);
-//   }
+	public remove(name: string): void {
+		for (const i of this.vec_) {
+			if (i.first === name) {
+				break;
+			}
+		}
+		if (i === vec_.end()) {
+			NTA_THROW("No item named '" + name + "' in collection");
+		}
 
-// //#ifdef NTA_INTERNAL
-// //    std::pair<std::string, T>& getByIndex(size_t index);
-// //#endif
+		this.vec_.erase(i);
+	}
 
-//   private:
-//     typedef std::vector<std::pair<std::string, T> > CollectionStorage;
-//     CollectionStorage vec_;
-//   };
+	// #ifdef NTA_INTERNAL
+	//    pair<string, T>& getByIndex(size_t index);
+	// #endif
+
+}
 // }
 
 // #endif
