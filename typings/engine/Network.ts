@@ -22,8 +22,9 @@
 
 import nupic_module from "../bindings";
 
-import {Dimensions} from "../ntypes/Dimensions";
-import {Link} from "./Link";
+import {Collection} from "../ntypes/Collection";
+import { Dimensions } from "../ntypes/Dimensions";
+import { Link } from "./Link";
 import { Region } from "./Region";
 
 /** @file
@@ -71,7 +72,7 @@ type runCallbackFunction = (network: Network, iteration: number, userData: any) 
  * a `void*` pointer to the associated data.
  */
 // typedef; std::pair<runCallbackFunction, void*> callbackItem;
-interface callbackItem {
+export interface callbackItem {
 	function: runCallbackFunction;
 	data: any;
 }
@@ -310,7 +311,7 @@ export interface Network {// : public Serializable<NetworkProto>
      * @returns A Collection of Region objects in the network
      */
 
-	getRegions(): Region[];
+	getRegions(): Collection<Region>;
 
 	/**
      * Get all links between regions
@@ -406,7 +407,7 @@ export interface Network {// : public Serializable<NetworkProto>
      *
      * @returns Reference to callback Collection
      */
-	getCallbacks(): callbackItem[];
+	getCallbacks(): Collection< callbackItem>;
 
 	/**
      * @}
@@ -434,9 +435,10 @@ export interface Network {// : public Serializable<NetworkProto>
 	// Capnp serialization methods
 	// using; Serializable::write;
 	// virtual; void write(NetworkProto::Builder& proto); const override;
+	write(): Buffer;
 	// using; Serializable::read;
 	// virtual; void read(NetworkProto::Reader& proto); override;
-
+	read(buf: Buffer): void;
 	// private:
 
 	//   // Both constructors use this common initialization method

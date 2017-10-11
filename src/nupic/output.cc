@@ -1,4 +1,7 @@
-﻿#include "input.h"
+﻿#include "output.h"
+
+#include "region.h"
+#include "link.h"
 
 //namespace input_general_callback {
 //	std::shared_ptr<overload_resolution> overload;
@@ -11,234 +14,153 @@
 //}
 
 void
-input::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Output::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
-	auto class_overload = overload->add_class("Input");
-	
-    // /**
-    //  * Constructor.
-    //  *
-    //  * @param region
-    //  *        The region that the input belongs to.
-    //  * @param type
-    //  *        The type of the input, i.e. TODO
-    //  * @param isRegionLevel
-    //  *        Whether the input is region level, i.e. TODO
-    //  */
-    // Input(Region& region, NTA_BasicType type, bool isRegionLevel);
+	auto class_overload = overload->add_class("Output");
+	/**
+	* Constructor.
+	*
+	* @param region
+	*        The region that the output belongs to.
+	* @param type
+	*        The type of the output, TODO
+	* @param isRegionLevel
+	*        Whether the output is region level, i.e. TODO
+	*/
+	//Output(Region& region, NTA_BasicType type, bool isRegionLevel);
 	class_overload->add_overload_constructor({
-		 	make_param<Region*>("region","Region"),
-			make_param<int>("type", "NTA_BasicType"),
-			make_param<bool>("isRegionLevel", "bool")
-		 },
-	// 	/**
-	// 	 *
-	// 	 * Destructor.
-	// 	 *
-	// 	 */
-	// 	~Input();
-	
-	// 	/**
-	// 	 *
-	// 	 * Set the name for the input.
-	// 	 *
-	// 	 * Inputs need to know their own name for error messages.
-	// 	 *
-	// 	 * @param name
-	// 	 *        The name of the input
-	// 	 *
-	// 	 */
-	// 	void setName(const std::string& name);
-	
-	// 	/**
-	// 	 * Get the name of the input.
-	// 	 *
-	// 	 * @return
-	// 	 *        The name of the input
-	// 	 */
-	// 	const std::string& getName() const;
-	
-	// 	/**
-	// 	 * Add the given link to this input and to the list of links on the output
-	// 	 *
-	// 	 * @param link
-	// 	 *        The link to add.
-	// 	 * @param srcOutput
-	// 	 *        The output of previous Region, which is also the source of the input
-	// 	 */
-	// 	void
-	// 	addLink(Link* link, Output* srcOutput);
-	
-	// 	/**
-	// 	 * Locate an existing Link to the input.
-	// 	 *
-	// 	 * It's called by Network.removeLink() and internally when adding a link
-	// 	 *
-	// 	 * @param srcRegionName
-	// 	 *            The name of the source Region
-	// 	 * @param srcOutputName
-	// 	 *            The name of the source Output
-	// 	 *
-	// 	 * @returns
-	// 	 *     The link if found or @c NULL if no such link exists
-	// 	 */
-	// 	Link*
-	// 	findLink(const std::string& srcRegionName,
-	// 			 const std::string& srcOutputName);
-	
-	// 	/**
-	// 	 * Removing an existing link from the input.
-	// 	 *
-	// 	 * It's called in four cases:
-	// 	 *
-	// 	 * 1. Network.removeLink()
-	// 	 * 2. Network.removeRegion() when given @a srcRegion
-	// 	 * 3. Network.removeRegion() when given @a destRegion
-	// 	 * 4. Network.~Network()
-	// 	 *
-	// 	 * It is an error to call this if our containing region
-	// 	 * is uninitialized.
-	// 	 *
-	// 	 * @note This method will set the Link pointer to NULL on return (to avoid
-	// 	 * a dangling reference)
-	// 	 *
-	// 	 * @param link
-	// 	 *        The Link to remove, possibly retrieved by findLink(), note that
-	// 	 *        it is a reference to the pointer, not the pointer itself.
-	// 	 */
-	// 	void
-	// 	removeLink(Link*& link);
-	
-	// 	/**
-	// 	 * Make input data available.
-	// 	 *
-	// 	 * Called by Region.prepareInputs()
-	// 	 */
-	// 	void
-	// 	prepare();
-	
-	// 	/**
-	// 	 *
-	// 	 * Get the data of the input.
-	// 	 *
-	// 	 * @returns
-	// 	 *         A mutable reference to the data of the input as an @c Array
-	// 	 */
-	// 	const Array &
-	// 	getData() const;
-	
-	// 	/**
-	// 	 *
-	// 	 * Get the Region that the input belongs to.
-	// 	 *
-	// 	 * @returns
-	// 	 *         The mutable reference to the Region that the input belongs to
-	// 	 */
-	// 	Region&
-	// 	getRegion();
-	
-	// 	/**
-	// 	 *
-	// 	 * Get all the Link objects added to the input.
-	// 	 *
-	// 	 * @returns
-	// 	 *         All the Link objects added to the input
-	// 	 */
-	// 	const std::vector<Link*>&
-	// 	getLinks();
-	
-	// 	/**
-	// 	 *
-	// 	 * Tells whether the input is region level.
-	// 	 *
-	// 	 * @returns
-	// 	 *     Whether the input is region level, i.e. TODO
-	// 	 */
-	// 	bool
-	// 	isRegionLevel();
-	
-	// 	/**
-	// 	 * Called by Region.evaluateLinks() as part
-	// 	 * of network initialization.
-	// 	 *
-	// 	 * 1. Tries to make sure that dimensions at both ends
-	// 	 *    of a link are specified by calling setSourceDimensions()
-	// 	 *    if possible, and then calling getDestDimensions()
-	// 	 * 2. Ensures that region dimensions are consistent with
-	// 	 *    either by setting destination region dimensions (this is
-	// 	 *    where links "induce" dimensions) or by raising an exception
-	// 	 *    if they are inconsistent.
-	// 	 *
-	// 	 * @returns
-	// 	 *         Number of links that could not be fully evaluated, i.e. incomplete
-	// 	 */
-	// 	size_t
-	// 	evaluateLinks();
-	
-	// 	/**
-	// 	 * Initialize the Input .
-	// 	 *
-	// 	 * After the input has all the information it needs, it is initialized by
-	// 	 * this method. Volatile data structures (e.g. the input buffer) are set up。
-	// 	 */
-	// 	void
-	// 	initialize();
-	
-	// 	/**
-	// 	 * Tells whether the Input is initialized.
-	// 	 *
-	// 	 * @returns
-	// 	 *         Whether the Input is initialized
-	// 	 */
-	// 	bool
-	// 	isInitialized();
-	
-	// 	/* ------------ Methods normally called by the RegionImpl ------------- */
-	
-	// 	/**
-	// 	 *
-	// 	 * @see Link.buildSplitterMap()
-	// 	 *
-	// 	 */
-	// 	typedef std::vector< std::vector<size_t> > SplitterMap;
-	
-	// 	/**
-	// 	 *
-	// 	 * Get splitter map from an initialized input
-	// 	 *
-	// 	 * @returns
-	// 	 *         The splitter map
-	// 	 */
-	// 	const SplitterMap& getSplitterMap() const;
-	
-	// 	/** explicitly instantiated for various types */
-	// 	template <typename T> void getInputForNode(size_t nodeIndex, std::vector<T>& input) const;
-	
+		make_param<Region*>("region","Region"),
+		make_param<NTA_BasicType>("type","NTA_BasicType"),
+		make_param<bool>("isRegionLevel","bool")
+	}, New_region);
 
-	// /** @overload */
-	// overload->addOverload("features2d", "", "FAST", {
-	// 	make_param<IOArray*>("image","IOArray"),
-	// 	make_param<std::shared_ptr<overres::Callback>>("cb","Function"),// : (keypoints : Array<_types.KeyPoint>) = > void,
-	// 	make_param<int>("threshold","int"),
-	// 	make_param<bool>("nonmaxSuppression","bool",true)
-	// }, FAST_a);
+	/**
+	* Destructor
+	*/
+	//~Output();
 
+	/**
+	* Set the name for the output.
+	*
+	* Output need to know their own name for error messages.
+	*
+	* @param name
+	*        The name of the output
+	*/
+	//void setName(const std::string& name);
+	class_overload->add_overload("setName", {
+		make_param<std::string>("name","string")
+	}, setName);
 
-}
+	/**
+	* Get the name of the output.
+	*
+	* @return
+	*        The name of the output
+	*/
+	//const std::string& getName() const;
+	class_overload->add_overload("getName", {}, getName);
 
+	/**
+	* Initialize the Output .
+	*
+	* @param size
+	*        The count of node output element, i.e. TODO
+	*
+	* @note It's safe to reinitialize an initialized Output with the same
+	* parameters.
+	*
+	*/
+	//void initialize(size_t size);
+	class_overload->add_overload("initialize", {
+		make_param<size_t>("size","size_t")
+	}, initialize);
 
+	/**
+	*
+	* Add a Link to the Output .
+	*
+	* @note The Output does NOT take ownership of @a link, it's created and
+	* owned by an Input Object.
+	*
+	* Called by Input.addLink()
+	*
+	* @param link
+	*        The Link to add
+	*/
+	//void addLink(Link* link);
+	class_overload->add_overload("addLink", {
+		make_param<Link*>("link","Link")
+	}, addLink);
 
-POLY_METHOD(features2d::drawKeypoints){
-	auto image		= info.at<IOArray*>(0)->GetInputArray();
-	auto keypoints	= *info.at<std::shared_ptr<std::vector<KeyPoint*>>>(1);
-	auto outImage = info.at<IOArray*>(2)->GetInputOutputArray();
-	auto color = info.at<Scalar*>(3)->_scalar;
-	auto flags = info.at<int>(4);
+	/**
+	* Removing an existing link from the output.
+	*
+	* @note Called only by Input.removeLink() even if triggered by
+	* Network.removeRegion() while removing the region that contains us.
+	*
+	* @param link
+	*        The Link to remove
+	*/
+	//void removeLink(Link* link);
+	class_overload->add_overload("removeLink", {
+		make_param<Link*>("link","Link")
+	}, removeLink);
 
-	std::unique_ptr<std::vector<cv::KeyPoint>> vec_kp = std::make_unique<std::vector<cv::KeyPoint>>();
-	std::transform(std::begin(keypoints), std::end(keypoints), std::back_inserter(*vec_kp), [](const KeyPoint* kpi) {return *kpi->_keyPoint; });
+	/**
+	* Tells whether the output has outgoing links.
+	*
+	* @note We cannot delete a region if there are any outgoing links
+	* This allows us to check in Network.removeRegion() and Network.~Network().
+	* @returns
+	*         Whether the output has outgoing links
+	*/
+	//bool hasOutgoingLinks();
+	class_overload->add_overload("hasOutgoingLinks", {}, hasOutgoingLinks);
 
-	cv::drawKeypoints(image, *vec_kp, outImage, *color, flags);
+	/**
+	*
+	* Get the data of the output.
+	*
+	* @returns
+	*         A constant reference to the data of the output as an @c Array
+	*
+	* @note It's mportant to return a const array so caller can't
+	* reallocate the buffer.
+	*/
+	//const Array & getData() const;
+	class_overload->add_overload("getData", {}, getData);
+
+	/**
+	*
+	* Tells whether the output is region level.
+	*
+	* @returns
+	*     Whether the output is region level, i.e. TODO
+	*/
+	//bool isRegionLevel() const;
+	class_overload->add_overload("isRegionLevel", {}, isRegionLevel);
+
+	/**
+	*
+	* Get the Region that the output belongs to.
+	*
+	* @returns
+	*         The mutable reference to the Region that the output belongs to
+	*/
+	//Region& getRegion() const;
+	class_overload->add_overload("getRegion", {}, getRegion);
+
+	/**
+	* Get the count of node output element.
+	*
+	* @returns
+	*         The count of node output element, previously set by initialize().
+	*/
+	//size_t getNodeOutputElementCount() const;
+	class_overload->add_overload("getNodeOutputElementCount", {}, getNodeOutputElementCount);
+
+	constructor.Reset(class_overload->done<Output>());
 }
 

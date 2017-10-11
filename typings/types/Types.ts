@@ -43,57 +43,77 @@
  * Represents a 8-bit byte.
  */
 
-type NTA_Byte = number; //        Byte;
+export type size_t = number;
+export type bool = boolean;
+
+export type int = number;
+export type uint = number;
+
+export type float = number;
+export type double = number;
+
+export type NTA_Byte = number; //        Byte;
+export type Byte = NTA_Byte;
 
 /**
  * Represents a 16-bit signed integer.
  */
-type NTA_Int16 = number; //      Int16;
+export type NTA_Int16 = number; //      Int16;
+export type Int16 = NTA_Int16;
 
 /**
  * Represents a 16-bit unsigned integer.
  */
-type NTA_UInt16 = number; //     UInt16;
+export type NTA_UInt16 = number; //     UInt16;
+export type UInt16 = NTA_UInt16;
 
 /**
  * Represents a 32-bit signed integer.
  */
-type NTA_Int32 = number; //       Int32;
+export type NTA_Int32 = number; //       Int32;
+export type Int32 = NTA_Int32;
 
 /**
  * Represents a 32-bit unsigned integer.
  */
-type NTA_UInt32 = number; //      UInt32;
+export type NTA_UInt32 = number; //      UInt32;
+export type UInt32 = NTA_UInt32;
 
 /**
  * Represents a 64-bit signed integer.
  */
-type NTA_Int64 = number; //          Int64;
+export type NTA_Int64 = number; //          Int64;
+export type Int64 = NTA_Int64;
 
 /**
  * Represents a 64-bit unsigned integer.
  */
-type NTA_UInt64 = number; //       UInt64;
+export type NTA_UInt64 = number; //       UInt64;
+export type UInt64 = NTA_UInt64;
 
 /**
  * Represents a 32-bit real number(a floating-point number).
  */
-type NTA_Real32 = number; //      Real32;
+export type NTA_Real32 = number; //      Real32;
+export type Real32 = NTA_Real32;
 
 /**
  * Represents a 64-bit real number(a floating-point number).
  */
-type NTA_Real64 = number; //     Real64;
+export type NTA_Real64 = number; //     Real64;
+export type Real64 = NTA_Real64;
 
 /**
  * Represents an opaque handle/pointer, same as `void *`
  */
-type NTA_Handle = number; //      Handle;
+export type NTA_Handle = number; //      Handle;
+export type Handle = NTA_Handle;
 
 /**
 * Represents an opaque pointer, same as `uintptr_t`
 */
-type NTA_UIntPtr = number; //     UIntPtr;
+export type NTA_UIntPtr = number; //     UIntPtr;
+export type UIntPtr = NTA_UIntPtr;
 
 /**
  * @}
@@ -113,26 +133,30 @@ type NTA_UIntPtr = number; //     UIntPtr;
  *
  * Same as nupic::Real64 if `NTA_DOUBLE_PRECISION` is defined, nupic::Real32 otherwise.
  */
-type NTA_Real = number; // Real;
+export type NTA_Real = number; // Real;
+export type Real = NTA_Real;
 
 /**
  * Represents a signed integer.
  *
  * Same as nupic::Int64 if `NTA_BIG_INTEGER` is defined, nupic::Int32 otherwise.
  */
-type NTA_Int = number; //  Int;
+export type NTA_Int = number; //  Int;
+export type Int = NTA_Int;
 
 /**
  * Represents a unsigned integer.
  *
  * Same as nupic::UInt64 if `NTA_BIG_INTEGER` is defined, nupic::UInt32 otherwise.
  */
-type NTA_UInt = number; // UInt;
+export type NTA_UInt = number; // UInt;
+export type UInt = NTA_UInt;
 
 /**
  * Represents lengths of arrays, strings and so on.
  */
-type NTA_Size = number; // Size;
+export type NTA_Size = number; // Size;
+export type Size = NTA_Size;
 
 /**
 * @}
@@ -247,3 +271,8 @@ export enum NTA_BasicType {
 	// #endif
 
 }// NTA_BasicType;
+
+export class pair<T1, T2> {
+	constructor(public  first?: T1, public second?: T2) {
+	}
+}

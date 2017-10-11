@@ -19,7 +19,8 @@
 //  * http://numenta.org/licenses/
 //  * ---------------------------------------------------------------------
 //  */
-
+import nupic_module from "../bindings";
+import { NTA_BasicType, size_t } from "../types/Types";
 // /** @file
 //  * Definitions for the ArrayBase class
 //   *
@@ -43,98 +44,56 @@
 
 // namespace nupic
 // {
-//   /**
-//    * An ArrayBase is used for passing arrays of data back and forth between
-//    * a client application and NuPIC, minimizing copying. It facilitates
-//    * both zero-copy and one-copy operations.
-//    */
-//   class ArrayBase
-//   {
-//   public:
-//     /**
-//      * Caller provides a buffer to use.
-//      * NuPIC always copies data into this buffer
-//      * Caller frees buffer when no longer needed.
-//      */
-//     ArrayBase(NTA_BasicType type, void* buffer, size_t count);
+/**
+ * An ArrayBase is used for passing arrays of data back and forth between
+ * a client application and NuPIC, minimizing copying. It facilitates
+ * both zero-copy and one-copy operations.
+ */
+interface ArrayBase_Static {
+	/**
+	   * Caller provides a buffer to use.
+	   * NuPIC always copies data into this buffer
+	   * Caller frees buffer when no longer needed.
+	   */
+	new(type: NTA_BasicType, buffer: Buffer): ArrayBase;
 
-//     /**
-//      * Caller does not provide a buffer --
-//      * Nupic will either provide a buffer via setBuffer or
-//      * ask the ArrayBase to allocate a buffer via allocateBuffer.
-//      */
-//     explicit ArrayBase(NTA_BasicType type);
+	/**
+     * Caller does not provide a buffer --
+     * Nupic will either provide a buffer via setBuffer or
+     * ask the ArrayBase to allocate a buffer via allocateBuffer.
+     */
+	new(type: NTA_BasicType): ArrayBase;
 
-//     /**
-//      * The destructor ensures the array doesn't leak its buffer (if
-//      * it owns it).
-//      */
-//     virtual ~ArrayBase();
+	/**
+   * The destructor ensures the array doesn't leak its buffer (if
+   * it owns it).
+   */
+	// virtual ~ArrayBase();
 
-//     /**
-//      * Ask ArrayBase to allocate its buffer
-//      */
-//     void
-//     allocateBuffer(size_t count);
+}
 
-//     void
-//     setBuffer(void *buffer, size_t count);
+export interface ArrayBase {
 
-//     void
-//     releaseBuffer();
+	/**
+     * Ask ArrayBase to allocate its buffer
+     */
 
-//     void*
-//     getBuffer() const;
+	allocateBuffer(count: size_t): void;
 
-//     // number of elements of given type in the buffer
-//     size_t
-//     getCount() const;
+	setBuffer(buffer: Buffer): void;
 
-//     NTA_BasicType
-//     getType() const;
+	releaseBuffer(): void;
 
-//   protected:
-//     // buffer_ is typed so that we can use new/delete
-//     // cast to/from void* as necessary
-//     char* buffer_;
-//     size_t count_;
-//     NTA_BasicType type_;
-//     bool own_;
+	getBuffer(): Buffer;
 
-//   private:
-//     /**
-//      * Element-type-specific templated function for streaming elements to
-//      * ostream. Elements are comma+space-separated and enclosed in braces.
-//      *
-//      * @param outStream   output stream
-//      * @param inbuf       input buffer
-//      * @param numElements number of elements to use from the beginning of buffer
-//      */
-//     template <typename SourceElementT>
-//     static void _templatedStreamBuffer(std::ostream& outStream,
-//                                        const void* inbuf,
-//                                        size_t numElements)
-//     {
-//       outStream << "(";
+	// number of elements of given type in the buffer
 
-//       // Stream the elements
-//       auto it = (const SourceElementT*)inbuf;
-//       auto const end = it + numElements;
-//       if (it < end)
-//       {
-//         for (; it < end - 1; ++it)
-//         {
-//           outStream << *it << ", ";
-//         }
+	getCount(): size_t;
 
-//         outStream << *it;  // final element without the comma
-//       }
+	getType(): NTA_BasicType;
 
-//       outStream << ")";
-//     }
-
-//     friend std::ostream& operator<<(std::ostream&, const ArrayBase&);
-//   };
+}
+export let ArrayBase: ArrayBase_Static = nupic_module.x;
 
 //   // Serialization for diagnostic purposes
 //   std::ostream& operator<<(std::ostream&, const ArrayBase&);

@@ -16,8 +16,10 @@ public:
 
 	std::shared_ptr<nupic::Spec> _spec;
 
-
 	static POLY_METHOD(New);
+	static POLY_METHOD(toString);
+
+
 
 };
 

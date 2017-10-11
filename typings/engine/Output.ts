@@ -32,6 +32,7 @@ import nupic_module from "../bindings";
 // #include <set>
 // #include <nupic/types/Types.hpp>
 // #include <nupic/utils/Log.hpp> // temporary, while impl is in this file
+import {ArrayBase} from "../ntypes/ArrayBase";
 import {NTA_BasicType} from "../types/Types";
 // import * as Log from "../utils/Log";
 import {Link} from "./Link";
@@ -143,7 +144,7 @@ export interface Output {
      * @note It's mportant to return a const array so caller can't
      * reallocate the buffer.
      */
-	getData(): any[];
+	getData(): ArrayBase;
 
 	/***
      *

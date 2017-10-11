@@ -1,4 +1,4 @@
-﻿#include "input.h"
+﻿#include "dimensions.h"
 
 //namespace input_general_callback {
 //	std::shared_ptr<overload_resolution> overload;
@@ -11,234 +11,466 @@
 //}
 
 void
-input::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Dimensions::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
-	auto class_overload = overload->add_class("Input");
-	
-    // /**
-    //  * Constructor.
-    //  *
-    //  * @param region
-    //  *        The region that the input belongs to.
-    //  * @param type
-    //  *        The type of the input, i.e. TODO
-    //  * @param isRegionLevel
-    //  *        Whether the input is region level, i.e. TODO
-    //  */
-    // Input(Region& region, NTA_BasicType type, bool isRegionLevel);
+	auto class_overload = overload->add_class("Dimensions");
+	/**
+	* Create a new Dimensions object.
+	*
+	* @note Default dimensions are unspecified, see isUnspecified()
+	*
+	*/
+	//Dimensions();
 	class_overload->add_overload_constructor({
-		 	make_param<Region*>("region","Region"),
-			make_param<int>("type", "NTA_BasicType"),
-			make_param<bool>("isRegionLevel", "bool")
-		 },
-	// 	/**
-	// 	 *
-	// 	 * Destructor.
-	// 	 *
-	// 	 */
-	// 	~Input();
-	
-	// 	/**
-	// 	 *
-	// 	 * Set the name for the input.
-	// 	 *
-	// 	 * Inputs need to know their own name for error messages.
-	// 	 *
-	// 	 * @param name
-	// 	 *        The name of the input
-	// 	 *
-	// 	 */
-	// 	void setName(const std::string& name);
-	
-	// 	/**
-	// 	 * Get the name of the input.
-	// 	 *
-	// 	 * @return
-	// 	 *        The name of the input
-	// 	 */
-	// 	const std::string& getName() const;
-	
-	// 	/**
-	// 	 * Add the given link to this input and to the list of links on the output
-	// 	 *
-	// 	 * @param link
-	// 	 *        The link to add.
-	// 	 * @param srcOutput
-	// 	 *        The output of previous Region, which is also the source of the input
-	// 	 */
-	// 	void
-	// 	addLink(Link* link, Output* srcOutput);
-	
-	// 	/**
-	// 	 * Locate an existing Link to the input.
-	// 	 *
-	// 	 * It's called by Network.removeLink() and internally when adding a link
-	// 	 *
-	// 	 * @param srcRegionName
-	// 	 *            The name of the source Region
-	// 	 * @param srcOutputName
-	// 	 *            The name of the source Output
-	// 	 *
-	// 	 * @returns
-	// 	 *     The link if found or @c NULL if no such link exists
-	// 	 */
-	// 	Link*
-	// 	findLink(const std::string& srcRegionName,
-	// 			 const std::string& srcOutputName);
-	
-	// 	/**
-	// 	 * Removing an existing link from the input.
-	// 	 *
-	// 	 * It's called in four cases:
-	// 	 *
-	// 	 * 1. Network.removeLink()
-	// 	 * 2. Network.removeRegion() when given @a srcRegion
-	// 	 * 3. Network.removeRegion() when given @a destRegion
-	// 	 * 4. Network.~Network()
-	// 	 *
-	// 	 * It is an error to call this if our containing region
-	// 	 * is uninitialized.
-	// 	 *
-	// 	 * @note This method will set the Link pointer to NULL on return (to avoid
-	// 	 * a dangling reference)
-	// 	 *
-	// 	 * @param link
-	// 	 *        The Link to remove, possibly retrieved by findLink(), note that
-	// 	 *        it is a reference to the pointer, not the pointer itself.
-	// 	 */
-	// 	void
-	// 	removeLink(Link*& link);
-	
-	// 	/**
-	// 	 * Make input data available.
-	// 	 *
-	// 	 * Called by Region.prepareInputs()
-	// 	 */
-	// 	void
-	// 	prepare();
-	
-	// 	/**
-	// 	 *
-	// 	 * Get the data of the input.
-	// 	 *
-	// 	 * @returns
-	// 	 *         A mutable reference to the data of the input as an @c Array
-	// 	 */
-	// 	const Array &
-	// 	getData() const;
-	
-	// 	/**
-	// 	 *
-	// 	 * Get the Region that the input belongs to.
-	// 	 *
-	// 	 * @returns
-	// 	 *         The mutable reference to the Region that the input belongs to
-	// 	 */
-	// 	Region&
-	// 	getRegion();
-	
-	// 	/**
-	// 	 *
-	// 	 * Get all the Link objects added to the input.
-	// 	 *
-	// 	 * @returns
-	// 	 *         All the Link objects added to the input
-	// 	 */
-	// 	const std::vector<Link*>&
-	// 	getLinks();
-	
-	// 	/**
-	// 	 *
-	// 	 * Tells whether the input is region level.
-	// 	 *
-	// 	 * @returns
-	// 	 *     Whether the input is region level, i.e. TODO
-	// 	 */
-	// 	bool
-	// 	isRegionLevel();
-	
-	// 	/**
-	// 	 * Called by Region.evaluateLinks() as part
-	// 	 * of network initialization.
-	// 	 *
-	// 	 * 1. Tries to make sure that dimensions at both ends
-	// 	 *    of a link are specified by calling setSourceDimensions()
-	// 	 *    if possible, and then calling getDestDimensions()
-	// 	 * 2. Ensures that region dimensions are consistent with
-	// 	 *    either by setting destination region dimensions (this is
-	// 	 *    where links "induce" dimensions) or by raising an exception
-	// 	 *    if they are inconsistent.
-	// 	 *
-	// 	 * @returns
-	// 	 *         Number of links that could not be fully evaluated, i.e. incomplete
-	// 	 */
-	// 	size_t
-	// 	evaluateLinks();
-	
-	// 	/**
-	// 	 * Initialize the Input .
-	// 	 *
-	// 	 * After the input has all the information it needs, it is initialized by
-	// 	 * this method. Volatile data structures (e.g. the input buffer) are set up。
-	// 	 */
-	// 	void
-	// 	initialize();
-	
-	// 	/**
-	// 	 * Tells whether the Input is initialized.
-	// 	 *
-	// 	 * @returns
-	// 	 *         Whether the Input is initialized
-	// 	 */
-	// 	bool
-	// 	isInitialized();
-	
-	// 	/* ------------ Methods normally called by the RegionImpl ------------- */
-	
-	// 	/**
-	// 	 *
-	// 	 * @see Link.buildSplitterMap()
-	// 	 *
-	// 	 */
-	// 	typedef std::vector< std::vector<size_t> > SplitterMap;
-	
-	// 	/**
-	// 	 *
-	// 	 * Get splitter map from an initialized input
-	// 	 *
-	// 	 * @returns
-	// 	 *         The splitter map
-	// 	 */
-	// 	const SplitterMap& getSplitterMap() const;
-	
-	// 	/** explicitly instantiated for various types */
-	// 	template <typename T> void getInputForNode(size_t nodeIndex, std::vector<T>& input) const;
-	
+	}, New);
 
-	// /** @overload */
-	// overload->addOverload("features2d", "", "FAST", {
-	// 	make_param<IOArray*>("image","IOArray"),
-	// 	make_param<std::shared_ptr<overres::Callback>>("cb","Function"),// : (keypoints : Array<_types.KeyPoint>) = > void,
-	// 	make_param<int>("threshold","int"),
-	// 	make_param<bool>("nonmaxSuppression","bool",true)
-	// }, FAST_a);
+	/**
+	* Create a new Dimensions object from a @c std::vector<size_t>.
+	*
+	* @param v
+	*        A @c std::vector of @c size_t, the value with the index of @a n
+	*        is the size of the @a n th dimension
+	*
+	*/
+	//Dimensions(std::vector<size_t> v);
+	class_overload->add_overload_constructor({
+		make_param<std::shared_ptr<std::vector<int>>>("v", "Array<int>")
+	}, New_v);
 
+	/** Create a new 1-dimension Dimensions object.
 
+	* @param x
+	*        The size of the 1st dimension
+	*
+	*/
+	//Dimensions(size_t x);
+	class_overload->add_overload_constructor({
+		make_param<int>("x","size_t")
+	}, New_x);
+
+	/**
+	* Create a new 2-dimension Dimensions.
+	*
+	* @param x
+	*        The size of the 1st dimension
+	* @param y
+	*        The size of the 2nd dimension
+	*/
+	//Dimensions(size_t x, size_t y);
+	class_overload->add_overload_constructor({
+		make_param<int>("x","size_t"),
+		make_param<int>("y","size_t")
+	}, New_x_y);
+
+	/**
+	* Create a new 3-dimension Dimensions.
+	*
+	* @param x
+	*        The size of the 1st dimension
+	* @param y
+	*        The size of the 2nd dimension
+	* @param z
+	*        The size of the 3rd dimension
+	*/
+	//Dimensions(size_t x, size_t y, size_t z);
+	class_overload->add_overload_constructor({
+		make_param<int>("x","size_t"),
+		make_param<int>("y","size_t"),
+		make_param<int>("z","size_t")
+	}, New_x_y_z);
+
+	/**
+	*
+	* @}
+	*
+	* @name Properties
+	*
+	* @{
+	*
+	*/
+
+	/**
+	* Get the count of cells in the grid, which is the product of the sizes of
+	* the dimensions.
+	*
+	* @returns
+	*        The count of cells in the grid.
+	*/
+	/*size_t
+		getCount() const;*/
+	class_overload->add_overload("getCount", {}, getCount);
+
+	/**
+	*
+	* Get the number of dimensions.
+	*
+	* @returns number of dimensions
+	*
+	*/
+	/*size_t
+		getDimensionCount() const;*/
+	class_overload->add_overload("getDimensionCount", {}, getDimensionCount);
+
+	/**
+	* Get the size of a dimension.
+	*
+	* @param index
+	*        The index of the dimension
+	*
+	* @returns
+	*        The size of the dimension with the index of @a index
+	*
+	* @note Do not confuse @a index with "linear index" as in getIndex()
+	*/
+	/*size_t
+		getDimension(size_t index) const;*/
+	class_overload->add_overload("getDimension", {
+		make_param<int>("index","size_t")
+	}, getDimension);
+
+	/**
+	*
+	* @}
+	*
+	* @name Boolean properties
+	*
+	* There are two "special" values for dimensions:
+	*
+	* * Dimensions of `[]` (`dims.size()==0`) means "not yet known" aka
+	* "unspecified", see isUnspecified()
+	* * Dimensions of `[0]`  (`dims.size()==1 && dims[0] == 0`) means
+	* "don't care", see isDontcare()
+	*
+	* @{
+	*
+	*/
+
+	/**
+	* Tells whether the Dimensions object is "unspecified".
+	*
+	* @returns
+	*     Whether the Dimensions object is "unspecified"
+	*
+	* @see isSpecified()
+	*/
+	/*bool
+		isUnspecified() const;*/
+	class_overload->add_overload("isUnspecified", {}, isUnspecified);
+
+	/**
+	*
+	* Tells whether the Dimensions object is "don't care".
+	*
+	* @returns
+	*     Whether the Dimensions object is "don't care"
+	*/
+	/*bool
+		isDontcare() const;*/
+	class_overload->add_overload("isDontcare", {}, isDontcare);
+
+	/**
+	* Tells whether the Dimensions object is "specified".
+	*
+	* A "specified" Dimensions object satisfies all following conditions:
+	*
+	*   * "valid"
+	*   * NOT "unspecified"
+	*   * NOT "don't care"
+	*
+	* @returns
+	*       Whether the Dimensions object is "specified"
+	*
+	* @note It's not the opposite of isUnspecified()!
+	*/
+	/*bool
+		isSpecified() const;*/
+	class_overload->add_overload("isSpecified", {}, isSpecified);
+
+	/**
+	* Tells whether the sizes of all dimensions are 1.
+	*
+	* @returns
+	*       Whether the sizes of all dimensions are 1, e.g. [1], [1 1], [1 1 1], etc.
+	*/
+	/*bool
+		isOnes() const;*/
+	class_overload->add_overload("isOnes", {}, isOnes);
+
+	/**
+	* Tells whether Dimensions is "valid".
+	*
+	* A Dimensions object is valid if it specifies actual dimensions, i.e. all
+	* dimensions have a size greater than 0, or is a special value
+	* ("unspecified"/"don't care").
+	*
+	* A Dimensions object is invalid if any dimensions are 0 (except for "don't care")
+	*
+	* @returns
+	*       Whether Dimensions is "valid"
+	*/
+	/*bool
+		isValid() const;*/
+	class_overload->add_overload("isValid", {}, isValid);
+
+	/**
+	*
+	* @}
+	*
+	* @name Coordinate<->index mapping
+	*
+	* Coordinate<->index mapping is in lower-major order, i.e.
+	* for Region with dimensions `[2,3]`:
+	*
+	*     [0,0] -> index 0
+	*     [1,0] -> index 1
+	*     [0,1] -> index 2
+	*     [1,1] -> index 3
+	*     [0,2] -> index 4
+	*     [1,2] -> index 5
+	*
+	* @{
+	*
+	*/
+
+	/**
+	* Convert a Coordinate to a linear index (in lower-major order).
+	*
+	* @param coordinate
+	*        The coordinate to be converted
+	*
+	* @returns
+	*        The linear index corresponding to @a coordinate
+	*/
+	/*size_t
+		getIndex(const Coordinate& coordinate) const;*/
+	class_overload->add_overload("getIndex", {
+		make_param<Coordinate*>("coordinate","Coordinate")
+	}, getIndex);
+
+	/**
+	* Convert a linear index (in lower-major order) to a Coordinate.
+	*
+	* @param index
+	*        The linear index to be converted
+	*
+	* @returns
+	*        The Coordinate corresponding to @a index
+	*/
+	/*Coordinate
+		getCoordinate(const size_t index) const;*/
+	class_overload->add_overload("getCoordinate", {
+		make_param<int>("index","size_t")
+	}, getCoordinate);
+
+	/**
+	*
+	* @}
+	*
+	* @name Misc
+	*
+	* @{
+	*
+	*/
+
+	/**
+	*
+	* Convert the Dimensions object to string representation.
+	*
+	* In most cases, we want a human-readable string, but for
+	* serialization we want only the actual dimension values
+	*
+	* @param humanReadable
+	*        The default is @c true, make the string human-readable,
+	*        set to @c false for serialization
+	*
+	* @returns
+	*        The string representation of the Dimensions object
+	*/
+	/*std::string
+		toString(bool humanReadable = true) const;*/
+	class_overload->add_overload("toString", {
+		make_param<bool>("humanReadable","bool")
+	}, toString);
+
+	/**
+	* Promote the Dimensions object to a new dimensionality.
+	*
+	* @param newDimensionality
+	*        The new dimensionality to promote to, it can be greater than,
+	*        smaller than or equal to current dimensionality
+	*
+	* @note The sizes of all dimensions must be 1( i.e. isOnes() returns true),
+	* or an exception will be thrown.
+	*/
+	/*void
+		promote(size_t newDimensionality);*/
+	class_overload->add_overload("promote", {
+		make_param<int>("newDimensionality","size_t")
+	}, promote);
+
+	/**
+	* The equivalence operator.
+	*
+	* Two Dimensions objects will be considered equivalent, if any of the
+	* following satisfies:
+	*
+	* * They have the same number of dimensions and the same size for every
+	* dimension.
+	* * Both of them have the size of 1 for everything dimensions, despite of
+	* how many dimensions they have, i.e. isOnes() returns @c true for both
+	* of them. Some linking scenarios require us to treat [1] equivalent to [1 1] etc.
+	*
+	* @param dims2
+	*        The Dimensions object being compared
+	*
+	* @returns
+	*        Whether this Dimensions object is equivalent to @a dims2.
+	*
+	*/
+	/*bool
+		operator == (const Dimensions& dims2) const;
+*/
+	/**
+	* The in-equivalence operator, the opposite of operator==().
+	*
+	* @param dims2
+	*        The Dimensions object being compared
+	*
+	* @returns
+	*        Whether this Dimensions object is not equivalent to @a dims2.
+	*/
+	/*bool
+		operator != (const Dimensions& dims2) const;*/
 }
 
 
 
-POLY_METHOD(features2d::drawKeypoints){
-	auto image		= info.at<IOArray*>(0)->GetInputArray();
-	auto keypoints	= *info.at<std::shared_ptr<std::vector<KeyPoint*>>>(1);
-	auto outImage = info.at<IOArray*>(2)->GetInputOutputArray();
-	auto color = info.at<Scalar*>(3)->_scalar;
-	auto flags = info.at<int>(4);
+POLY_METHOD(Dimensions::New) {
+	if (!info.IsConstructCall())
+		return Nan::ThrowTypeError("Cannot call constructor as function");
 
-	std::unique_ptr<std::vector<cv::KeyPoint>> vec_kp = std::make_unique<std::vector<cv::KeyPoint>>();
-	std::transform(std::begin(keypoints), std::end(keypoints), std::back_inserter(*vec_kp), [](const KeyPoint* kpi) {return *kpi->_keyPoint; });
+	auto region = info.at<Region*>(0);
+	auto type = info.at<int>(1);
+	auto isRegionLevel = info.at<bool>(2);
 
-	cv::drawKeypoints(image, *vec_kp, outImage, *color, flags);
+	Input *pt;
+
+	pt = new Input();
+	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
+
+	pt->Wrap(info.This());
+	info.GetReturnValue().Set(info.This());
 }
+POLY_METHOD(Dimensions::New_v) {
+	if (!info.IsConstructCall())
+		return Nan::ThrowTypeError("Cannot call constructor as function");
 
+	auto region = info.at<Region*>(0);
+	auto type = info.at<int>(1);
+	auto isRegionLevel = info.at<bool>(2);
+
+	Input *pt;
+
+	pt = new Input();
+	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
+
+	pt->Wrap(info.This());
+	info.GetReturnValue().Set(info.This());
+}
+POLY_METHOD(Dimensions::New_x) {
+	if (!info.IsConstructCall())
+		return Nan::ThrowTypeError("Cannot call constructor as function");
+
+	auto region = info.at<Region*>(0);
+	auto type = info.at<int>(1);
+	auto isRegionLevel = info.at<bool>(2);
+
+	Input *pt;
+
+	pt = new Input();
+	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
+
+	pt->Wrap(info.This());
+	info.GetReturnValue().Set(info.This());
+}
+POLY_METHOD(Dimensions::New_x_y) {
+	if (!info.IsConstructCall())
+		return Nan::ThrowTypeError("Cannot call constructor as function");
+
+	auto region = info.at<Region*>(0);
+	auto type = info.at<int>(1);
+	auto isRegionLevel = info.at<bool>(2);
+
+	Input *pt;
+
+	pt = new Input();
+	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
+
+	pt->Wrap(info.This());
+	info.GetReturnValue().Set(info.This());
+}
+POLY_METHOD(Dimensions::New_x_y_z) {
+	if (!info.IsConstructCall())
+		return Nan::ThrowTypeError("Cannot call constructor as function");
+
+	auto region = info.at<Region*>(0);
+	auto type = info.at<int>(1);
+	auto isRegionLevel = info.at<bool>(2);
+
+	Input *pt;
+
+	pt = new Input();
+	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
+
+	pt->Wrap(info.This());
+	info.GetReturnValue().Set(info.This());
+}
+POLY_METHOD(Dimensions::getCount) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::getDimensionCount) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::getDimension) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::isUnspecified) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::isDontcare) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::isSpecified) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::isOnes) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::isValid) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::getIndex) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::getCoordinate) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::toString) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}
+POLY_METHOD(Dimensions::promote) {
+	auto this_ = info.This<Dimensions*>();
+	throw std::runtime_error("not implemented");
+}

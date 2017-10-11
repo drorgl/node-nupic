@@ -19,6 +19,9 @@
  * http://numenta.org/licenses/
  * ---------------------------------------------------------------------
  */
+import nupic_module from "../bindings";
+
+import { bool} from "../types/Types";
 
 /** @file
  * Defines the ScalarSensor
@@ -33,7 +36,7 @@
 // Workaround windows.h collision:
 // https://github.com/sandstorm-io/capnproto/issues/213
 #undef VOID
-#include <capnp/any.h>
+#include < capnp/any.h>
 
 #include <nupic/encoders/ScalarEncoder.hpp>
 #include <nupic/engine/RegionImpl.hpp>
@@ -54,40 +57,40 @@ namespace nupic
   {
   public:
     ScalarSensor(const ValueMap& params, Region *region);
-    ScalarSensor(BundleIO& bundle, Region* region);
+  ScalarSensor(BundleIO& bundle, Region* region);
     ScalarSensor(capnp::AnyPointer::Reader& proto, Region* region);
-    ScalarSensor();
-    virtual ~ScalarSensor() override;
+  ScalarSensor();
+  virtual ~ScalarSensor() override;
 
     static Spec* createSpec();
 
-    virtual void getParameterFromBuffer(const std::string& name,
+  virtual void getParameterFromBuffer(const std::string& name,
                                         Int64 index,
                                         IWriteBuffer& value) override;
-    virtual void setParameterFromBuffer(const std::string& name,
+  virtual void setParameterFromBuffer(const std::string& name,
                                         Int64 index,
                                         IReadBuffer& value) override;
-    virtual void initialize() override;
+  virtual void initialize() override;
 
-    virtual void serialize(BundleIO& bundle) override;
-    virtual void deserialize(BundleIO& bundle) override;
+  virtual void serialize(BundleIO& bundle) override;
+  virtual void deserialize(BundleIO& bundle) override;
 
-    using Serializable::write;
-    virtual void write(capnp::AnyPointer::Builder& anyProto) const override;
-    using Serializable::read;
-    virtual void read(capnp::AnyPointer::Reader& anyProto) override;
+  using Serializable::write;
+  virtual void write(capnp::AnyPointer::Builder& anyProto) const override;
+  using Serializable::read;
+  virtual void read(capnp::AnyPointer::Reader& anyProto) override;
 
-    void compute() override;
-    virtual std::string executeCommand(const std::vector<std::string>& args,
+  void compute() override;
+  virtual std::string executeCommand(const std::vector<std::string>& args,
                                        Int64 index) override;
 
-    virtual size_t getNodeOutputElementCount(const std::string& outputName) override;
+  virtual size_t getNodeOutputElementCount(const std::string& outputName) override;
   private:
     Real64 sensedValue_;
-    ScalarEncoderBase* encoder_;
-    const Output* encodedOutput_;
-    const Output* bucketOutput_;
-  };
+  ScalarEncoderBase* encoder_;
+  const Output* encodedOutput_;
+  const Output* bucketOutput_;
+  }
 }
 
-#endif // NTA_SCALAR_SENSOR_HPP
+#endif; // NTA_SCALAR_SENSOR_HPP

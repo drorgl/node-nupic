@@ -38,11 +38,11 @@ import nupic_module from "../bindings";
 // We need the full definitions because these
 // objects are returned by value.
 // #include <nupic/ntypes/Dimensions.hpp>
-import { Dimensions} from "../ntypes/Dimensions";
-import {Input} from "./Input";
-import {Network} from "./Network";
-import {Output} from "./Output";
-import {Spec} from "./Spec";
+import { Dimensions } from "../ntypes/Dimensions";
+import { Input } from "./Input";
+import { Network } from "./Network";
+import { Output } from "./Output";
+import { Spec } from "./Spec";
 // #include <nupic/os/Timer.hpp>
 // import * as Timer from "../os/Timer";
 // #include <nupic/proto/RegionProto.capnp.h>
@@ -356,6 +356,18 @@ export interface Region {// : public Serializable<RegionProto>
      *        The value of the parameter
      */
 	setParameterBool(name: string, value: boolean): void;
+
+    /**
+     * Set the parameter to a function callback value.
+     *
+     * @param name
+     *        The name of the parameter
+     *
+     * @param value
+     *        The value of the parameter
+     */
+	// tslint:disable-next-line:ban-types
+	setParameterCallback(name: string, value: Function): void;
 
 	/**
      * Get the parameter as an @c Array value.
@@ -697,11 +709,9 @@ export interface Region {// : public Serializable<RegionProto>
 	// in Network::~Network()
 	// It is an error to call any region methods after uninitialize()
 	// except removeAllIncomingLinks and ~Region
-	// void
-	// uninitialize();
+	uninitialize(): void;
 
-	// void
-	// removeAllIncomingLinks();
+	removeAllIncomingLinks(): void;
 
 	// const NodeSet&
 	// getEnabledNodes() const;

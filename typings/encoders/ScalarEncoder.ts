@@ -20,17 +20,21 @@
  * ---------------------------------------------------------------------
  */
 
+import nupic_module from "../bindings";
+
+import { bool} from "../types/Types";
+
 /** @file
  * Define the ScalarEncoder and PeriodicScalarEncoder
  */
 
-#ifndef NTA_ENCODERS_SCALAR
-#define NTA_ENCODERS_SCALAR
+// #ifndef NTA_ENCODERS_SCALAR
+// #define NTA_ENCODERS_SCALAR
 
-#include <nupic/types/Types.hpp>
+// #include <nupic/types/Types.hpp>
 
-namespace nupic
-{
+// namespace nupic
+// {
   /**
    * @b Description
    * Base class for ScalarEncoders
@@ -78,8 +82,8 @@ namespace nupic
    * makes sense because, for example, with the input space [1, 10] and 10
    * buckets, 1.49 is in the first bucket and 1.51 is in the second.
    */
-  class ScalarEncoder : public ScalarEncoderBase
-  {
+  class ScalarEncoder : public ScalarEncoderBase;
+{
   public:
     /**
      * Constructs a ScalarEncoder
@@ -136,8 +140,8 @@ namespace nupic
    * bucket and 1.51 in the second, the PeriodicScalarEncoder will put 1.99 in
    * the first bucket and 2.0 in the second.
    */
-  class PeriodicScalarEncoder : public ScalarEncoderBase
-  {
+class PeriodicScalarEncoder : public ScalarEncoderBase
+{
   public:
     /**
      * Constructs a PeriodicScalarEncoder
@@ -162,18 +166,18 @@ namespace nupic
      */
     PeriodicScalarEncoder(int w, double minValue, double maxValue, int n,
                           double radius, double resolution);
-    virtual ~PeriodicScalarEncoder() override;
+  virtual ~PeriodicScalarEncoder() override;
 
-    virtual int encodeIntoArray(Real64 input, Real32 output[]) override;
-    virtual int getOutputWidth() const override { return n_; }
+  virtual int encodeIntoArray(Real64 input, Real32 output[]) override;
+  virtual int getOutputWidth() const override { return n_; }
 
   private:
     int w_;
-    int n_;
-    double minValue_;
-    double maxValue_;
-    double bucketWidth_;
-  }; // end class PeriodicScalarEncoder
+  int n_;
+  double minValue_;
+  double maxValue_;
+  double; bucketWidth_;
+  } // end class PeriodicScalarEncoder
 } // end namespace nupic
 
-#endif // NTA_ENCODERS_SCALAR
+#endif; // NTA_ENCODERS_SCALAR

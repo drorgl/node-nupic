@@ -41,7 +41,8 @@ import nupic_module from "../bindings";
 
 // import * as Array from "../ntypes/Array.hpp";
 // import * as Types from "../types/Types.hpp";
-import { NTA_BasicType } from "../types/Types";
+import { ArrayBase } from "../ntypes/ArrayBase";
+import { NTA_BasicType, size_t } from "../types/Types";
 import { Link } from "./Link";
 import { Output } from "./Output";
 import { Region } from "./Region";
@@ -61,6 +62,8 @@ import { Region } from "./Region";
  * @todo identify methods that may be called by RegionImpl -- this
  * is the internal "public interface"
  */
+export type SplitterMap = size_t[][];
+
 interface Input_Static {
 	/**
 	   * Constructor.
@@ -170,7 +173,7 @@ export interface Input {
      *         A mutable reference to the data of the input as an @c Array
      */
 
-	getData(): any[];
+	getData(): ArrayBase;
 
 	/***
      *
@@ -249,10 +252,13 @@ export interface Input {
 	//  * @returns
 	//  *         The splitter map
 	//  */
-	// const SplitterMap& getSplitterMap() const;
+	getSplitterMap(): SplitterMap;
 
 	// /** explicitly instantiated for various types */
 	// template <typename T> void getInputForNode(size_t nodeIndex, std::vector<T>& input) const;
+
+	getInputForNode<T>(TType: string, nodeIndex: size_t): T[];
+	// implement for:Real64,Real32,Int64,Int32,UInt64,UInt32,Byte
 
 	//   private:
 	//     Region& region_;

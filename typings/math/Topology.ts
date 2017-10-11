@@ -19,7 +19,8 @@
 //  * http://numenta.org/licenses/
 //  * ----------------------------------------------------------------------
 //  */
-
+import nupic_module from "../bindings";
+import { UInt } from "../types/Types";
 // /** @file
 //  * Topology helpers
 //  */
@@ -52,9 +53,12 @@
 //        * @returns
 //        * A vector of coordinates of length dimensions.size().
 //        */
-//       std::vector<UInt> coordinatesFromIndex(
-//         UInt index,
-//         const std::vector<UInt>& dimensions);
+
+type IcoordinatesFromIndex = (
+	index: UInt,
+	dimensions: UInt[]) => UInt[];
+
+export let coordinatesFromIndex: IcoordinatesFromIndex = nupic_module.x;
 
 //       /**
 //        * Translate coordinates into an index, using the given coordinate system.
@@ -70,9 +74,10 @@
 //        * by using the dimensions as a mixed radix definition. For example, in
 //        * dimensions 42x10, the point [1, 4] is index 1*420 + 4*10 = 460.
 //        */
-//       UInt indexFromCoordinates(
-//         const std::vector<UInt>& coordinates,
-//         const std::vector<UInt>& dimensions);
+type IindexFromCoordinates = (
+	coordinates: UInt[],
+	dimensions: UInt[]) => UInt;
+export let indexFromCoordinates: IindexFromCoordinates = nupic_module.x;
 
 //       /**
 //        * A class that lets you iterate over all points within the neighborhood
@@ -133,7 +138,7 @@
 //       {
 //       public:
 //         Neighborhood(UInt centerIndex, UInt radius,
-//                      const std::vector<UInt>& dimensions);
+//                      const Array<UInt>& dimensions);
 
 //         class Iterator {
 //         public:
@@ -146,7 +151,7 @@
 //           void advance_();
 
 //           const Neighborhood& neighborhood_;
-//           std::vector<Int> offset_;
+//           Array<Int> offset_;
 //           bool finished_;
 //         };
 
@@ -154,8 +159,8 @@
 //         Iterator end() const;
 
 //       private:
-//         const std::vector<UInt> centerPosition_;
-//         const std::vector<UInt>& dimensions_;
+//         const Array<UInt> centerPosition_;
+//         const Array<UInt>& dimensions_;
 //         const UInt radius_;
 //       };
 
@@ -184,7 +189,7 @@
 //       {
 //       public:
 //         WrappingNeighborhood(UInt centerIndex, UInt radius,
-//                              const std::vector<UInt>& dimensions);
+//                              const Array<UInt>& dimensions);
 
 //         class Iterator {
 //         public:
@@ -197,7 +202,7 @@
 //           void advance_();
 
 //           const WrappingNeighborhood& neighborhood_;
-//           std::vector<Int> offset_;
+//           Array<Int> offset_;
 //           bool finished_;
 //         };
 
@@ -205,8 +210,8 @@
 //         Iterator end() const;
 
 //       private:
-//         const std::vector<UInt> centerPosition_;
-//         const std::vector<UInt>& dimensions_;
+//         const Array<UInt> centerPosition_;
+//         const Array<UInt>& dimensions_;
 //         const UInt radius_;
 //       };
 

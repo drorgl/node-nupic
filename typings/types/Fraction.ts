@@ -19,6 +19,8 @@
 //  * http://numenta.org/licenses/
 //  * ---------------------------------------------------------------------
 //  */
+import nupic_module from "../bindings";
+import { bool, double, int, size_t, uint } from "../types/Types";
 
 // #ifndef NTA_FRACTION_HPP
 // #define NTA_FRACTION_HPP
@@ -27,48 +29,54 @@
 
 // namespace nupic
 // {
-//   class Fraction
-//   {
-//   private:
-//     int numerator_, denominator_;
-//     // arbitrary cutoff -- need to fix overflow handling. 64-bits everywhere?
-//     const static int overflowCutoff = 10000000;
 
-//   public:
-//     Fraction(int _numerator, int _denominator);
-//     Fraction(int _numerator);
-//     Fraction();
+interface Fraction_Static {
+	new(_numerator: int, _denominator: int): Fraction;
+	new(_numerator: int): Fraction;
+	new(): Fraction;
+	fromDouble(value: double, tolerance?: uint /*= 10000*/): Fraction;
+	computeGCD(a: int, b: int): uint;
+	computeLCM(a: int, b: int): uint;
 
-//     bool isNaturalNumber();
+}
 
-//     int getNumerator();
-//     int getDenominator();
+export interface Fraction {
+	//   private:
+	//     int numerator_, denominator_;
+	//     // arbitrary cutoff -- need to fix overflow handling. 64-bits everywhere?
+	//     const static int overflowCutoff = 10000000;
 
-//     void setNumerator(int _numerator);
-//     void setDenominator(int _denominator);
-//     void setFraction(int _numerator, int _denominator);
+	//   public:
 
-//     static unsigned int computeGCD(int a, int b);
-//     static unsigned int computeLCM(int a,int b);
+	isNaturalNumber(): bool;
 
-//     void reduce();
+	getNumerator(): int;
+	getDenominator(): int;
 
-//     Fraction operator*(const Fraction& rhs);
-//     Fraction operator*(const int rhs);
-//     friend Fraction operator/(const Fraction& lhs, const Fraction& rhs);
-//     friend Fraction operator-(const Fraction& lhs, const Fraction& rhs);
-//     Fraction operator+(const Fraction& rhs);
-//     Fraction operator%(const Fraction& rhs);
-//     bool operator<(const Fraction& rhs);
-//     bool operator>(const Fraction& rhs);
-//     bool operator<=(const Fraction& rhs);
-//     bool operator>=(const Fraction& rhs);
-//     friend bool operator==(Fraction lhs, Fraction rhs);
-//     friend std::ostream& operator<<(std::ostream& out, Fraction rhs);
+	setNumerator(_numerator: int): void;
+	setDenominator(_denominator: int): void;
+	setFraction(_numerator: int, _denominator: int): void;
 
-//     static Fraction fromDouble(double value, unsigned int tolerance = 10000);
-//     double toDouble();
-//   };
+	reduce(): void;
+
+	// Fraction operator*(const Fraction& rhs);
+	// Fraction operator*(const int rhs);
+	// friend Fraction operator/(const Fraction& lhs, const Fraction& rhs);
+	// friend Fraction operator-(const Fraction& lhs, const Fraction& rhs);
+	// Fraction operator+(const Fraction& rhs);
+	// Fraction operator%(const Fraction& rhs);
+	// bool operator<(const Fraction& rhs);
+	// bool operator>(const Fraction& rhs);
+	// bool operator<=(const Fraction& rhs);
+	// bool operator>=(const Fraction& rhs);
+	// friend bool operator==(Fraction lhs, Fraction rhs);
+	// friend std::ostream& operator<<(std::ostream& out, Fraction rhs);
+
+	toDouble(): double;
+	toString(): string; // << operator!
+}
+
+export let Fraction: Fraction_Static = nupic_module.x;
 // }
 
 // #endif //NTA_FRACTION_HPP

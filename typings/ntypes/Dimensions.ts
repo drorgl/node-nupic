@@ -55,7 +55,7 @@ import nupic_module from "../bindings";
  * @endinternal
  */
 // typedef std::vector < size_t > Coordinate;
-type Coordinate = number[];
+export type Coordinate = number[];
 
 /**
  * Represents the dimensions of a Region.

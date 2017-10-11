@@ -24,132 +24,143 @@
  * Definitions for the BitHistory.
  */
 
-#ifndef NTA_bit_history_HPP
-#define NTA_bit_history_HPP
+import nupic_module from "../bindings";
 
-#include <map>
-#include <string>
-#include <vector>
+import {int, Real64, UInt} from "../types/Types";
 
-#include <nupic/proto/BitHistory.capnp.h>
-#include <nupic/types/Serializable.hpp>
-#include <nupic/types/Types.hpp>
+// #ifndef NTA_bit_history_HPP
+// #define NTA_bit_history_HPP
 
-using namespace std;
+// #include <map>
+// #include <string>
+// #include <vector>
 
-namespace nupic
-{
-  namespace algorithms
-  {
-    namespace cla_classifier
-    {
+// #include <nupic/proto/BitHistory.capnp.h>
+// #include <nupic/types/Serializable.hpp>
+// #include <nupic/types/Types.hpp>
 
-      /** Class to store duty cycles for buckets for a single input bit.
-       *
-       * @b Responsibility
-       * The BitHistory is responsible for updating and relaying the duty
-       * cycles for the different buckets.
-       *
-       * TODO: Support serialization and deserialization.
-       *
-       */
-      class BitHistory : public Serializable<BitHistoryProto>
-      {
-        public:
-          /**
-           * Constructor.
-           */
-          BitHistory() {}
+// using namespace std;
 
-          /**
-           * Constructor.
-           *
-           * @param bitNum The input bit index that this BitHistory stores data
-           *               for.
-           * @param nSteps The number of steps this BitHistory is storing duty
-           *               cycles for.
-           * @param alpha The alpha to use when decaying the duty cycles.
-           * @param verbosity The logging verbosity to use.
-           *
-           */
-          BitHistory(UInt bitNum, int nSteps, Real64 alpha, UInt verbosity);
+// namespace nupic
+// {
+//   namespace algorithms
+//   {
+namespace cla_classifier {
 
-          virtual ~BitHistory() {};
+	/** Class to store duty cycles for buckets for a single input bit.
+	 *
+	 * @b Responsibility
+	 * The BitHistory is responsible for updating and relaying the duty
+	 * cycles for the different buckets.
+	 *
+	 * TODO: Support serialization and deserialization.
+	 *
+	 */
+	// : public Serializable<BitHistoryProto>
 
-          /**
-           * Update the duty cycle for the specified bucket index.
-           *
-           * @param iteration The current iteration. The difference between
-           *                  consecutive calls is used to determine how much to
-           *                  decay the previous duty cycle value.
-           * @param bucketIdx The bucket index to update.
-           *
-           */
-          void store(int iteration, int bucketIdx);
+	interface BitHistory_Static {
+		/**
+		 * Constructor.
+		 */
+		// BitHistory() {}
+		new(): BitHistory;
 
-          /**
-           * Sets the votes for each bucket when this cell is active.
-           *
-           * @param iteration The current iteration.
-           * @param votes A vector to populate with the votes for each bucket.
-           *
-           */
-          void infer(int iteration, vector<Real64>* votes);
+		/**
+		 * Constructor.
+		 *
+		 * @param bitNum The input bit index that this BitHistory stores data
+		 *               for.
+		 * @param nSteps The number of steps this BitHistory is storing duty
+		 *               cycles for.
+		 * @param alpha The alpha to use when decaying the duty cycles.
+		 * @param verbosity The logging verbosity to use.
+		 *
+		 */
+		new(bitNum: UInt, nSteps: int, alpha: Real64, verbosity: UInt): BitHistory;
 
-          /**
-           * Save the state to the ostream.
-           */
-          void save(ostream& outStream) const;
+		// virtual ~BitHistory() {};
 
-          /**
-           * Load state from istream.
-           */
-          void load(istream& inStream);
+	}
 
-          /**
-           * Save the state to the builder.
-           */
-          using Serializable::write;
-          void write(BitHistoryProto::Builder& builder) const;
+	interface BitHistory {
+		// public:
 
-          /**
-           * Load state from reader.
-           */
-          using Serializable::read;
-          void read(BitHistoryProto::Reader& proto);
+		/**
+		 * Update the duty cycle for the specified bucket index.
+		 *
+		 * @param iteration The current iteration. The difference between
+		 *                  consecutive calls is used to determine how much to
+		 *                  decay the previous duty cycle value.
+		 * @param bucketIdx The bucket index to update.
+		 *
+		 */
+		store(iteration: int, bucketIdx: int): void;
 
-          /**
-           * Check if the other instance matches this one.
-           *
-           * @param other an instance to compare to
-           * @returns true iff the other instance matches this one
-           */
-          bool operator==(const BitHistory& other) const;
+		/**
+		 * Sets the votes for each bucket when this cell is active.
+		 *
+		 * @param iteration The current iteration.
+		 * @param votes A vector to populate with the votes for each bucket.
+		 *
+		 */
+		infer(iteration: int, votes: Real64[]): void;
 
-          /**
-           * Check if the other instance doesn't match this one.
-           *
-           * @param other an instance to compare to
-           * @returns true iff the other instance matches doesn't match this one
-           */
-          bool operator!=(const BitHistory& other) const;
+		/**
+		 * Save the state to the ostream.
+		 */
+		// save( outStream : ostream) : void;
 
-        private:
+		/**
+		 * Load state from istream.
+		 */
+		// load(inStream: istream): void;
 
-          string id_;
-          // Mapping from bucket index to the duty cycle values.
-          map<int, Real64> stats_;
-          // Last iteration at which the duty cycles were updated to the present
-          // value. This is not done every iteration for efficiency reasons.
-          int lastTotalUpdate_;
-          int learnIteration_;
-          // The alpha to use when decaying the duty cycles.
-          Real64 alpha_;
-          UInt verbosity_;
-      }; // end class BitHistory
+		/**
+		 * Save the state to the builder.
+		 */
+		// using Serializable::write;
+		// void write(BitHistoryProto::Builder& builder) const;
 
-    } // end namespace cla_classifier
-  } // end namespace algorithms
-} // end namespace nupic
+		/**
+		 * Load state from reader.
+		 */
+		// using Serializable::read;
+		// void read(BitHistoryProto::Reader& proto);
 
-#endif // NTA_fast_cla_classifier_HPP
+		/**
+		 * Check if the other instance matches this one.
+		 *
+		 * @param other an instance to compare to
+		 * @returns true iff the other instance matches this one
+		 */
+		// bool operator==(const BitHistory& other) const;
+
+		/**
+		 * Check if the other instance doesn't match this one.
+		 *
+		 * @param other an instance to compare to
+		 * @returns true iff the other instance matches doesn't match this one
+		 */
+		// bool operator!=(const BitHistory& other) const;
+
+		// private:
+
+		//   string id_;
+		//   // Mapping from bucket index to the duty cycle values.
+		//   map<int, Real64> stats_;
+		//   // Last iteration at which the duty cycles were updated to the present
+		//   // value. This is not done every iteration for efficiency reasons.
+		//   int lastTotalUpdate_;
+		//   int learnIteration_;
+		//   // The alpha to use when decaying the duty cycles.
+		//   Real64 alpha_;
+		//   UInt verbosity_;
+	} // end class BitHistory
+
+	export let BitHistory: BitHistory_Static = nupic_module.algorithms.BitHistory;
+
+} // end namespace cla_classifier
+//  } // end namespace algorithms
+// } // end namespace nupic
+
+// #endif; // NTA_fast_cla_classifier_HPP

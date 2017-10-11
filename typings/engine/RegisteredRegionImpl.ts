@@ -40,54 +40,53 @@
 //   class Region;
 //   class ValueMap;
 
-//   class GenericRegisteredRegionImpl {
-//     public:
-//       GenericRegisteredRegionImpl() {}
+export interface GenericRegisteredRegionImpl {
+	//   GenericRegisteredRegionImpl() {}
 
-//       virtual ~GenericRegisteredRegionImpl() {}
+	//   virtual ~GenericRegisteredRegionImpl() {}
 
-//       virtual RegionImpl* createRegionImpl(
-//           const ValueMap& params, Region *region) = 0;
+	createRegionImpl(
+		params: ValueMap, region: Region): RegionImpl;
 
-//       virtual RegionImpl* deserializeRegionImpl(
-//           BundleIO& params, Region *region) = 0;
+	deserializeRegionImpl(
+		params: BundleIO, region: Region): RegionImpl;
 
-//       virtual RegionImpl* deserializeRegionImpl(
-//           capnp::AnyPointer::Reader& proto, Region *region) = 0;
+	//    deserializeRegionImpl(
+	//       capnp::AnyPointer::Reader& proto, Region *region): RegionImpl;
 
-//       virtual Spec* createSpec() = 0;
-//   };
+	createSpec(): Spec;
+}
 
-//   template <class T>
-//   class RegisteredRegionImpl: public GenericRegisteredRegionImpl {
-//     public:
-//       RegisteredRegionImpl() {}
+  //template <class T>
+  class RegisteredRegionImpl: public GenericRegisteredRegionImpl {
+    public:
+      RegisteredRegionImpl() {}
 
-//       ~RegisteredRegionImpl() {}
+      ~RegisteredRegionImpl() {}
 
-//       virtual RegionImpl* createRegionImpl(
-//           const ValueMap& params, Region *region) override
-//       {
-//         return new T(params, region);
-//       }
+      virtual RegionImpl* createRegionImpl(
+          const ValueMap& params, Region *region) override
+      {
+        return new T(params, region);
+      }
 
-//       virtual RegionImpl* deserializeRegionImpl(
-//           BundleIO& params, Region *region) override
-//       {
-//         return new T(params, region);
-//       }
+      virtual RegionImpl* deserializeRegionImpl(
+          BundleIO& params, Region *region) override
+      {
+        return new T(params, region);
+      }
 
-//       virtual RegionImpl* deserializeRegionImpl(
-//           capnp::AnyPointer::Reader& proto, Region *region) override
-//       {
-//         return new T(proto, region);
-//       }
+      virtual RegionImpl* deserializeRegionImpl(
+          capnp::AnyPointer::Reader& proto, Region *region); override
+    {
+        return new T(proto, region);
+      }
 
-//       virtual Spec* createSpec() override
-//       {
-//         return T::createSpec();
-//       }
-//   };
+    virtual Spec* createSpec() override
+    {
+        return T;::createSpec();
+      }
+  }
 
 // }
 

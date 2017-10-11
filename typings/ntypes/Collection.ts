@@ -20,7 +20,7 @@
 //  * ---------------------------------------------------------------------
 //  */
 import nupic_module from "../bindings";
-import { bool, pair ,size_t} from "../types/Types";
+import { bool, pair, size_t } from "../types/Types";
 import { NTA_CHECK, NTA_THROW } from "../utils/Log";
 // #ifndef NTA_COLLECTION_HPP
 // #define NTA_COLLECTION_HPP
@@ -38,70 +38,26 @@ import { NTA_CHECK, NTA_THROW } from "../utils/Log";
 //   // You can add items using the add() method.
 //   //
 
-class Collection<T>
-{
-	private vec_: Array<pair<string, T>>;
+export interface Collection<T> {
 
-	public getCount(): size_t {
-		return this.vec_.length;
-	}
+	getCount(): size_t;
 
 	// This method provides access by index to the contents of the collection
 	// The indices are in insertion order.
 	//
 
-	public getByIndex(index: size_t): pair<string, T> {
-		NTA_CHECK(() => index < vec_.length);
-		return this.vec_[index];
-	}
+	getByIndex(index: size_t): pair<string, T>;
 
-	public contains(name: string): bool {
-		for (const i of this.vec_) {
-			if (i.first === name) {
-				return true;
-			}
-		}
-		return false;
-	}
+	contains(name: string): bool;
 
-	public getByName(name: string): T {
-		for (const i of this.vec_) {
-
-			if (i.first === name) {
-				return i.second;
-			}
-		}
-		NTA_THROW("No item named: " + name);
-	}
+	getByName(name: string): T;
 
 	// TODO: move add/remove to a ModifiableCollection subclass
 	// This method should be internal but is currently tested
 	// in net_test.py in test_node_spec
-	public add(name: string, item: T): void {
-		// make sure we don't already have something with this name
-		for (const i of this.vec_) {
-			if (i.first === name) {
-				NTA_THROW("Unable to add item '" + name + "' to collection "
-					+ "because it already exists");
-			}
-		}
+	add(name: string, item: T): void;
 
-		// Add the new item to the vector
-		this.vec_.push(new pair(name, item));
-	}
-
-	public remove(name: string): void {
-		for (const i of this.vec_) {
-			if (i.first === name) {
-				break;
-			}
-		}
-		if (i === vec_.end()) {
-			NTA_THROW("No item named '" + name + "' in collection");
-		}
-
-		this.vec_.erase(i);
-	}
+	remove(name: string): void;
 
 	// #ifdef NTA_INTERNAL
 	//    pair<string, T>& getByIndex(size_t index);

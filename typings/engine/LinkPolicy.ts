@@ -19,7 +19,9 @@
  * http://numenta.org/licenses/
  * ---------------------------------------------------------------------
  */
+import nupic_module from "../bindings";
 
+import { bool} from "../types/Types";
 /** @file
  * Definition of the LinkPolicy class
  */

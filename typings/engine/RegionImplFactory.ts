@@ -19,6 +19,13 @@
 //  * http://numenta.org/licenses/
 //  * ---------------------------------------------------------------------
 //  */
+import nupic_module from "../bindings";
+import {BundleIO} from "../ntypes/BundleIO";
+import { bool } from "../types/Types";
+import {Region} from "./Region";
+import {RegionImpl} from "./RegionImpl";
+import {GenericRegisteredRegionImpl} from "./RegisteredRegionImpl";
+import {Spec} from "./Spec";
 
 // /** @file
 //  * Definition of the RegionImpl Factory API
@@ -50,69 +57,74 @@
 //   class BundleIO;
 //   class ValueMap;
 //   class GenericRegisteredRegionImpl;
+interface RegionImplFactory_Static {
+	getInstance(): RegionImplFactory;
 
-//   class RegionImplFactory
-//   {
-//   public:
-//     static RegionImplFactory & getInstance();
+	// RegionImplFactory is a lightweight object
+	// ~RegionImplFactory() {};
 
-//     // RegionImplFactory is a lightweight object
-//     ~RegionImplFactory() {};
+	registerPyRegionPackage(path: string): void;
 
-//     // Create a RegionImpl of a specific type; caller gets ownership.
-//     RegionImpl* createRegionImpl(const std::string nodeType,
-//                                  const std::string nodeParams,
-//                                  Region* region);
+	// Allows the user to load custom Python regions
+	registerPyRegion(module: string, className: string): void;
 
-//     // Create a RegionImpl from serialized state; caller gets ownership.
-//     RegionImpl* deserializeRegionImpl(const std::string nodeType,
-//                                       BundleIO& bundle,
-//                                       Region* region);
+	// Allows the user to load custom C++ regions
+	registerCPPRegion(name: string, wrapper: GenericRegisteredRegionImpl): void;
 
-//     // Create a RegionImpl from capnp proto; caller gets ownership.
-//     RegionImpl* deserializeRegionImpl(const std::string nodeType,
-//                                       capnp::AnyPointer::Reader& proto,
-//                                       Region* region);
+	// Allows the user to unregister Python regions
+	unregisterPyRegion(className: string): void;
 
-//     // Returns nodespec for a specific node type; Factory retains ownership.
-//     Spec* getSpec(const std::string nodeType);
+	// Allows the user to unregister C++ regions
+	unregisterCPPRegion(name: string): void;
 
-//     // RegionImplFactory caches nodespecs and the dynamic library reference
-//     // This frees up the cached information.
-//     // Should be called only if there are no outstanding
-//     // nodespec references (e.g. in NuPIC shutdown) or pynodes.
-//     void cleanup();
+}
 
-//     static void registerPyRegionPackage(const char * path);
+export interface RegionImplFactory {
 
-//     // Allows the user to load custom Python regions
-//     static void registerPyRegion(const std::string module, const std::string className);
+	// Create a RegionImpl of a specific type; caller gets ownership.
+	createRegionImpl(
+		nodeType: string,
+		nodeParams: string,
+		region: Region): RegionImpl;
 
-//     // Allows the user to load custom C++ regions
-//     static void registerCPPRegion(const std::string name, GenericRegisteredRegionImpl * wrapper);
+	// Create a RegionImpl from serialized state; caller gets ownership.
+	deserializeRegionImpl(
+		nodeType: string,
+		bundle: BundleIO,
+		region: Region): RegionImpl;
 
-//     // Allows the user to unregister Python regions
-//     static void unregisterPyRegion(const std::string className);
+	// Create a RegionImpl from capnp proto; caller gets ownership.
+	// deserializeRegionImpl(
+	// 	nodeType: string,
+	// 	proto: capnp: : AnyPointer:  : Reader,
+	// 	region: Region): RegionImpl;
 
-//     // Allows the user to unregister C++ regions
-//     static void unregisterCPPRegion(const std::string name);
+	// Returns nodespec for a specific node type; Factory retains ownership.
+	getSpec(nodeType: string): Spec;
 
-//   private:
-//     RegionImplFactory() {};
-//     RegionImplFactory(const RegionImplFactory &);
+	// RegionImplFactory caches nodespecs and the dynamic library reference
+	// This frees up the cached information.
+	// Should be called only if there are no outstanding
+	// nodespec references (e.g. in NuPIC shutdown) or pynodes.
+	cleanup(): void;
 
-//     // TODO: implement locking for thread safety for this global data structure
-//     // TODO: implement cleanup
+	//   private:
+	//     RegionImplFactory() {};
+	//     RegionImplFactory(RegionImplFactory &);
 
-//     // getSpec returns references to nodespecs in this cache.
-//     // should not be cleaned up until those references have disappeared.
-//     std::map<std::string, Spec*> nodespecCache_;
+	//     // TODO: implement locking for thread safety for this global data structure
+	//     // TODO: implement cleanup
 
-//     // Using shared_ptr here to ensure the dynamic python library object
-//     // is deleted when the factory goes away. Can't use scoped_ptr
-//     // because it is not initialized in the constructor.
-//     std::shared_ptr<DynamicPythonLibrary> pyLib_;
-//   };
+	//     // getSpec returns references to nodespecs in this cache.
+	//     // should not be cleaned up until those references have disappeared.
+	//     std::map<string, Spec*> nodespecCache_;
+
+	//     // Using shared_ptr here to ensure the dynamic python library object
+	//     // is deleted when the factory goes away. Can't use scoped_ptr
+	//     // because it is not initialized in the constructor.
+	//     std::shared_ptr<DynamicPythonLibrary> pyLib_;
+}
+export let RegionImplFactory: RegionImplFactory_Static = nupic_module.x;
 // }
 
 // #endif // NTA_REGION_IMPL_FACTORY_HPP

@@ -17,8 +17,9 @@ public:
 	std::shared_ptr<nupic::NuPIC> _nupic;
 
 
-	static POLY_METHOD(New);
-
+	static POLY_METHOD(init);
+	static POLY_METHOD(shutdown);
+	static POLY_METHOD(isInitialized);
 };
 
 #endif

@@ -320,70 +320,59 @@ POLY_METHOD(Input::findLink) {
 
 POLY_METHOD(Input::removeLink) {
 	auto this_ = info.This<Input*>();
+	auto link = info.at<Link*>(0)->_link;
 
+	this_->_input->removeLink(link.get());
 }
 
 POLY_METHOD(Input::prepare) {
 	auto this_ = info.This<Input*>();
 
+	this_->_input->prepare();
 }
 
 POLY_METHOD(Input::getData) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::getRegion) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::getLinks) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::isRegionLevel) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::evaluateLinks) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::initialize) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::isInitialized) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::getSplitterMap) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::getInputForNode) {
 	auto this_ = info.This<Input*>();
-
+	throw std::runtime_error("not implemented");
 }
-
-//
-//POLY_METHOD(features2d::drawKeypoints){
-//	auto image		= info.at<IOArray*>(0)->GetInputArray();
-//	auto keypoints	= *info.at<std::shared_ptr<std::vector<KeyPoint*>>>(1);
-//	auto outImage = info.at<IOArray*>(2)->GetInputOutputArray();
-//	auto color = info.at<Scalar*>(3)->_scalar;
-//	auto flags = info.at<int>(4);
-//
-//	std::unique_ptr<std::vector<cv::KeyPoint>> vec_kp = std::make_unique<std::vector<cv::KeyPoint>>();
-//	std::transform(std::begin(keypoints), std::end(keypoints), std::back_inserter(*vec_kp), [](const KeyPoint* kpi) {return *kpi->_keyPoint; });
-//
-//	cv::drawKeypoints(image, *vec_kp, outImage, *color, flags);
-//}
 

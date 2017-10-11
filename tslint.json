@@ -13,7 +13,9 @@
         "no-bitwise": false,
         "interface-name": [false,"always-prefix"],
         "jsdoc-format":false,
-        "no-empty-interface":false
+        "no-empty-interface":false,
+        "unified-signatures":false,
+        "max-classes-per-file":false
     },
     "extends": "tslint:recommended"
 }

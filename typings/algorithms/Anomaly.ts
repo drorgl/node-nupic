@@ -20,50 +20,50 @@
  * ---------------------------------------------------------------------
  */
 
-#ifndef NUPIC_ALGORITHMS_ANOMALY_HPP
-#define NUPIC_ALGORITHMS_ANOMALY_HPP
+// #ifndef NUPIC_ALGORITHMS_ANOMALY_HPP
+// #define NUPIC_ALGORITHMS_ANOMALY_HPP
 
+// #include <vector>
+// #include <memory> // Needed for smart pointer templates
+// #include <nupic/utils/MovingAverage.hpp> // Needed for for smart pointer templates
+// #include <nupic/types/Types.hpp>
+import nupic_module from "../bindings";
 
-#include <vector>
-#include <memory> // Needed for smart pointer templates
-#include <nupic/utils/MovingAverage.hpp> // Needed for for smart pointer templates
-#include <nupic/types/Types.hpp>
+import { Real32, Real64, UInt } from "../types/Types";
 
-namespace nupic
-{
+// namespace nupic
+// {
 
-  namespace util
-  {
-    class MovingAverage; // Forward declaration
-  }
+// namespace util
+// {
+//   class MovingAverage; // Forward declaration
+// }
 
-  namespace algorithms
-  {
+// namespace algorithms
+// {
 
-    namespace anomaly
-    {
+export namespace anomaly {
 
-      /**
-       * Computes the raw anomaly score.
-       *
-       * The raw anomaly score is the fraction of active columns not predicted.
-       *
-       * @param activeColumns: array of active column indices
-       * @param prevPredictedColumns: array of columns indices predicted in
-       *     prev step
-       * @return anomaly score 0..1 (Real32)
-       */
-      Real32 computeRawAnomalyScore(const std::vector<UInt>& active,
-                                    const std::vector<UInt>& predicted);
+	/**
+	 * Computes the raw anomaly score.
+	 *
+	 * The raw anomaly score is the fraction of active columns not predicted.
+	 *
+	 * @param activeColumns: array of active column indices
+	 * @param prevPredictedColumns: array of columns indices predicted in
+	 *     prev step
+	 * @return anomaly score 0..1 (Real32)
+	 */
+	// Real32 computeRawAnomalyScore(const std::vector<UInt>& active,
+	//                               const std::vector<UInt>& predicted);
 
+	type IcomputeRawAnomalyScore = (active: UInt[], predicted: UInt[]) => Real32;
+	export let computeRawAnomalyScore: IcomputeRawAnomalyScore = nupic_module.anomaly.computeRawAnomalyScore;
 
-      enum class AnomalyMode { PURE, LIKELIHOOD, WEIGHTED };
+	export enum AnomalyMode { PURE, LIKELIHOOD, WEIGHTED }
 
-
-      class Anomaly
-      {
-      public:
-        /**
+	interface Anomaly_Static {
+		/**
          * Utility class for generating anomaly scores in different ways.
          *
          * Supported modes:
@@ -91,10 +91,16 @@ namespace nupic
          *        (1 iff >= binaryAnomalyThreshold). The transformation is
          *        applied after moving average is computed.
          */
-        Anomaly(UInt slidingWindowSize=0, AnomalyMode mode=AnomalyMode::PURE,
-                Real32 binaryAnomalyThreshold=0);
+		new(
+			slidingWindowSize?: UInt /*=0*/,
+			mode?: AnomalyMode /*=AnomalyMode::PURE*/,
+			binaryAnomalyThreshold?: Real32 /*=0*/): Anomaly;
+	}
 
-        /**
+	export interface Anomaly {
+		// public:
+
+		/**
          * Compute the anomaly score as the percent of active columns not
          * predicted.
          *
@@ -108,18 +114,21 @@ namespace nupic
          *                   (used in anomaly-likelihood)
          * @return the computed anomaly score; Real32 0..1
          */
-        Real32 compute(const std::vector<UInt>& active,
-                       const std::vector<UInt>& predicted,
-                       Real64 inputValue=0, UInt timestamp=0);
+		compute(
+			active: UInt[],
+			predicted: UInt[],
+			inputValue?: Real64 /*=0*/, timestamp?: UInt /*=0*/): Real32;
 
-      private:
-        AnomalyMode mode_;
-        Real32 binaryThreshold_;
-        std::unique_ptr<nupic::util::MovingAverage> movingAverage_;
+		//   private:
+		//     AnomalyMode; mode_;
+		//     Real32 binaryThreshold_;
+		//     std::unique_ptr<nupic::util::MovingAverage> movingAverage_;
 
-      };
-    } // namespace anomaly
-  } // namespace algorithms
-} // namespace nupic
+	}
 
-#endif // NUPIC_ALGORITHMS_ANOMALY_HPP
+	export let Anomaly: Anomaly_Static = nupic_module.algorithms.Anomaly;
+} // namespace anomaly
+//  } // namespace algorithms
+// } // namespace nupic
+
+// #   endif; // NUPIC_ALGORITHMS_ANOMALY_HPP

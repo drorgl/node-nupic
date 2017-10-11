@@ -17,7 +17,18 @@ public:
 	std::shared_ptr<nupic::Output> _output;
 
 
-	static POLY_METHOD(New);
+	static POLY_METHOD(New_region);
+	static POLY_METHOD(setName);
+	static POLY_METHOD(getName);
+	static POLY_METHOD(initialize);
+	static POLY_METHOD(addLink);
+	static POLY_METHOD(removeLink);
+	static POLY_METHOD(hasOutgoingLinks);
+	static POLY_METHOD(getData);
+	static POLY_METHOD(isRegionLevel);
+	static POLY_METHOD(getRegion);
+	static POLY_METHOD(getNodeOutputElementCount);
+
 
 };
 

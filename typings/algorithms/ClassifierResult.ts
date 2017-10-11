@@ -20,93 +20,106 @@
  * ---------------------------------------------------------------------
  */
 
-#ifndef NTA_classifier_result_HPP
-#define NTA_classifier_result_HPP
+import nupic_module from "../bindings";
 
-#include <map>
-#include <vector>
+import { bool, Int, Real64, UInt } from "../types/Types";
 
-#include <nupic/types/Types.hpp>
+// #ifndef NTA_classifier_result_HPP
+// #define NTA_classifier_result_HPP
 
-using namespace std;
+// #include <map>
+// #include <vector>
 
-namespace nupic
-{
-  namespace algorithms
-  {
-    namespace cla_classifier
-    {
+// #include <nupic/types/Types.hpp>
 
-      /** CLA classifier result class.
-       *
-       * @b Responsibility
-       * The ClassifierResult is responsible for storing result data and
-       * cleaning up the data when deleted.
-       *
-       */
-      class ClassifierResult
-      {
-        public:
+// using namespace std;
 
-          /**
-           * Constructor.
-           */
-          ClassifierResult() {}
+// namespace nupic
+// {
+//   namespace algorithms
+//   {
+// namespace cla_classifier {
+interface IResultStep {
+	first: Int;
+	second: Real64[];
+}
 
-          /**
-           * Destructor - frees memory allocated during lifespan.
-           */
-          virtual ~ClassifierResult();
+/** CLA classifier result class.
+ *
+ * @b Responsibility
+ * The ClassifierResult is responsible for storing result data and
+ * cleaning up the data when deleted.
+ *
+ */
+interface ClassifierResult_Static {
+	/**
+			   * Constructor.
+			   */
+	new(): ClassifierResult;
 
-          /**
-           * Creates and returns a vector for a given step.
-           *
-           * The vectors created are stored and can be accessed with the
-           * iterator methods. The vectors are owned by this class and are
-           * deleted in the destructor.
-           *
-           * @param step The prediction step to create a vector for. If -1, then
-           *             a vector for the actual values to use for each bucket
-           *             is returned.
-           * @param size The size of the desired vector.
-           * @param value The value to populate the vector with.
-           *
-           * @returns The specified vector.
-           */
-          virtual vector<Real64>* createVector(Int step, UInt size, Real64 value);
+	/**
+	 * Destructor - frees memory allocated during lifespan.
+	 */
+	// virtual ~ClassifierResult();
+	/**
+	 * Checks if the other instance has the exact same values.
+	 *
+	 * @param other The other instance to compare to.
+	 * @returns True iff the other instance has the same values.
+	 */
+	// virtual bool operator== (const ClassifierResult& other) const;
 
-          /**
-           * Checks if the other instance has the exact same values.
-           *
-           * @param other The other instance to compare to.
-           * @returns True iff the other instance has the same values.
-           */
-          virtual bool operator==(const ClassifierResult& other) const;
+}
 
-          /**
-           * Iterator method begin.
-           */
-          virtual map<Int, vector<Real64>*>::const_iterator begin()
-          {
-            return result_.begin();
-          }
+export interface ClassifierResult {
+	// public:
+	// first: Int;
+	// second: Real64[];
 
-          /**
-           * Iterator method end.
-           */
-          virtual map<Int, vector<Real64>*>::const_iterator end()
-          {
-            return result_.end();
-          }
+	/**
+	 * Creates and returns a vector for a given step.
+	 *
+	 * The vectors created are stored and can be accessed with the
+	 * iterator methods. The vectors are owned by this class and are
+	 * deleted in the destructor.
+	 *
+	 * @param step The prediction step to create a vector for. If -1, then
+	 *             a vector for the actual values to use for each bucket
+	 *             is returned.
+	 * @param size The size of the desired vector.
+	 * @param value The value to populate the vector with.
+	 *
+	 * @returns The specified vector.
+	 */
+	createVector(step: Int, size: UInt, value: Real64): Real64[];
 
-        private:
+	/**
+	 * Iterator method begin.
+	 */
+	//   virtual map<Int, Array<Real64>*>::const_iterator begin()
+	//   {
+	//     return result_.begin();
+	//   }
 
-          map<Int, vector<Real64>*> result_;
+	//   /**
+	//    * Iterator method end.
+	//    */
+	//   virtual map<Int, Array<Real64>*>::const_iterator end()
+	//   {
+	//     return result_.end();
+	//   }
 
-      }; // end class ClassifierResult
+	// private:
 
-    } // end namespace cla_classifier
-  } // end namespace algorithms
-} // end namespace nupic
+	//   map<Int, Array<Real64>*> result_;
+	getResultMap(): { [step: number]: Real64[]; };
+	getResultArray(): IResultStep[];
 
-#endif // NTA_classifier_result_HPP
+	} // end class ClassifierResult
+export let ClassifierResult: ClassifierResult_Static = nupic_module.x;
+
+// } // end namespace cla_classifier
+//   } // end namespace algorithms
+// } // end namespace nupic
+
+// #endif // NTA_classifier_result_HPP

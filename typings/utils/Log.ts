@@ -48,7 +48,7 @@ export function NTA_DEBUG(msg: string){
 // #define NTA_WARN nupic::LogItem(__FILE__, __LINE__, nupic::LogItem::warn).stream()
 
 // // To throw an exception and make sure the exception message is logged appropriately
-export function NTA_THROW(err) {
+export function NTA_THROW(err: string) {
 	throw new Error(err); // (__FILE__, __LINE__)
 }
 
