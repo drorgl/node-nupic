@@ -31,7 +31,7 @@
 // using namespace nupic;
 
 // class PyHelpersTest : public ::testing::Test
-// { 
+// {
 //   public:
 //   PyHelpersTest()
 //   {
@@ -45,7 +45,6 @@
 //     Py_Finalize();
 //   }
 // };
-
 
 // TEST_F(PyHelpersTest, pyPtrConstructionNULL)
 // {
@@ -67,7 +66,7 @@
 //   ASSERT_TRUE(pp2.isNULL());
 //   Py_DECREF(p);
 // }
-  
+
 // TEST_F(PyHelpersTest, pyPtrConstructionAssign)
 // {
 //   PyObject * p = PyTuple_New(1);
@@ -118,9 +117,9 @@
 //   py::Int n3(long(0));
 //   py::Int n4(555);
 //   py::Int n5(6666);
-  
+
 //   ASSERT_TRUE(n1 == -5);
-//   int x = n2; 
+//   int x = n2;
 //   int expected = -6666;
 //   ASSERT_TRUE(x == expected);
 //   ASSERT_TRUE(n3 == 0);
@@ -137,9 +136,9 @@
 //   py::Long n3(long(0));
 //   py::Long n4(555);
 //   py::Long n5(66666666);
-  
+
 //   ASSERT_TRUE(n1 == -5);
-//   long x = n2; 
+//   long x = n2;
 //   long expected = -66666666;
 //   ASSERT_TRUE(x == expected);
 //   ASSERT_TRUE(n3 == 0);
@@ -156,7 +155,7 @@
 //   py::UnsignedLong n3((unsigned long)(0));
 //   py::UnsignedLong n4(555);
 //   py::UnsignedLong n5(66666666);
-  
+
 //   ASSERT_TRUE(n1 == (unsigned long)(-5));
 //   ASSERT_TRUE(n2 == (unsigned long)(-66666666));
 //   ASSERT_TRUE(n3 == 0);
@@ -176,7 +175,7 @@
 //   py::Float n3(333.555);
 //   py::Float n4(0.02);
 //   py::Float n5("0.02");
-  
+
 //   ASSERT_TRUE(max == py::Float::getMax());
 //   ASSERT_TRUE(min == py::Float::getMin());
 //   ASSERT_TRUE(n1 == -0.5);
@@ -231,7 +230,7 @@
 //   py::Tuple empty;
 //   ASSERT_TRUE(PyTuple_Check(empty) != 0);
 //   ASSERT_TRUE(empty.getCount() == 0);
-  
+
 //   EXPECT_THROW(empty.setItem(0, s1), std::exception);
 //   EXPECT_THROW(empty.getItem(0), std::exception);
 // }
@@ -248,11 +247,11 @@
 //   t1.setItem(0, s1);
 //   py::String item1(t1.getItem(0));
 //   ASSERT_TRUE(std::string(item1) == std::string(s1));
-  
+
 //   py::String fastItem1(t1.fastGetItem(0));
 //   ASSERT_TRUE(std::string(fastItem1) == std::string(s1));
 //   fastItem1.release();
-  
+
 //   EXPECT_THROW(t1.setItem(1, s2), std::exception);
 //   EXPECT_THROW(t1.getItem(1), std::exception);
 
@@ -282,7 +281,6 @@
 //   ASSERT_TRUE(std::string(fastItem2) == std::string(s2));
 //   fastItem2.release();
 
-
 //   EXPECT_THROW(t2.setItem(2, s2), std::exception);
 //   EXPECT_THROW(t2.getItem(2), std::exception);
 
@@ -297,7 +295,7 @@
 //   py::List empty;
 //   ASSERT_TRUE(PyList_Check(empty) != 0);
 //   ASSERT_TRUE(empty.getCount() == 0);
-  
+
 //   EXPECT_THROW(empty.setItem(0, s1), std::exception);
 //   EXPECT_THROW(empty.getItem(0), std::exception);
 // }
@@ -320,7 +318,7 @@
 
 //   ASSERT_TRUE(t1.getCount() == 1);
 //   ASSERT_TRUE(std::string(item1) == std::string(s1));
-  
+
 //   EXPECT_THROW(t1.getItem(1), std::exception);
 // }
 
@@ -342,7 +340,7 @@
 
 //   t2.append(s2);
 //   ASSERT_TRUE(t2.getCount() == 2);
-  
+
 //   py::String item2(t2.getItem(1));
 //   ASSERT_TRUE(std::string(item2) == std::string(s2));
 //   py::String fastItem2(t2.fastGetItem(1));
@@ -383,7 +381,7 @@
 // {
 //   PyObject * p = PyDict_New();
 //   PyDict_SetItem(p, py::String("1234"), py::String("5678"));
-  
+
 //   py::Dict d(p);
 
 //   ASSERT_TRUE(PyDict_Contains(d, py::String("1234")) == 1);
@@ -392,7 +390,7 @@
 
 //   ASSERT_TRUE(PyDict_Contains(d, py::String("777")) == 1);
 // }
-  
+
 // // getItem with default (exisiting and non-exisitng key)
 // TEST_F(PyHelpersTest, pyDictGetItem)
 // {
@@ -400,8 +398,8 @@
 //   d.setItem("A", py::String("AAA"));
 
 //   PyObject * defaultItem = (PyObject *)123;
-  
-//   py::String A(d.getItem("A"));             
+
+//   py::String A(d.getItem("A"));
 //   ASSERT_TRUE(std::string(A) == std::string("AAA"));
 
 //   // No "B" in the dict, so expect to get the default item
@@ -411,7 +409,7 @@
 //   PyDict_SetItem(d, py::String("777"), py::String("999"));
 //   ASSERT_TRUE(PyDict_Contains(d, py::String("777")) == 1);
 // }
-  
+
 // TEST_F(PyHelpersTest, pyModule)
 // {
 //   py::Module module("sys");

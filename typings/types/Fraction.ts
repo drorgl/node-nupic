@@ -30,7 +30,7 @@ import { bool, double, int, size_t, uint } from "../types/Types";
 // namespace nupic
 // {
 
-interface Fraction_Static {
+export interface Fraction_Static {
 	new(_numerator: int, _denominator: int): Fraction;
 	new(_numerator: int): Fraction;
 	new(): Fraction;

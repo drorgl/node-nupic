@@ -38,7 +38,9 @@ import nupic_module from "../bindings";
 // We need the full definitions because these
 // objects are returned by value.
 // #include <nupic/ntypes/Dimensions.hpp>
+import { ArrayBase } from "../ntypes/ArrayBase";
 import { Dimensions } from "../ntypes/Dimensions";
+import { Handle } from "../types/Types";
 import { Input } from "./Input";
 import { Network } from "./Network";
 import { Output } from "./Output";
@@ -78,7 +80,7 @@ import { Spec } from "./Spec";
  * Internally regions are created and owned by Network.
  *
  */
-interface Region_Static {
+export interface Region_Static {
 	/**
 		* Get the Spec of a region type without an instance.
 		*
@@ -357,7 +359,7 @@ export interface Region {// : public Serializable<RegionProto>
      */
 	setParameterBool(name: string, value: boolean): void;
 
-    /**
+	/**
      * Set the parameter to a function callback value.
      *
      * @param name
@@ -507,7 +509,7 @@ export interface Region {// : public Serializable<RegionProto>
      * @endinternal
      *
      */
-	getInputData(inputName: string): ArrayRef;
+	getInputData(inputName: string): ArrayBase; // ArrayRef;
 
 	/**
      * Get the output data.
@@ -529,7 +531,7 @@ export interface Region {// : public Serializable<RegionProto>
      * @endinternal
      *
      */
-	getOutputData(outputName: string): ArrayRef;
+	getOutputData(outputName: string): ArrayBase; // ArrayRef;
 
 	/**
      * Get the count of input data.

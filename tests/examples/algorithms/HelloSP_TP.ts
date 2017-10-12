@@ -19,9 +19,11 @@
  * http://numenta.org/licenses/
  * ---------------------------------------------------------------------
  */
+import { Cells4, Real, spatial_pooler, Timer, UInt } from "../../../typings/index";
+import SpatialPooler  = spatial_pooler.SpatialPooler;
 
 // #include <iostream>
-// #include <vector>
+// #include <Array>
 // #include <algorithm>    // std::generate
 // #include <ctime>        // std::time
 // #include <cstdlib>      // std::rand, std::srand
@@ -48,39 +50,39 @@ const  DIM_INPUT = 10000;
 const  TP_CELLS_PER_COL = 10; // cells per column in TP
 const  EPOCHS = Math.pow(10, 4); // number of iterations (calls to SP/TP compute() )
 
-let inputDim = [ DIM_INPUT ];
-let colDim = [ DIM ];
+const inputDim = [ DIM_INPUT ];
+const colDim = [ DIM ];
 
 // generate random input
-vector < UInt > input(DIM_INPUT);
-vector < UInt > outSP(DIM); // active array, output of SP/TP
+const input = new Array < UInt >(DIM_INPUT);
+const outSP = new Array < UInt > (DIM); // active array, output of SP/TP
 const  _CELLS = DIM * TP_CELLS_PER_COL;
-vector < UInt > outTP(_CELLS);
-Real; rIn[DIM] = {}; // input for TP (must be Reals)
-Real; rOut[_CELLS] = {};
+const outTP  = new Array < UInt >(_CELLS);
+const rIn = new Array<Real>(DIM); // input for TP (must be Reals)
+const rOut = new Array<Real>(_CELLS);
 
 // initialize SP, TP
-let sp = new SpatialPooler(inputDim, colDim);
-let tp = new Cells4(DIM, TP_CELLS_PER_COL, 12, 8, 15, 5, .5, .8, 1.0, .1, .1, 0.0, false, 42, true, false);
+const sp = new SpatialPooler(inputDim, colDim);
+const tp = new Cells4(DIM, TP_CELLS_PER_COL, 12, 8, 15, 5, .5, .8, 1.0, .1, .1, 0.0, false, 42, true, false);
 
 // Start a stopwatch timer
-Timer; stopwatch(true);
+const stopwatch = new Timer(true);
 
 // run
 for (let e = 0; e < EPOCHS; e++) {
-	generate(input.begin(), input.end(), RandomNumber01);
-	fill(outSP.begin(), outSP.end(), 0);
-	sp.compute(input.data(), true, outSP.data());
-	sp.stripUnlearnedColumns(outSP.data());
+	input.forEach((v, i, a) => {a[i] = RandomNumber01(); });
+	outSP.fill(0);
+	sp.compute(input, true, outSP);
+	sp.stripUnlearnedColumns(outSP);
 
-	for (UInt i = 0; i < DIM; i++; ) {
-		rIn[i] = (Real)(outSP[i]);
+	for (let i = 0; i < DIM; i++ ) {
+		rIn[i] = (outSP[i]);
 	}
 
 	tp.compute(rIn, rOut, true, true);
 
-	for (let i = 0; i < _CELLS; i++; ) {
-		outTP[i] = (UInt); rOut[i];
+	for (let i = 0; i < _CELLS; i++) {
+		outTP[i] =  rOut[i];
 	}
 
 	// print

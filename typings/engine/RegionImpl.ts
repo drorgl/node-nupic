@@ -59,7 +59,7 @@ import { Region } from "./Region";
 //   class ArrayRef;
 //   class NodeSet;
 //   class BundleIO;
-interface RegionImpl_Static {
+export interface RegionImpl_Static {
 	// All subclasses must call this constructor from their regular constructor
 	new(region: Region): RegionImpl;
 

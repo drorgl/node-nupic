@@ -54,7 +54,7 @@ import { UInt } from "../types/Types";
 //        * A vector of coordinates of length dimensions.size().
 //        */
 
-type IcoordinatesFromIndex = (
+export type IcoordinatesFromIndex = (
 	index: UInt,
 	dimensions: UInt[]) => UInt[];
 
@@ -74,7 +74,7 @@ export let coordinatesFromIndex: IcoordinatesFromIndex = nupic_module.x;
 //        * by using the dimensions as a mixed radix definition. For example, in
 //        * dimensions 42x10, the point [1, 4] is index 1*420 + 4*10 = 460.
 //        */
-type IindexFromCoordinates = (
+export type IindexFromCoordinates = (
 	coordinates: UInt[],
 	dimensions: UInt[]) => UInt;
 export let indexFromCoordinates: IindexFromCoordinates = nupic_module.x;

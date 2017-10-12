@@ -44,7 +44,7 @@ import {Cells4} from "./Cells4";
  * indices for the *destination* cell, and the *destination* segment on that cell.
  * The cell index is between 0 and nCols * nCellsPerCol.
  */
-interface OutSynapse_Static {
+export interface OutSynapse_Static {
 	new(
 		dstCellIdx?: UInt/* =(UInt) -1*/,
 		dstSegIdx?: UInt/* =(UInt) -1*/

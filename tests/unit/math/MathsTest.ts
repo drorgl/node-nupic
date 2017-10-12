@@ -24,7 +24,7 @@
  * Implementation for maths unit tests
  */
 
-//#include <nupic/common/utils.hpp>
+// #include <nupic/common/utils.hpp>
 // #include <nupic/math/ArrayAlgo.hpp>
 //
 // #include "MathsTest.hpp"
@@ -67,32 +67,32 @@
 //
 //  //--------------------------------------------------------------------------------
 //  void MathsTest::unitTestNearlyEqualVector()
-//  { 
+//  {
 //    vector<Real> v1, v2;
-//    
+//
 //    {
 //      Test("nearlyEqualVector, empty vectors", true, nearlyEqualVector(v1, v2));
-//      
+//
 //      v2.push_back(1);
 //      Test("nearlyEqualVector, different sizes", false, nearlyEqualVector(v1, v2));
-//      
+//
 //      v1.push_back(1);
 //      Test("nearlyEqualVector, 1 element", true, nearlyEqualVector(v1, v2));
-//      
-//#if 0
+//
+// #if 0
 //      for(UInt i=0; i<2048; ++i) {
 //        Real v = Real(rng_->get() % 256)/256.0;
 //        v1.push_back(v);
 //        v2.push_back(v);
 //      }
 //      Test("nearlyEqualVector, 2049 elements 1", true, nearlyEqualVector(v1, v2));
-//      
+//
 //      v2[512] += 1.0;
 //      Test("nearlyEqualVector, 2049 elements 2", false, nearlyEqualVector(v1, v2));
-//      
+//
 //      v1.clear(); v2.clear();
 //      Test("nearlyEqualVector, after clear", true, nearlyEqualVector(v1, v2));
-//#endif
+// #endif
 //    }
 //  }
 //
@@ -107,7 +107,7 @@
 //        normalize(empty1.begin(), empty1.end());
 //        Test("Normalize vector<Real>, empty", true, nearlyEqualVector(empty1, empty1));
 //      }
-//	  
+//
 //      {
 //        v1[0] = Real(0.0); v1[1] = Real(0.0); v1[2] = Real(0.0);
 //        answer[0] = Real(0.0); answer[1] = Real(0.0); answer[2] = Real(0.0);
@@ -152,7 +152,7 @@
 //        Test("Normalize vector<Real> 52", true, nearlyEqualVector(v1, answer));
 //      }
 //    }
-//	
+//
 //    { // normalize
 //      std::vector<Real> v1(3), answer(3);
 //
@@ -223,11 +223,11 @@
 //      vector<Real> v1(3);
 //      v1[0] = 1.0; v1[1] = numeric_limits<Real>::infinity(); v1[2] = 3.0;
 //      stringstream s, answer;
-//#if defined(NTA_OS_WINDOWS)
+// #if defined(NTA_OS_WINDOWS)
 //      answer << "3 1 1.#INF 3 ";
-//#else
+// #else
 //      answer << "3 1 inf 3 ";
-//#endif
+// #endif
 //      s << v1;
 //      bool comp = s.str() == answer.str();
 //      Test("vector<Real> infinity to stream", true, comp);
@@ -237,25 +237,25 @@
 //      vector<Real> v1(3);
 //      v1[0] = 1.0; v1[1] = numeric_limits<Real>::quiet_NaN(); v1[2] = 3.0;
 //      stringstream s, answer;
-//#if defined(NTA_OS_WINDOWS)
+// #if defined(NTA_OS_WINDOWS)
 //      answer << "3 1 1.#QNAN 3 ";
-//#else
+// #else
 //      answer << "3 1 nan 3 ";
-//#endif
+// #endif
 //      s << v1;
 //      bool comp = s.str() == answer.str();
 //      Test("vector<Real> quiet_NaN to stream", true, comp);
 //    }
-//	  
+//
 //    {
 //      vector<Real> v1(3);
 //      v1[0] = 1.0; v1[1] = numeric_limits<Real>::signaling_NaN(); v1[2] = 3.0;
 //      stringstream s, answer;
-//#if defined(NTA_OS_WINDOWS)
+// #if defined(NTA_OS_WINDOWS)
 //      answer << "3 1 1.#QNAN 3 ";
-//#else
+// #else
 //      answer << "3 1 nan 3 ";
-//#endif
+// #endif
 //      s << v1;
 //      bool comp = s.str() == answer.str();
 //      Test("vector<Real> signaling_NaN to stream", true, comp);
@@ -376,11 +376,11 @@
 //    nchildren = 21;
 //    w = 125;
 //    nreps = 1000;
-//    
+//
 //    vector<UInt> boundaries(nchildren, 0);
-//    
+//
 //    boundaries[0] = rng_->getUInt32(w) + 1;
-//    for (UInt i = 1; i < (nchildren-1); ++i) 
+//    for (UInt i = 1; i < (nchildren-1); ++i)
 //      boundaries[i] = boundaries[i-1] + (rng_->getUInt32(w) + 1);
 //    ncols = nchildren * w;
 //    boundaries[nchildren-1] = ncols;
@@ -392,17 +392,17 @@
 //        x[j] = rng_->getReal64();
 //
 //      winnerTakesAll2(boundaries, x.begin(), v.begin());
-//      
+//
 //      UInt k2 = 0;
 //      for (UInt k1 = 0; k1 < nchildren; ++k1) {
 //
-//        vector<Real>::iterator it = 
+//        vector<Real>::iterator it =
 //          max_element(x.begin() + k2, x.begin() + boundaries[k1]);
 //        Test("Maths winnerTakesAll2 1", v[it - x.begin()], 1);
 //
 //        Real s = accumulate(v.begin() + k2, v.begin() + boundaries[k1], (Real)0);
 //        Test("Maths winnerTakesAll2 2", s, (Real) 1);
-//        
+//
 //        k2 = boundaries[k1];
 //      }
 //
@@ -425,11 +425,11 @@
 //      x[0] = 1;
 //      normalize_max(x.begin(), x.end(), 1);
 //      Test("scale 2", nearlyEqual(x[0], (Real)1), true);
-//      
+//
 //      x[0] = 2;
 //      normalize_max(x.begin(), x.end(), 1);
 //      Test("scale 3", nearlyEqual(x[0], (Real)1), true);
-//      
+//
 //      normalize_max(x.begin(), x.end(), .5);
 //      Test("scale 4", nearlyEqual(x[0], (Real).5), true);
 //
@@ -456,7 +456,7 @@
 //      normalize_max(x.begin(), x.end(), 10);
 //      Test("scale 8a", nearlyEqual(x[0], (Real)7), true);
 //      Test("scale 8b", nearlyEqual(x[1], (Real)10), true);
-//    }    
+//    }
 //
 //    {
 //      const UInt N = 256;
@@ -473,7 +473,7 @@
 //          ans[j] /= max;
 //
 //        normalize_max(x.begin(), x.end(), 1);
-//        
+//
 //        bool identical = true;
 //        for (UInt j = 0; j < N && identical; ++j)
 //          if (!nearlyEqual(x[j], ans[j]))
@@ -491,9 +491,9 @@
 //    UInt n = 1000; // Changing n will change the error!
 //
 //    { // Constructor with F only
-//      n = 1000; 
+//      n = 1000;
 //      double lb = -1, ub = 1, t_lb = -2, t_ub = 2, t_step = (t_ub - t_lb)/(10*n);
-//      
+//
 //      QSI<double, Exp<double> > q_e1(lb, ub, n, Exp<double>());
 //      Test("qsi f 1", q_e1.max_error(t_lb, t_ub, t_step).second <= 1e-8, true);
 //
@@ -501,8 +501,8 @@
 //      Test("qsi f 2", q_e2.max_error(t_lb, t_ub, t_step).second <= 1e-7, true);
 //    }
 //
-//    { 
-//      n = 2000;    
+//    {
+//      n = 2000;
 //      Real lb = -1, ub = 1, t_lb = -2, t_ub = 2, t_step = (t_ub - t_lb)/(10*n);
 //
 //      QSI<Real, Exp<Real> > q_e1(lb, ub, n, Exp<Real>());
@@ -511,7 +511,7 @@
 //      QSI<Real, Exp2<Real> > q_e2(lb, ub, n, Exp2<Real>());
 //      Test("qsi f 4", q_e2.max_error(t_lb, t_ub, t_step).second <= 1e-3, true);
 //    }
-//   
+//
 //    { // Constructor with F and derivative
 //      n = 1000;
 //      double lb = -1, ub = 1, t_lb = -2, t_ub = 2, t_step = (t_ub - t_lb)/(10*n);
@@ -519,8 +519,8 @@
 //      QSI<double, Exp<double> > q_e1(lb, ub, n, Exp<double>(1, 2), Exp<double>(2, 2));
 //      Test("qsi f ff 1", q_e1.max_error(t_lb, t_ub, t_step).second <= 1e-7, true);
 //    }
-//     
-//    { 
+//
+//    {
 //      n = 2000;
 //      Real lb = -1, ub = 1, t_lb = -2, t_ub = 2, t_step = (t_ub - t_lb)/(10*n);
 //      QSI<Real, Exp<Real> > q_e2(lb, ub, n, Exp<Real>(1, 2), Exp<Real>(2, 2));
@@ -542,8 +542,8 @@
 //      QSI<double, Exp<double> > q_e1(lb, ub, n, Exp<double>(1,1), Exp<double>(1,1));
 //      q_e1(x.begin(), x.end(), y.begin());
 //      Test("qsi vector 1", nearlyEqualRange(y.begin(), y.end(), yref.begin()), true);
-//    }   
-//    
+//    }
+//
 //    { // Vector to itself
 //      n = 1000;
 //      double v, lb = -1, ub = 1, t_lb = -2, t_ub = 2, t_step = (t_ub - t_lb)/(n);
@@ -553,7 +553,7 @@
 //
 //      for (UInt i = 0; i < n; ++i, v += t_step) {
 //        vv[i] = v;
-//        yref[i] = exp(v);    
+//        yref[i] = exp(v);
 //      }
 //
 //      QSI<double, Exp<double> > q_e1(lb, ub, n, Exp<double>(1,1), Exp<double>(1,1));
@@ -563,22 +563,19 @@
 //    */
 //  }
 //
-  //--------------------------------------------------------------------------------
-  // void MathsTest::RunTests()
-  // {
-    //
-    //unitTestNearlyZero();
-    //unitTestNearlyEqual();
-    //unitTestNearlyEqualVector();
-    //unitTestNormalize();
-    ////unitTestVectorToStream();
-    //unitTestElemOps();
-    //unitTestWinnerTakesAll();
-    //unitTestScale();
-    ////unitTestQSI(); // HEAP CORRUPTION on Windows
-  // }
-  
-  //----------------------------------------------------------------------
+// --------------------------------------------------------------------------------
+// void MathsTest::RunTests()
+// {
+//
+// unitTestNearlyZero();
+// unitTestNearlyEqual();
+// unitTestNearlyEqualVector();
+// unitTestNormalize();
+//// unitTestVectorToStream();
+// unitTestElemOps();
+// unitTestWinnerTakesAll();
+// unitTestScale();
+//// unitTestQSI(); // HEAP CORRUPTION on Windows
+// }
+// ----------------------------------------------------------------------
 // } // end namespace nupic
-
-

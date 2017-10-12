@@ -46,7 +46,7 @@ import { bool, Real, UInt } from "../types/Types";
 	 * of the synapse, and a permanence value. The source cell index is between
 	 * 0 and nCols * nCellsPerCol.
 	 */
-interface InSynapse_Static {
+export interface InSynapse_Static {
 		new(): InSynapse;
 		new(srcCellIdx: UInt, permanence: Real): InSynapse;
 

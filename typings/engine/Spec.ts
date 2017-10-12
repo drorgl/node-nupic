@@ -21,6 +21,7 @@
  */
 
 import nupic_module from "../bindings";
+import {NTA_BasicType} from "../types/Types";
 
 /** @file
 Definition of Spec data structures
@@ -36,7 +37,7 @@ Definition of Spec data structures
 
 // namespace nupic
 // {
-interface InputSpec_Static {
+export interface InputSpec_Static {
 	new(): InputSpec;
 	new(
 		description: string,
@@ -48,7 +49,7 @@ interface InputSpec_Static {
 		requireSplitterMap?: boolean/* = true*/): InputSpec;
 }
 
-interface InputSpec {
+export interface InputSpec {
 	// public:
 
 	description: string;
@@ -65,16 +66,17 @@ interface InputSpec {
 
 export let InputSpec: InputSpec_Static = nupic_module.InputSpec;
 
-interface OutputSpec_Static {
+export interface OutputSpec_Static {
 	new(): OutputSpec;
-	new(description: string,
-		   dataType: NTA_BasicType,
-		   count: number,
-		   regionLevel: boolean,
-		   isDefaultOutput: boolean): OutputSpec;
+	new(
+		description: string,
+		dataType: NTA_BasicType,
+		count: number,
+		regionLevel: boolean,
+		isDefaultOutput: boolean): OutputSpec;
 }
 
-interface OutputSpec {
+export interface OutputSpec {
 	// public:
 
 	description: string;
@@ -88,12 +90,12 @@ interface OutputSpec {
 
 export let OutputSpec: OutputSpec_Static = nupic_module.OutputSpec;
 
-interface CommandSpec_Static {
+export interface CommandSpec_Static {
 	new(): CommandSpec;
 	new(description: string): CommandSpec;
 }
 
-interface CommandSpec {
+export interface CommandSpec {
 	// public:
 
 	description: string;
@@ -102,21 +104,22 @@ interface CommandSpec {
 
 export let CommandSpec: CommandSpec_Static = nupic_module.CommandSpec;
 
-interface ParameterSpec_Static {
+export interface ParameterSpec_Static {
 
 	new(): ParameterSpec;
-    /**
+	/**
      * @param defaultValue -- a JSON-encoded value
      */
-	new(description: string,
-		   dataType: NTA_BasicType, count: number,
-		   constraints: string, defaultValue: string,
-		   accessMode: AccessMode): ParameterSpec;
+	new(
+		description: string,
+		dataType: NTA_BasicType, count: number,
+		constraints: string, defaultValue: string,
+		accessMode: AccessMode): ParameterSpec;
 }
 
-enum AccessMode { CreateAccess, ReadOnlyAccess, ReadWriteAccess }
+export enum AccessMode { CreateAccess, ReadOnlyAccess, ReadWriteAccess }
 
-interface ParameterSpec {
+export interface ParameterSpec {
 	// public:
 
 	description: string;
@@ -135,7 +138,7 @@ interface ParameterSpec {
 
 export let ParameterSpec: ParameterSpec_Static = nupic_module.ParameterSpec;
 
-interface Spec_Static {
+export interface Spec_Static {
 	new(): Spec;
 }
 export interface Spec {

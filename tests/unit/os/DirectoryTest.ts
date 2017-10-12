@@ -24,7 +24,6 @@
 //  * Implementation for Directory test
 //  */
 
-
 // // #include <nupic/os/Directory.hpp>
 // // #include <nupic/os/Path.hpp>
 // // #include <nupic/os/OS.hpp>
@@ -32,7 +31,6 @@
 // // #include <apr.h>
 // // #include <gtest/gtest.h>
 // // #include <nupic/utils/Log.hpp>
-
 
 // #if defined(NTA_OS_WINDOWS)
 //   #define NOMINMAX
@@ -56,15 +54,14 @@
 //   char * s = ::getcwd(buff, APR_PATH_MAX);
 //   NTA_CHECK(s != nullptr) << OS::getErrorMessage();
 // #endif
-//   return buff;  
+//   return buff;
 // }
-
 
 // std::string sep(Path::sep);
 
 // TEST(DirectoryTest, Existence)
 // {
-  
+
 //   ASSERT_TRUE(!Directory::exists("No such dir"));
 //   if (Directory::exists("dir_0"))
 //     Directory::removeTree("dir_0");
@@ -77,10 +74,10 @@
 // TEST(DirectoryTest, setCWD)
 // {
 //   Directory::create("dir_1");
-  
+
 //   std::string baseDir = Path::makeAbsolute(getCurrDir());
 //   Directory::setCWD("dir_1");
-//   std::string cwd1 = Path::makeAbsolute(getCurrDir());    
+//   std::string cwd1 = Path::makeAbsolute(getCurrDir());
 
 //   std::string cwd2 = Path::makeAbsolute(baseDir + Path::sep + std::string("dir_1"));
 //   ASSERT_EQ(cwd1, cwd2);
@@ -116,7 +113,7 @@
 //   std::string p = Path::makeAbsolute(std::string("someDir"));
 //   std::string a = Path::join(p, "A");
 //   std::string b = Path::join(p, "B");
-  
+
 //   if (Path::exists(p))
 //     Directory::removeTree(p);
 //   ASSERT_TRUE(!Path::exists(p));
@@ -141,7 +138,7 @@
 //   std::string dest = Path::join(a, "B", "1.txt");
 
 //   ASSERT_TRUE(!Directory::exists(Path::normalize(Path::join(a, "B"))));
-    
+
 //   Directory::copyTree(b, a);
 //   ASSERT_TRUE(Directory::exists(Path::normalize(Path::join(a, "B"))));
 
@@ -157,7 +154,7 @@
 
 //   Directory::removeTree(p);
 //   ASSERT_TRUE(!Path::exists(p));
-    
+
 // }
 
 // TEST(DirectoryTest, Iterator)
@@ -167,7 +164,7 @@
 //   Directory::create("A");
 //   Directory::create("A" + sep + "B");
 //   Directory::create("A" + sep + "C");
-  
+
 //   {
 //     Directory::Iterator di("A");
 //     Directory::Entry entry;
@@ -179,27 +176,27 @@
 //     ASSERT_TRUE(e->type == Directory::Entry::DIRECTORY);
 //     subdirs.push_back(e->path);
 //     string first = e->path;
-    
+
 //     e = di.next(entry);
 //     ASSERT_TRUE(e != nullptr);
 //     ASSERT_TRUE(e->type == Directory::Entry::DIRECTORY);
 //     subdirs.push_back(e->path);
-    
+
 //     e = di.next(entry);
 //     ASSERT_TRUE(e == nullptr);
-    
+
 //     // Get around different directory iteration orders on different platforms
 //     std::sort(subdirs.begin(), subdirs.end());
 //     ASSERT_TRUE(subdirs[0] == "B");
 //     ASSERT_TRUE(subdirs[1] == "C");
-    
+
 //     // check that after reset first entry is returned again
 //     di.reset();
 //     e = di.next(entry);
 //     ASSERT_TRUE(e != nullptr);
 //     ASSERT_TRUE(e->type == Directory::Entry::DIRECTORY);
 //     ASSERT_TRUE(e->path == first);
-//   }  	
+//   }
 
 //   // Cleanup test dirs
 //   ASSERT_TRUE(Path::exists("A"));

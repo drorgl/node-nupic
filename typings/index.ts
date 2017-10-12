@@ -34,13 +34,13 @@ export * from "./ntypes/NodeSet";
 // export * from "./algorithms/Connections";
 // export * from "./algorithms/SpatialPooler";
 // export * from "./algorithms/Cells4";
-// export * from "./os/Timer";
+export * from "./os/Timer";
 // export * from "./os/Path";
 export * from "./utils/Log";
 // export * from "./algorithms/SpatialPooler";
 
 // export * from "./os/Timer";
-// export * from "./utils/Random";
+export * from "./utils/Random";
 
 export * from "./Algorithms/Anomaly";
 // export * from "./Algorithms/ArrayBuffer";

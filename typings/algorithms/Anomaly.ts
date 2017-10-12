@@ -57,12 +57,12 @@ export namespace anomaly {
 	// Real32 computeRawAnomalyScore(const std::vector<UInt>& active,
 	//                               const std::vector<UInt>& predicted);
 
-	type IcomputeRawAnomalyScore = (active: UInt[], predicted: UInt[]) => Real32;
+	export type IcomputeRawAnomalyScore = (active: UInt[], predicted: UInt[]) => Real32;
 	export let computeRawAnomalyScore: IcomputeRawAnomalyScore = nupic_module.anomaly.computeRawAnomalyScore;
 
 	export enum AnomalyMode { PURE, LIKELIHOOD, WEIGHTED }
 
-	interface Anomaly_Static {
+	export interface Anomaly_Static {
 		/**
          * Utility class for generating anomaly scores in different ways.
          *

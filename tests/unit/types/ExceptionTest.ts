@@ -53,6 +53,5 @@
 //     ASSERT_EQ(e.getLineNumber(), 123);
 //     ASSERT_EQ(std::string(e.getMessage()), std::string("MMM"));
 //     ASSERT_EQ(std::string(e.getStackTrace()), std::string("TB"));
-//   }  
+//   }
 // });
-

@@ -24,7 +24,7 @@ import {BundleIO} from "../ntypes/BundleIO";
 import { bool } from "../types/Types";
 import {Region} from "./Region";
 import {RegionImpl} from "./RegionImpl";
-import {GenericRegisteredRegionImpl} from "./RegisteredRegionImpl";
+// import {GenericRegisteredRegionImpl} from "./RegisteredRegionImpl";
 import {Spec} from "./Spec";
 
 // /** @file
@@ -57,7 +57,7 @@ import {Spec} from "./Spec";
 //   class BundleIO;
 //   class ValueMap;
 //   class GenericRegisteredRegionImpl;
-interface RegionImplFactory_Static {
+export interface RegionImplFactory_Static {
 	getInstance(): RegionImplFactory;
 
 	// RegionImplFactory is a lightweight object
@@ -69,7 +69,7 @@ interface RegionImplFactory_Static {
 	registerPyRegion(module: string, className: string): void;
 
 	// Allows the user to load custom C++ regions
-	registerCPPRegion(name: string, wrapper: GenericRegisteredRegionImpl): void;
+	// registerCPPRegion(name: string, wrapper: GenericRegisteredRegionImpl): void;
 
 	// Allows the user to unregister Python regions
 	unregisterPyRegion(className: string): void;

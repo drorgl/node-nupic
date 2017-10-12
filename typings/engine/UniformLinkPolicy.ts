@@ -66,7 +66,7 @@ import { LinkPolicy } from "./LinkPolicy";
 // of more complex receptive field mappings as configured via parameters.
 // ---
 
-interface UniformLinkPolicy_Static {
+export interface UniformLinkPolicy_Static {
 	new(params: string, link: Link): UniformLinkPolicy;
 
 	// ~UniformLinkPolicy();

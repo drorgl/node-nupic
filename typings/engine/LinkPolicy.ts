@@ -32,7 +32,7 @@ import { bool} from "../types/Types";
 // #include <string>
 // #include <nupic/engine/Input.hpp> // SplitterMap definition
 import {Dimensions} from "../ntypes/Dimensions";
-import { Input } from "./Input";
+import { Input, SplitterMap } from "./Input";
 
 // LinkPolicy is an interface class subclassed by all link policies
 // namespace nupic
@@ -65,7 +65,7 @@ export interface LinkPolicy {
 	// if protoSplitter[destNode][x] == srcNode for some x, then
 	// srcNode sends its output to destNode.
 	//
-	buildProtoSplitterMap(splitter: Input.SplitterMap): void;
+	buildProtoSplitterMap(splitter: SplitterMap): void;
 }
 
 // } // namespace nupic

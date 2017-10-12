@@ -64,7 +64,7 @@ import { Region } from "./Region";
  */
 export type SplitterMap = size_t[][];
 
-interface Input_Static {
+export interface Input_Static {
 	/**
 	   * Constructor.
 	   *

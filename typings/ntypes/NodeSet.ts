@@ -49,7 +49,7 @@ import { size_t } from "../types/Types";
 //    *
 //    * TODO: split into hpp/cpp
 //    */
-interface NodeSet_Static {
+export interface NodeSet_Static {
 	new(nnodes: size_t): NodeSet;
 }
 export interface NodeSet {

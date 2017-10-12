@@ -1,166 +1,166 @@
-/* ---------------------------------------------------------------------
- * Numenta Platform for Intelligent Computing (NuPIC)
- * Copyright (C) 2016, Numenta, Inc.  Unless you have an agreement
- * with Numenta, Inc., for a separate license for this software code, the
- * following terms and conditions apply:
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero Public License version 3 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero Public License for more details.
- *
- * You should have received a copy of the GNU Affero Public License
- * along with this program.  If not, see http://www.gnu.org/licenses.
- *
- * http://numenta.org/licenses/
- * ---------------------------------------------------------------------
- */
-import { ASSERT_EQ, TEST } from "../test_base";
+// /* ---------------------------------------------------------------------
+//  * Numenta Platform for Intelligent Computing (NuPIC)
+//  * Copyright (C) 2016, Numenta, Inc.  Unless you have an agreement
+//  * with Numenta, Inc., for a separate license for this software code, the
+//  * following terms and conditions apply:
+//  *
+//  * This program is free software: you can redistribute it and/or modify
+//  * it under the terms of the GNU Affero Public License version 3 as
+//  * published by the Free Software Foundation.
+//  *
+//  * This program is distributed in the hope that it will be useful,
+//  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//  * See the GNU Affero Public License for more details.
+//  *
+//  * You should have received a copy of the GNU Affero Public License
+//  * along with this program.  If not, see http://www.gnu.org/licenses.
+//  *
+//  * http://numenta.org/licenses/
+//  * ---------------------------------------------------------------------
+//  */
+// import { ASSERT_EQ, TEST } from "../test_base";
 
-import { Segment, UInt } from "../../../typings/index";
+// import { Segment, UInt } from "../../../typings/index";
 
-/** @file
- * Implementation of unit tests for Segment
- */
+// /** @file
+//  * Implementation of unit tests for Segment
+//  */
 
-// #include <nupic/algorithms/Segment.hpp>
-// #include <gtest/gtest.h>
-// #include <set>
+// // #include <nupic/algorithms/Segment.hpp>
+// // #include <gtest/gtest.h>
+// // #include <set>
 
-// using namespace nupic::algorithms::Cells4;
-// using namespace std;
+// // using namespace nupic::algorithms::Cells4;
+// // using namespace std;
 
-function setUpSegment(
-	segment: Segment,
-	inactiveSegmentIndices: UInt[],
-	activeSegmentIndices: UInt[],
-	activeSynapseIndices: UInt[],
-	inactiveSynapseIndices: UInt[]): void {
-	const permanences = [0.2, 0.9, 0.9, 0.7, 0.4, // active synapses
-		0.8, 0.1, 0.2, 0.3, 0.2]; // inactive synapses
+// function setUpSegment(
+// 	segment: Segment,
+// 	inactiveSegmentIndices: UInt[],
+// 	activeSegmentIndices: UInt[],
+// 	activeSynapseIndices: UInt[],
+// 	inactiveSynapseIndices: UInt[]): void {
+// 	const permanences = [0.2, 0.9, 0.9, 0.7, 0.4, // active synapses
+// 		0.8, 0.1, 0.2, 0.3, 0.2]; // inactive synapses
 
-	const srcCells = new Set<UInt>();
-	for (let i = 0; i < permanences.length; i++) {
-		srcCells.clear();
-		srcCells.add(i);
+// 	const srcCells = new Set<UInt>();
+// 	for (let i = 0; i < permanences.length; i++) {
+// 		srcCells.clear();
+// 		srcCells.add(i);
 
-		segment.addSynapses(srcCells, permanences[i], 0.5);
+// 		segment.addSynapses(srcCells, permanences[i], 0.5);
 
-		if (i < 5) {
-			inactiveSegmentIndices.push(i);
-			inactiveSynapseIndices.push(0);
-		}		else {
-			activeSegmentIndices.push(i);
-			activeSynapseIndices.push(0);
-		}
-	}
-}
+// 		if (i < 5) {
+// 			inactiveSegmentIndices.push(i);
+// 			inactiveSynapseIndices.push(0);
+// 		}		else {
+// 			activeSegmentIndices.push(i);
+// 			activeSynapseIndices.push(0);
+// 		}
+// 	}
+// }
 
-/*
-* Test that synapses are removed from inactive first even when there
-* are active synapses with lower permanence.
-*/
-TEST("SegmentTest", "freeNSynapsesInactiveFirst", () => {
-	const segment = new Segment();
+// /*
+// * Test that synapses are removed from inactive first even when there
+// * are active synapses with lower permanence.
+// */
+// TEST("SegmentTest", "freeNSynapsesInactiveFirst", () => {
+// 	const segment = new Segment();
 
-	const inactiveSegmentIndices = new Array<UInt>();
-	const activeSegmentIndices = new Array<UInt>();
-	const activeSynapseIndices = new Array<UInt>();
-	const inactiveSynapseIndices = new Array<UInt>();
-	const removed = new Array<UInt>();
+// 	const inactiveSegmentIndices = new Array<UInt>();
+// 	const activeSegmentIndices = new Array<UInt>();
+// 	const activeSynapseIndices = new Array<UInt>();
+// 	const inactiveSynapseIndices = new Array<UInt>();
+// 	const removed = new Array<UInt>();
 
-	setUpSegment(segment,
-		inactiveSegmentIndices,
-		activeSegmentIndices,
-		activeSynapseIndices,
-		inactiveSynapseIndices);
+// 	setUpSegment(segment,
+// 		inactiveSegmentIndices,
+// 		activeSegmentIndices,
+// 		activeSynapseIndices,
+// 		inactiveSynapseIndices);
 
-	ASSERT_EQ(segment.size(), 10);
+// 	ASSERT_EQ(segment.size(), 10);
 
-	segment.freeNSynapses(2,
-		inactiveSynapseIndices,
-		inactiveSegmentIndices,
-		activeSynapseIndices,
-		activeSegmentIndices,
-		removed, 0,
-		10, 1.0);
+// 	segment.freeNSynapses(2,
+// 		inactiveSynapseIndices,
+// 		inactiveSegmentIndices,
+// 		activeSynapseIndices,
+// 		activeSegmentIndices,
+// 		removed, 0,
+// 		10, 1.0);
 
-	ASSERT_EQ(segment.size(), 8);
+// 	ASSERT_EQ(segment.size(), 8);
 
-	const removed_expected = [0, 4];
-	removed.sort();
-	ASSERT_EQ(removed, removed_expected);
-});
+// 	const removed_expected = [0, 4];
+// 	removed.sort();
+// 	ASSERT_EQ(removed, removed_expected);
+// });
 
-/*
-* Test that active synapses are removed once all inactive synapses are
-* exhausted.
-*/
-TEST("SegmentTest", "freeNSynapsesActiveFallback", () => {
-	const segment = new Segment();
+// /*
+// * Test that active synapses are removed once all inactive synapses are
+// * exhausted.
+// */
+// TEST("SegmentTest", "freeNSynapsesActiveFallback", () => {
+// 	const segment = new Segment();
 
-	const inactiveSegmentIndices = new Array<UInt>();
-	const activeSegmentIndices = new Array<UInt>();
+// 	const inactiveSegmentIndices = new Array<UInt>();
+// 	const activeSegmentIndices = new Array<UInt>();
 
-	const activeSynapseIndices = new Array<UInt>();
-	const inactiveSynapseIndices = new Array<UInt>();
-	const removed = new Array<UInt>();
+// 	const activeSynapseIndices = new Array<UInt>();
+// 	const inactiveSynapseIndices = new Array<UInt>();
+// 	const removed = new Array<UInt>();
 
-	setUpSegment(segment,
-		inactiveSegmentIndices,
-		activeSegmentIndices,
-		activeSynapseIndices,
-		inactiveSynapseIndices);
+// 	setUpSegment(segment,
+// 		inactiveSegmentIndices,
+// 		activeSegmentIndices,
+// 		activeSynapseIndices,
+// 		inactiveSynapseIndices);
 
-	ASSERT_EQ(segment.size(), 10);
+// 	ASSERT_EQ(segment.size(), 10);
 
-	segment.freeNSynapses(6,
-		inactiveSynapseIndices,
-		inactiveSegmentIndices,
-		activeSynapseIndices,
-		activeSegmentIndices,
-		removed, 0,
-		10, 1.0);
+// 	segment.freeNSynapses(6,
+// 		inactiveSynapseIndices,
+// 		inactiveSegmentIndices,
+// 		activeSynapseIndices,
+// 		activeSegmentIndices,
+// 		removed, 0,
+// 		10, 1.0);
 
-	const removed_expected = [0, 1, 2, 3, 4, 6];
-	removed.sort();
-	ASSERT_EQ(removed, removed_expected);
-});
+// 	const removed_expected = [0, 1, 2, 3, 4, 6];
+// 	removed.sort();
+// 	ASSERT_EQ(removed, removed_expected);
+// });
 
-/*
-* Test that removal respects insertion order (stable sort of permanences).
-*/
-TEST("SegmentTest", "freeNSynapsesStableSort", () => {
-	const segment = new Segment();
+// /*
+// * Test that removal respects insertion order (stable sort of permanences).
+// */
+// TEST("SegmentTest", "freeNSynapsesStableSort", () => {
+// 	const segment = new Segment();
 
-	const inactiveSegmentIndices = new Array<UInt>();
-	const activeSegmentIndices = new Array<UInt>();
+// 	const inactiveSegmentIndices = new Array<UInt>();
+// 	const activeSegmentIndices = new Array<UInt>();
 
-	const activeSynapseIndices = new Array<UInt>();
-	const inactiveSynapseIndices = new Array<UInt>();
-	const removed = new Array<UInt>();
+// 	const activeSynapseIndices = new Array<UInt>();
+// 	const inactiveSynapseIndices = new Array<UInt>();
+// 	const removed = new Array<UInt>();
 
-	setUpSegment(segment,
-		inactiveSegmentIndices,
-		activeSegmentIndices,
-		activeSynapseIndices,
-		inactiveSynapseIndices);
+// 	setUpSegment(segment,
+// 		inactiveSegmentIndices,
+// 		activeSegmentIndices,
+// 		activeSynapseIndices,
+// 		inactiveSynapseIndices);
 
-	ASSERT_EQ(segment.size(), 10);
+// 	ASSERT_EQ(segment.size(), 10);
 
-	segment.freeNSynapses(7,
-		inactiveSynapseIndices,
-		inactiveSegmentIndices,
-		activeSynapseIndices,
-		activeSegmentIndices,
-		removed, 0,
-		10, 1.0);
+// 	segment.freeNSynapses(7,
+// 		inactiveSynapseIndices,
+// 		inactiveSegmentIndices,
+// 		activeSynapseIndices,
+// 		activeSegmentIndices,
+// 		removed, 0,
+// 		10, 1.0);
 
-	const removed_expected = [0, 1, 2, 3, 4, 6, 7];
-	removed.sort();
-	ASSERT_EQ(removed, removed_expected);
-});
+// 	const removed_expected = [0, 1, 2, 3, 4, 6, 7];
+// 	removed.sort();
+// 	ASSERT_EQ(removed, removed_expected);
+// });

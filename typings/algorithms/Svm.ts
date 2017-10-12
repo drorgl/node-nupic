@@ -21,7 +21,7 @@
 //  */
 import nupic_module from "../bindings";
 
-import { bool, int,float } from "../types/Types";
+import { bool, float, int } from "../types/Types";
 
 // /*
 // Copyright (c) 2000-2007 Chih-Chung Chang and Chih-Jen Lin
@@ -335,43 +335,43 @@ import { bool, int,float } from "../types/Types";
 //  * n_sv = n_sv[n_class], number of SVs for each class
 //  * probA, probB = [n_class*(n_class-1)/2]
 //  */
-interface svm_model_Static {
+export interface svm_model_Static {
 	new(): svm_model;
 }
 
 export interface svm_model {// : public Serializable<SvmModelProto> {
 	n_dims_: int;
-	sv_mem: float *;
-sv: Array < float * > ;
-sv_coef: Array < float *> ;
-rho: Array<float>;
-label: Array < int >
-	n_sv: Array < int >
-		probA : Array<float>;
-probB: Array<float>;
-w: Array<float[]>;
+	// 	sv_mem: float *;
+	// sv: Array < float * > ;
+	// sv_coef: Array < float *> ;
+	rho: float[];
+	label: int[];
+	n_sv: int[];
+	probA: float[];
+	probB: float[];
+	w: float[][];
 
-size();:int;
-n_dims();:int;
-n_class();:int;
+	size(): int;
+	n_dims(): int;
+	n_class(): int;
 
-//   svm_model()
-//       : n_dims_(0), sv_mem(nullptr), sv(), sv_coef(), rho(), label(), n_sv(),
-//         probA(), probB(), w() {}
+	//   svm_model()
+	//       : n_dims_(0), sv_mem(nullptr), sv(), sv_coef(), rho(), label(), n_sv(),
+	//         probA(), probB(), w() {}
 
-// ~svm_model();
+	// ~svm_model();
 
-persistent_size(); : int;
+	persistent_size(): int;
 
-// void save(std::ostream &outStream) const;
-save(); : Buffer;
-// void load(std::istream &inStream);
-load(state: Buffer); : void;
-// using Serializable::read;
-// virtual void read(SvmModelProto::Reader &proto) override;
-// using Serializable::write;
-// virtual void write(SvmModelProto::Builder &proto) const override;
-print(); : void;
+	// void save(std::ostream &outStream) const;
+	save(): Buffer;
+	// void load(std::istream &inStream);
+	load(state: Buffer): void;
+	// using Serializable::read;
+	// virtual void read(SvmModelProto::Reader &proto) override;
+	// using Serializable::write;
+	// virtual void write(SvmModelProto::Builder &proto) const override;
+	print(): void;
 
 }
 
@@ -763,7 +763,7 @@ export let svm_model: svm_model_Static = nupic_module.x;
 // };
 
 // ------------------------------------------------------------------------------
-interface svm_parameter_Static {
+export interface svm_parameter_Static {
 	new(k: int, p: bool, g: float, c: float, e: float, cs: int, s: int): svm_parameter;
 }
 export interface svm_parameter {// : public Serializable<SvmParameterProto> {

@@ -30,10 +30,10 @@ import { bool } from "../types/Types";
 
 // namespace nupic
 // {
-interface BundleIO_Static {
-	BundleIO(
+export interface BundleIO_Static {
+	new(
 		bundlePath: string, label: string,
-		regionName: string, isInput: bool);
+		regionName: string, isInput: bool): BundleIO;
 
 	// ~BundleIO();
 }

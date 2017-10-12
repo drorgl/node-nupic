@@ -47,7 +47,7 @@ import {Region} from "./Region";
 /**
  * Represents a named output to a Region.
  */
-interface Output_Static {
+export interface Output_Static {
 
 	/***
      * Constructor.

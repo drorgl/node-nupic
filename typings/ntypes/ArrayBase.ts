@@ -49,7 +49,7 @@ import { NTA_BasicType, size_t } from "../types/Types";
  * a client application and NuPIC, minimizing copying. It facilitates
  * both zero-copy and one-copy operations.
  */
-interface ArrayBase_Static {
+export interface ArrayBase_Static {
 	/**
 	   * Caller provides a buffer to use.
 	   * NuPIC always copies data into this buffer
@@ -85,6 +85,8 @@ export interface ArrayBase {
 	releaseBuffer(): void;
 
 	getBuffer(): Buffer;
+
+	getArray<T>(TType: string): T[];
 
 	// number of elements of given type in the buffer
 

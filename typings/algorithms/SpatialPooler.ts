@@ -22,7 +22,7 @@
 
 import nupic_module from "../bindings";
 
-import {bool, Int, Real, UInt, UInt64, } from "../types/Types";
+import {bool, Int, pair, Real, UInt, UInt64 } from "../types/Types";
 
 /** @file
  * Definitions for the Spatial Pooler in C++
@@ -74,7 +74,7 @@ export namespace spatial_pooler {
 	 *
 	 */
 	// : public Serializable<SpatialPoolerProto>
-	interface SpatialPooler_Static {
+	export interface SpatialPooler_Static {
 		new(): SpatialPooler;
 		new(
 			inputDimensions: UInt[],
@@ -1282,7 +1282,7 @@ export namespace spatial_pooler {
 
 	}
 
-	export let SpatialPooler: SpatialPooler_Static = x;
+	export let SpatialPooler: SpatialPooler_Static = nupic_module.x;
 } // end namespace spatial_pooler
 //  } // end namespace algorithms
 // } // end namespace nupic

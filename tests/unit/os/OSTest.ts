@@ -32,7 +32,6 @@
 
 // using namespace nupic;
 
-
 // TEST(OSTest, Basic)
 // {
 // #if defined(NTA_OS_WINDOWS)
@@ -41,7 +40,7 @@
 //   // save the parts of the environment we'll be changing
 //   std::string savedHOME;
 //   bool isHomeSet = Env::get("HOME", savedHOME);
-  
+
 //   Env::set("HOME", "/home1/myhome");
 //   Env::set("USER", "user1");
 //   Env::set("LOGNAME", "logname1");
@@ -61,14 +60,13 @@
 //     Env::set("HOME", savedHOME);
 //   }
 
-
 // #endif
 
 //   // Test getUserName()
 //   {
 // #if defined(NTA_OS_WINDOWS)
 //     Env::set("USERNAME", "123");
-//     ASSERT_TRUE(OS::getUserName() == "123");    
+//     ASSERT_TRUE(OS::getUserName() == "123");
 // #else
 //     // case 1 - USER defined
 //     Env::set("USER", "123");
@@ -81,22 +79,22 @@
 
 //     // case 3 - USER and LOGNAME not defined
 //     Env::unset("LOGNAME");
-    
+
 //     std::stringstream ss("");
 //     ss << getuid();
 //     ASSERT_TRUE(OS::getUserName() == ss.str());
 // #endif
 //   }
-  
+
 //   // Test getStackTrace()
 //   {
 // #if defined(NTA_OS_WINDOWS)
 // //    std::string stackTrace = OS::getStackTrace();
-// //    ASSERT_TRUE(!stackTrace.empty());  
+// //    ASSERT_TRUE(!stackTrace.empty());
 // //
 // //    stackTrace = OS::getStackTrace();
 // //    ASSERT_TRUE(!stackTrace.empty());
-// #endif  
+// #endif
 //   }
 
 //   // Test executeCommand()

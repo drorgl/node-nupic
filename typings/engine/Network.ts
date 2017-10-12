@@ -65,7 +65,7 @@ import { Region } from "./Region";
  * collection with getCallbacks() , and add a callback.
  */
 // typedef; void (*runCallbackFunction)(Network*, UInt64 iteration, void*);
-type runCallbackFunction = (network: Network, iteration: number, userData: any) => void;
+export type runCallbackFunction = (network: Network, iteration: number, userData: any) => void;
 
 /**
  * Type definition for a callback item, combines a @c runCallbackFunction and
@@ -82,7 +82,7 @@ export interface callbackItem {
  *
  * @nosubgrouping
  */
-interface Network_Static {
+export interface Network_Static {
 	/**
 	*
 	* Create an new Network and register it to NuPIC.

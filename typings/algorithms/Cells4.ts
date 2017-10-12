@@ -274,7 +274,7 @@ const _MAX_SEGS = 1 << 7;      // power of 2 allows efficient array indexing
 type OutSynapses = OutSynapse[];
 type SegmentUpdates = SegmentUpdate[];
 
-interface Cells4_Static {
+export interface Cells4_Static {
 	// -----------------------------------------------------------------------
 	/**
 	 * Default constructor needed when lifting from persistence.

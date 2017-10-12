@@ -75,7 +75,7 @@ export namespace temporal_memory {
 	 * convert a numpy array into a std::vector is to copy it, but you can
 	 * access a numpy array's internal C array directly.
 	 */
-	interface TemporalMemory_Static {
+	export interface TemporalMemory_Static {
 		new(): TemporalMemory;
 
 		/**
@@ -389,7 +389,7 @@ export namespace temporal_memory {
 		 * @returns Returns the Permanence decrement
 		 */
 		getPermanenceDecrement(): Permanence;
-		setPermanenceDecrement(Permanence): void;
+		setPermanenceDecrement(permanence: Permanence): void;
 
 		/**
 		 * Returns the predicted Segment decrement.

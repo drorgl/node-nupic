@@ -19,7 +19,8 @@
 //  * http://numenta.org/licenses/
 //  * ---------------------------------------------------------------------
 //  */
-
+import nupic_module from "../bindings";
+import { bool, Real64, UInt64 } from "../types/Types";
 // /** @file
 //  * Timer interface
 //  */
@@ -45,66 +46,67 @@
 //    * Uses the most precise and lowest overhead timer available on a given system.
 //    *
 //    */
-//   class Timer
-//   {
-//   public:
+export interface Timer_Static {
+	/**
+		* Create a stopwatch
+		*
+		* @param startme  If true, the timer is started when created
+		*/
+	new(startme?: bool/* = false*/): Timer;
+}
 
-//     /**
-//      * Create a stopwatch
-//      *
-//      * @param startme  If true, the timer is started when created
-//      */
-//     Timer(bool startme = false);
+export interface Timer {
 
-//     /**
-//      * Start the stopwatch
-//      */
-//     void
-//     start();
+	/**
+     * Start the stopwatch
+     */
 
-//     /**
-//      * Stop the stopwatch. When restarted, time will accumulate
-//      */
-//     void
-//     stop();
+	start(): void;
 
-//     /**
-//      * If stopped, return total elapsed time.
-//      * If started, return current elapsed time but don't stop the clock
-//      * return the value in seconds;
-//      */
-//     Real64
-//     getElapsed() const;
+	/**
+     * Stop the stopwatch. When restarted, time will accumulate
+     */
 
-//     /**
-//      * Reset the stopwatch, setting accumulated time to zero.
-//      */
-//     void
-//     reset();
+	stop(): void;
 
-//     /**Train
-//      * Return the number of time the stopwatch has been started.
-//      */
-//     UInt64
-//     getStartCount() const;
+	/**
+     * If stopped, return total elapsed time.
+     * If started, return current elapsed time but don't stop the clock
+     * return the value in seconds;
+     */
 
-//     /**
-//      * Returns true is the stopwatch is currently running
-//      */
-//     bool
-//     isStarted() const;
+	getElapsed(): Real64;
 
-//     std::string
-//     toString() const;
+	/**
+     * Reset the stopwatch, setting accumulated time to zero.
+     */
 
-//   private:
-//     // internally times are stored as ticks
-//     UInt64 prevElapsed_;   // total time as of last stop() (in ticks)
-//     UInt64 start_;         // time that start() was called (in ticks)
-//     UInt64 nstarts_;       // number of times start() was called
-//     bool started_;         // true if was started
+	reset(): void;
 
-//   }; // class Timer
+	/**Train
+     * Return the number of time the stopwatch has been started.
+     */
+
+	getStartCount(): UInt64;
+
+	/**
+     * Returns true is the stopwatch is currently running
+     */
+
+	isStarted(): bool;
+
+	toString(): string;
+
+	//   private:
+	//     // internally times are stored as ticks
+	//     UInt64 prevElapsed_;   // total time as of last stop() (in ticks)
+	//     UInt64 start_;         // time that start() was called (in ticks)
+	//     UInt64 nstarts_;       // number of times start() was called
+	//     bool started_;         // true if was started
+
+} // class Timer
+
+export let Timer: Timer_Static = nupic_module.x;
 
 // } // namespace nupic
 

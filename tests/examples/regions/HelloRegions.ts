@@ -19,6 +19,7 @@
  * http://numenta.org/licenses/
  * ---------------------------------------------------------------------
  */
+import path = require("path");
 
 // #include <iostream>
 // #include <sstream>
@@ -30,35 +31,35 @@
 // #include <nupic/os/Path.hpp>
 // #include <nupic/utils/Log.hpp>
 
-import { Network } from "../../../typings/index";
+import { Dimensions, Network, Real64 } from "../../../typings/index";
 
 // using namespace nupic;
 
 // int main(int argc, const char * argv[])
 // {
 // Create network
-let net = Network();
+const net = new Network();
 
 // Add VectorFileSensor region to network
-let region = net.addRegion("region", "VectorFileSensor", "{activeOutputCount: 1}");
+const region = net.addRegion("region", "VectorFileSensor", "{activeOutputCount: 1}");
 
 // Set region dimensions
-let dims = new Dimensions();
-dims.push_back(1);
+const dims = new Dimensions();
+dims.push(1);
 
 console.log("Setting region dimensions", dims.toString());
 
 region.setDimensions(dims);
 
 // Load data
-let path = Path::makeAbsolute ("../../../src/examples/regions/Data.csv");
+const data_path = path.resolve ("../../../src/examples/regions/Data.csv");
 
 console.log("Loading data from ", path);
 
-std::vector < std::string > loadFileArgs;
-loadFileArgs.push_back("loadFile");
-loadFileArgs.push_back(path);
-loadFileArgs.push_back("2");
+const loadFileArgs = new Array < string >();
+loadFileArgs.push("loadFile");
+loadFileArgs.push(data_path);
+loadFileArgs.push("2");
 
 region.executeCommand(loadFileArgs);
 
@@ -75,30 +76,29 @@ console.log("Compute");
 region.compute();
 
 // Get output
-const buffer = outputArray.getBuffer("Real64");
+const buffer = outputArray.getArray<Real64>("Real64");
 
 for (let i = 0; i < outputArray.getCount(); i++) {
 	console.log("  ", i, "    ", buffer[i]);
 }
 
 // Serialize
-const net2 = new Network(
-	{
-		std: : stringstream ss;
-		net.write(ss);
+const net2 = new Network();
+{
+		const ss = net.write();
 		net2.read(ss);
-	});
+	}
 net2.initialize();
 
 const region2 = net2.getRegions().getByName("region");
 region2.executeCommand(loadFileArgs);
 const outputArray2 = region2.getOutputData("dataOut");
-const buffer2 = outputArray2.getBuffer("Real64");
+const buffer2 = outputArray2.getArray<Real64>("Real64");
 
 net.run(1);
 net2.run(1);
 
-NTA_ASSERT(outputArray2.getCount() === outputArray.getCount());
+console.log(outputArray2.getCount() === outputArray.getCount());
 for (let i = 0; i < outputArray.getCount(); i++) {
 	console.log("  ", i, "    ", buffer[i], "   ", buffer2[i]);
 }

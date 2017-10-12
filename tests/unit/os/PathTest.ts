@@ -34,7 +34,6 @@
 // using namespace std;
 // using namespace nupic;
 
-
 // class PathTest : public ::testing::Test {
 // public:
 //   string testOutputDir_ = Path::makeAbsolute("TestEverything.out");
@@ -43,9 +42,9 @@
 //     // Create if it doesn't exist
 //     if (!Path::exists(testOutputDir_)) {
 //       std::cout << "Tester -- creating output directory " << std::string(testOutputDir_) << "\n";
-//       // will throw if unsuccessful. 
+//       // will throw if unsuccessful.
 //       Directory::create(string(testOutputDir_));
-//     } 
+//     }
 //   }
 
 //   string fromTestOutputDir(const string& path) {
@@ -82,7 +81,7 @@
 
 //   g = Path::getParent(g);
 //   EXPECT_STREQ("/", g.c_str()) << "getParent5";
-  
+
 //   // Parent should normalize first, to avoid parent(a/b/..)->(a/b)
 //   g = "/a/b/..";
 //   EXPECT_STREQ("/", Path::getParent(g).c_str()) << "getParent6";
@@ -93,22 +92,20 @@
 
 //   g = "a";
 //   EXPECT_STREQ(".", Path::getParent(g).c_str()) << "getParent8";
-  
+
 //   // getParent() of a relative directory above us should work
 //   g = "../../a";
 //   EXPECT_STREQ("../..", Path::getParent(g).c_str()) << "getParent9";
 
 //   g = ".";
 //   EXPECT_STREQ("..", Path::getParent(g).c_str()) << "getParent10";
-  
+
 // #endif
 
-  
 //   std::string x = Path::join("someDir", "X");
 //   x = Path::makeAbsolute(x);
 //   std::string y = Path::join(x, "Y");
 
-  
 //   std::string parent = Path::getParent(y);
 //   ASSERT_TRUE(x == parent);
 
@@ -150,13 +147,13 @@
 // #else
 //   EXPECT_STREQ("/foo/bar", Path::normalize("//foo/quux/..//bar").c_str())
 //     << "normalize1";
-//   EXPECT_STREQ("/foo/contains a lot of spaces", 
+//   EXPECT_STREQ("/foo/contains a lot of spaces",
 //        Path::normalize("///foo/a/b/c/../../d/../../contains a lot of spaces/g.tgz/..").c_str())
 //     << "normalize2";
-//   EXPECT_STREQ("../..", Path::normalize("../foo/../..").c_str()) 
+//   EXPECT_STREQ("../..", Path::normalize("../foo/../..").c_str())
 //     << "normalize3";
 //   EXPECT_STREQ("/", Path::normalize("/../..").c_str()) << "normalize4";
-// #endif         
+// #endif
 
 // }
 
@@ -183,7 +180,7 @@
 
 //   sv = Path::split("foo/bar");
 //   ASSERT_EQ(2U, sv.size()) << "split2 size";
-//   if (sv.size() == 2) 
+//   if (sv.size() == 2)
 //   {
 //     ASSERT_EQ(sv[0], "foo") << "split2.2";
 //     ASSERT_EQ(sv[1], "bar") << "split2.3";
@@ -193,7 +190,7 @@
 
 //   sv = Path::split("foo//bar/");
 //   ASSERT_EQ(2U, sv.size()) << "split3 size";
-//   if (sv.size() == 2) 
+//   if (sv.size() == 2)
 //   {
 //     ASSERT_EQ(sv[0], "foo") << "split3.2";
 //     ASSERT_EQ(sv[1], "bar") << "split3.3";
@@ -201,8 +198,7 @@
 //   EXPECT_STREQ("foo/bar", Path::join(sv.begin(), sv.end()).c_str())
 //     << "split3.4";
 
-// #endif 
-
+// #endif
 
 // }
 
@@ -235,7 +231,7 @@
 //     f >> s;
 //     ASSERT_TRUE(s == "12345");
 //   }
-  
+
 //   {
 //     if (Path::exists("b.txt"))
 //       Path::remove("b.txt");

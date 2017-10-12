@@ -31,7 +31,7 @@
 // #include <nupic/utils/LoggingException.hpp>
 // #include <nupic/utils/LogItem.hpp>
 
-export function NTA_DEBUG(msg: string){
+export function NTA_DEBUG(msg: string) {
 	// nupic::LogItem(__FILE__, __LINE__, nupic::LogItem::debug).stream()
 	console.log("DEBUG", msg);
 }

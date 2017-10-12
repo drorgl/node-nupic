@@ -55,10 +55,10 @@ export namespace sdr_classifier {
 	const sdrClassifierVersion = 1;
 
 	// typedef Dense<UInt, Real64> Matrix;
-	type Matrix = Dense<UInt, Real64>;
+	// type Matrix = Dense<UInt, Real64>;
 
 	// : public Serializable<SdrClassifierProto>
-	interface SDRClassifier_Static {
+	export interface SDRClassifier_Static {
 		/**
 			   * Constructor for use when deserializing.
 			   */

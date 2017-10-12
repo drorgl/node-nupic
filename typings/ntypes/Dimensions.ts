@@ -72,7 +72,7 @@ export type Coordinate = number[];
  * @nosubgrouping
  *
  */
-interface Dimensions_Static {
+export interface Dimensions_Static {
 	/**
 	 * Create a new Dimensions object.
 	 *
@@ -122,7 +122,7 @@ interface Dimensions_Static {
 	new( x: number,  y?: number,  z?: number): Dimensions;
 }
 
-export interface Dimensions extends Array<number>{ // : public std::vector < size_t >
+export interface Dimensions extends Array<number> { // : public std::vector < size_t >
 
 	// public:
 	/**

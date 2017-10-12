@@ -36,7 +36,7 @@ import nupic_module from "../bindings";
 // #include <nupic/engine/LinkPolicy.hpp>
 // #include <nupic/engine/Input.hpp> // needed for splitter map
 import {Dimensions} from "../ntypes/Dimensions";
-import { Input } from "./Input";
+import { Input, SplitterMap } from "./Input";
 import { LinkPolicy } from "./LinkPolicy";
 import {Output } from "./Output";
 // #include <nupic/ntypes/Array.hpp>
@@ -58,7 +58,7 @@ import {Output } from "./Output";
  * @nosubgrouping
  *
  */
-interface Link_Static {
+export interface Link_Static {
 
 	/**
      * @name Initialization
@@ -380,7 +380,7 @@ export interface Link {// : public Serializable<LinkProto>
      *
      */
 
-	buildSplitterMap(splitter: Input.SplitterMap): void;
+	buildSplitterMap(splitter: SplitterMap): void;
 
 	/*
      * No-op for links without delay; for delayed links, remove head element of

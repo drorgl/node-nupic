@@ -42,7 +42,7 @@ export function ASSERT_FLOAT_EQ(expected: any, actual: any, msg?: string) {
 	}
 }
 
-export function EXPECT_NEAR(val1, val2, abs_error, msg?: string) {
+export function EXPECT_NEAR(val1: number, val2: number, abs_error: number, msg?: string) {
 	const small = Math.min(val1, val2);
 	const large = Math.max(val1, val2);
 	if ((large - small) > abs_error) {

@@ -130,7 +130,7 @@ export interface CState { // : Serializable<CStateProto>
  * a sequential search of the entire array.
  */
 interface CStateIndexed_Static {
-	new(): CStateIndexed; ();
+	new(): CStateIndexed;
 
 	// CStateIndexed& operator=(CStateIndexed& o)
 
@@ -183,7 +183,8 @@ const _dutyCycleAlphas = [0.0, 0.0032, 0.0010, 0.00032,
 
 // -----------------------------------------------------------------------
 export type InSynapses = InSynapse[];
-interface Segment_Static {
+
+export interface Segment_Static {
 	new(): Segment;
 
 	// ----------------------------------------------------------------------

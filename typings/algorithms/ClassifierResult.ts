@@ -39,7 +39,7 @@ import { bool, Int, Real64, UInt } from "../types/Types";
 //   namespace algorithms
 //   {
 // namespace cla_classifier {
-interface IResultStep {
+export interface IResultStep {
 	first: Int;
 	second: Real64[];
 }
@@ -51,7 +51,7 @@ interface IResultStep {
  * cleaning up the data when deleted.
  *
  */
-interface ClassifierResult_Static {
+export interface ClassifierResult_Static {
 	/**
 			   * Constructor.
 			   */

@@ -88,7 +88,7 @@ export namespace connections {
 	 * @param permanence
 	 * Permanence of synapse.
 	 */
-	interface SynapseData {
+	export interface SynapseData {
 		presynapticCell: CellIdx;
 		permanence: Permanence;
 		segment: Segment;
@@ -106,7 +106,7 @@ export namespace connections {
 	 * @param cell
 	 * The cell that this segment is on.
 	 */
-	interface SegmentData {
+	export interface SegmentData {
 		synapses: Synapse[];
 		cell: CellIdx;
 	}
@@ -188,7 +188,7 @@ export namespace connections {
 	 * iterate over segments and update the vector at index `segment`.
 	 *
 	 */
-	interface Connections_Static {
+	export interface Connections_Static {
 		/**
          * Connections empty constructor.
          * (Does not call `initialize`.)

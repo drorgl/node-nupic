@@ -19,11 +19,11 @@
  * http://numenta.org/licenses/
  * ---------------------------------------------------------------------
  */
-   
+
 /** @file
  * Implementation of unit testing for class SparseTensor
- */      
-              
+ */
+
 // #include "SparseTensorUnitTest.hpp"
 //
 // #include <boost/tuple/tuple.hpp>
@@ -41,17 +41,17 @@
 //  inline bool Compare(const SparseTensor<I, F>& A, const DenseTensor<I2, F>& B)
 //  {
 //    bool ok = true;
-//    
+//
 //    if (A.getRank() != B.getRank()) {
 //      NTA_WARN << "Ranks are different: " << A.getRank() << " and " << B.getRank();
 //      ok = false;
 //    }
-//    
+//
 //    if (A.isZero() != B.isZero()) {
 //      NTA_WARN << "isZero problem";
 //      ok = false;
 //    }
-//    
+//
 //    if (A.isDense() != B.isDense()) {
 //      NTA_WARN << "Density problem";
 //      ok = false;
@@ -66,14 +66,14 @@
 //      NTA_WARN << "Bounds are different: "
 //               << A.getBounds()
 //               << " and " << B.getBounds();
-//      ok = false;   
+//      ok = false;
 //    }
-//    
+//
 //    if (A.getNNonZeros() != B.getNNonZeros()) {
 //      NTA_WARN << "Number of non-zeros are different: "
-//               << A.getNNonZeros() 
+//               << A.getNNonZeros()
 //               << " and " << B.getNNonZeros();
-//      ok = false;        
+//      ok = false;
 //    }
 //
 //    std::vector<boost::tuple<I, F, F> > diffs;
@@ -89,13 +89,13 @@
 //
 //    if (!diffs.empty()) {
 //      NTA_WARN << "There are " << diffs.size() << " differences between A and B: ";
-//      for (UInt i = 0; i < diffs.size(); ++i) 
-//        NTA_WARN << "Index: " << get<0>(diffs[i]) 
+//      for (UInt i = 0; i < diffs.size(); ++i)
+//        NTA_WARN << "Index: " << get<0>(diffs[i])
 //                 << " A (sparse) = " << get<1>(diffs[i])
 //                 << " B (dense) = " << get<2>(diffs[i]);
 //      ok = false;
 //    }
-//    
+//
 //    return ok;
 //  }
 //
@@ -111,27 +111,27 @@
 //  {
 //    Threshold(const Real& threshold_) : threshold(threshold_) {}
 //    Real threshold;
-//    inline Real operator()(const Real& x) const 
+//    inline Real operator()(const Real& x) const
 //    { return x > threshold ? 0 : x; }
 //  };
-//   
+//
 //  //--------------------------------------------------------------------------------
 //  struct Plus3
 //  {
-//    inline Real operator()(const Real& x) const 
+//    inline Real operator()(const Real& x) const
 //    { return x + 3; }
 //  };
 //
 //  //--------------------------------------------------------------------------------
 //  struct BinaryPlus3
 //  {
-//    inline Real operator()(const Real& x, const Real& y) const 
+//    inline Real operator()(const Real& x, const Real& y) const
 //    { return x + y + 3; }
 //  };
 //
 //  //--------------------------------------------------------------------------------
 //  template <typename Index, typename F>
-//  inline void GenerateRand01(Random *r, UInt nnz, SparseTensor<Index, F>& s) 
+//  inline void GenerateRand01(Random *r, UInt nnz, SparseTensor<Index, F>& s)
 //  {
 //    const Index& ub = s.getBounds();
 //    Index idx;
@@ -145,7 +145,7 @@
 //
 //  //--------------------------------------------------------------------------------
 //  template <typename Index, typename F>
-//  inline void GenerateRandRand01(Random *r, SparseTensor<Index, F>& s) 
+//  inline void GenerateRandRand01(Random *r, SparseTensor<Index, F>& s)
 //  {
 //    const Index& ub = s.getBounds();
 //    const UInt nnz = 1 + (r->getUInt32(product(ub)));
@@ -176,12 +176,12 @@
 //  {
 //    I3 ub(5, 4, 3);
 //
-//    { 
+//    {
 //      S3 s3(ub);
-//  
-//      ITER_3(ub[0], ub[1], ub[2]) 
+//
+//      ITER_3(ub[0], ub[1], ub[2])
 //        Test("SparseTensor bounds list constructor", s3.get(i, j, k), (Real)0);
-//       
+//
 //      Test("SparseTensor getRank 1", s3.getRank(), (UInt)3);
 //      Test("SparseTensor getNNonZeros 2", s3.getNNonZeros(), (UInt)0);
 //      Test("SparseTensor isZero 3", s3.isZero(), true);
@@ -208,13 +208,13 @@
 //      Test("SparseTensor isDense 91", s3.isDense(), false);
 //    }
 //
-//    { 
+//    {
 //      I3 i3(ub);
 //      S3 s3(i3);
-//  
-//      ITER_3(ub[0], ub[1], ub[2]) 
+//
+//      ITER_3(ub[0], ub[1], ub[2])
 //        Test("SparseTensor bounds vector constructor", s3.get(i, j, k), (Real)0);
-//       
+//
 //      Test("SparseTensor getRank 25", s3.getRank(), (UInt)3);
 //      Test("SparseTensor getNNonZeros 26", s3.getNNonZeros(), (UInt)0);
 //      Test("SparseTensor isZero 27", s3.isZero(), true);
@@ -236,11 +236,11 @@
 //      Test("SparseTensor isDense 36", s3.isDense(), true);
 //    }
 //
-//    { 
+//    {
 //      I3 ub3(ub);
 //      S3 s3(ub3);
 //
-//      ITER_3(ub[0], ub[1], ub[2]) 
+//      ITER_3(ub[0], ub[1], ub[2])
 //        s3.set(I3(i, j, k), Real(i*ub[1]*ub[2]+j*ub[2]+k));
 //
 //      S3 s32(s3);
@@ -255,11 +255,11 @@
 //      Test("SparseTensor getBounds 41", s32.getBounds(), I3(ub[0], ub[1], ub[2]));
 //    }
 //
-//    { 
+//    {
 //      I3 ub3(ub);
 //      S3 s3(ub3);
 //
-//      ITER_3(ub[0], ub[1], ub[2]) 
+//      ITER_3(ub[0], ub[1], ub[2])
 //        s3.set(I3(i, j, k), Real(i*ub[1]*ub[2]+j*ub[2]+k));
 //
 //      S3 s32 = s3;
@@ -289,13 +289,13 @@
 //    }
 //
 //    // Constructing a dimension 6, just to be sure, we had a bug
-//    // with va_arg(indices, UInt) (ellipsis setters/getters) 
+//    // with va_arg(indices, UInt) (ellipsis setters/getters)
 //    // that showed up in dimension 6 on 64 bits only, because of the specific sizes
-//    // of the integer types used... 
+//    // of the integer types used...
 //    I6 ub6(5, 4, 3, 2, 3, 4);
 //    D6 d6(ub6);
 //    S6 s6(ub6);
-//    
+//
 //    UInt c = 1;
 //    ITER_6(ub6[0], ub6[1], ub6[2], ub6[3], ub6[4], ub6[5]) {
 //      d6.set(I6(i, j, k, l, m, n), Real(c));
@@ -308,13 +308,13 @@
 //    // This could catch uninitialized values, that used to be a problem
 //    // on shona, revealed by valgrind only
 //    bool correct = true;
-//    ITER_6(ub6[0], ub6[1], ub6[2], ub6[3], ub6[4], ub6[5]) 
+//    ITER_6(ub6[0], ub6[1], ub6[2], ub6[3], ub6[4], ub6[5])
 //      if (s6.get(I6(i, j, k, l, m, n)) > 2000
 //          || d6.get(I6(i, j, k, l, m, n)) > 2000) {
 //        correct = false;
 //        break;
 //      }
-//    
+//
 //    Test("SparseTensor dim 6 set/get 2", correct, true);
 //  }
 //
@@ -323,10 +323,10 @@
 //  {
 //    I3 ub(5, 4, 3);
 //
-//    // These tests compiled conditionally, because they are 
+//    // These tests compiled conditionally, because they are
 //    // based on asserts rather than checks
-//    
-//#ifdef NTA_ASSERTIONS_ON
+//
+// #ifdef NTA_ASSERTIONS_ON
 //
 //    { // out of bounds
 //      S3 s3(ub);
@@ -368,9 +368,9 @@
 //      }
 //    }
 //
-//#endif
+// #endif
 //
-//    { 
+//    {
 //      S3 s3(ub), s32(ub), s33(ub);
 //
 //      ITER_3(ub[0], ub[1], ub[2]) {
@@ -445,7 +445,7 @@
 //        Test("SparseTensor setZero(Domain) 3", s3.isZero(), true);
 //      }
 //    }
-//    
+//
 //    {
 //      S2 s2(4, 5);
 //      D2 d2(4, 5);
@@ -465,28 +465,28 @@
 //      Test("SparseTensor update 02", Compare(s2, d2), true);
 //    }
 //
-//    {  
+//    {
 //      S3 s3(ub);
 //      D3 d3(ub);
-//      
+//
 //      ITER_3(ub[0], ub[1], ub[2]) {
 //        s3.update(I3(i, j, k), Real(i*ub[1]*ub[2]+j*ub[2]+k), std::plus<Real>());
 //        d3.set(i, j, k, (Real)(i*ub[1]*ub[2]+j*ub[2]+k));
-//      }    
+//      }
 //
 //      Test("SparseTensor update 1", Compare(s3, d3), true);
 //
 //      ITER_3(ub[0], ub[1], ub[2]) {
 //        s3.update(I3(i, j, k), s3.get(i, j, k), std::plus<Real>());
 //        d3.set(i, j, k, (Real)(d3.get(i, j, k) + d3.get(i, j, k)));
-//      }   
+//      }
 //
 //      Test("SparseTensor update 2", Compare(s3, d3), true);
-//    
-//      ITER_3(ub[0], ub[1], ub[2]) {    
+//
+//      ITER_3(ub[0], ub[1], ub[2]) {
 //        s3.update(I3(i, j, k), s3.get(i, j, k), nupic::Multiplies<Real>());
 //        d3.set(i, j, k, (Real)(d3.get(i, j, k) * d3.get(i, j, k)));
-//      }   
+//      }
 //
 //      Test("SparseTensor update 3", Compare(s3, d3), true);
 //    }
@@ -495,26 +495,26 @@
 //      S3 s3(ub), ref(ub);
 //
 //      Test("SparseTensor clear 1", s3, ref);
-//      
-//      ITER_3(ub[0], ub[1], ub[2]) 
+//
+//      ITER_3(ub[0], ub[1], ub[2])
 //        s3.set(I3(i, j, k), (Real)(i*ub[1]*ub[2]+j*ub[2]+k));
-//      
+//
 //      s3.clear();
 //      Test("SparseTensor clear 2", s3, ref);
 //
 //      s3.clear();
 //      Test("SparseTensor clear 3", s3, ref);
 //
-//      ITER_3(ub[0], ub[1], ub[2]) 
+//      ITER_3(ub[0], ub[1], ub[2])
 //        s3.set(I3(i, j, k), (Real)(i*ub[1]*ub[2]+j*ub[2]+k));
 //    }
 //
 //    { // setAll
 //      I4 ub4(5, 4, 3, 2);
 //      S4 s4(ub4);
-//      
+//
 //      Test("SparseTensor setAll 1", s4.isZero(), true);
-//      
+//
 //      s4.setAll(0);
 //      Test("SparseTensor setAll 2A", s4.isZero(), true);
 //      Test("SparseTensor setAll 2B", s4.getNNonZeros(), (UInt)0);
@@ -563,9 +563,9 @@
 //
 //      s2A.extract(0, some, s2B);
 //
-//      // Extract to some values    
+//      // Extract to some values
 //      some.clear();
-//      some.insert(0); some.insert(3); 
+//      some.insert(0); some.insert(3);
 //
 //      s2A.extract(0, some, s2B);
 //    }
@@ -592,15 +592,15 @@
 //
 //    { // TC1
 //      ind.insert(UInt(1));
-//      s2A.reduce(0, ind);  
+//      s2A.reduce(0, ind);
 //      Test("SparseTensor reduce 1A", s2A.isZero(), true);
 //      // Let's make sure we can call it twice, and stay invariant
 //      Test("SparseTensor reduce 1B", s2A.isZero(), true);
 //
 //      s2A.reduce(1, ind);
 //      Test("SparseTensor reduce 1C", s2A.isZero(), true);
-//    }      
-//    
+//    }
+//
 //    { // TC2
 //      ind.clear();
 //      s2A.reduce(0, ind);
@@ -650,7 +650,7 @@
 //      s2A.reduce(0, ind);
 //      Test("SparseTensor reduce 11A", s2A.isNull(), true);
 //    }
-//   
+//
 //  }
 //
 //  //--------------------------------------------------------------------------------
@@ -670,7 +670,7 @@
 //        Test("SparseTensor isPositive() 1", s2.isPositive(), false);
 //        Test("SparseTensor isNonNegative() 1", s2.isNonNegative(), true);
 //      }
-//       
+//
 //      { // Full (dense) tensor 1
 //        S2 s2(ub2); s2.setAll(1);
 //        Test("SparseTensor getNNonZeros() 2", s2.getNNonZeros(), ub2.product());
@@ -681,9 +681,9 @@
 //        Test("SparseTensor getFillRate() 2", s2.getFillRate(), (Real)1);
 //        Test("SparseTensor isPositive() 2", s2.isPositive(), true);
 //        Test("SparseTensor isNonNegative() 2", s2.isNonNegative(), true);
-//      }  
+//      }
 //
-//      { // Full (dense) tensor 2 (negative tensor) 
+//      { // Full (dense) tensor 2 (negative tensor)
 //        S2 s2(ub2); s2.setAll(-1);
 //        Test("SparseTensor getNNonZeros() 3", s2.getNNonZeros(), ub2.product());
 //        Test("SparseTensor getNZeros() 3", s2.getNZeros(), (UInt)0);
@@ -693,15 +693,15 @@
 //        Test("SparseTensor getFillRate() 3", s2.getFillRate(), (Real)1);
 //        Test("SparseTensor isPositive() 3", s2.isPositive(), false);
 //        Test("SparseTensor isNonNegative() 3", s2.isNonNegative(), false);
-//      }  
+//      }
 //
-//      { // Full (dense) tensor 2 (mixed positive and negative tensor) 
-//        S2 s2(ub2); 
+//      { // Full (dense) tensor 2 (mixed positive and negative tensor)
+//        S2 s2(ub2);
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
-//          if (o % 2 == 0) s2.set(i2, Real(o+1)); else s2.set(i2, Real(-1)); 
-//        } 
+//          if (o % 2 == 0) s2.set(i2, Real(o+1)); else s2.set(i2, Real(-1));
+//        }
 //        Test("SparseTensor getNNonZeros() 4", s2.getNNonZeros(), ub2.product());
 //        Test("SparseTensor getNZeros() 4", s2.getNZeros(), (UInt)0);
 //        Test("SparseTensor isZero() 4", s2.isZero(), false);
@@ -710,16 +710,16 @@
 //        Test("SparseTensor getFillRate() 4", s2.getFillRate(), (Real)1);
 //        Test("SparseTensor isPositive() 4", s2.isPositive(), false);
 //        Test("SparseTensor isNonNegative() 4", s2.isNonNegative(), false);
-//      }  
+//      }
 //
 //      { // Sparse tensor 1
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
 //          if (o % 2 == 0) { s2.set(i2, Real(o+1)); ++nnz; }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros() 5", s2.getNNonZeros(), nnz);
 //        Test("SparseTensor getNZeros() 5", s2.getNZeros(), ub2.product() - nnz);
 //        Test("SparseTensor isZero() 5", s2.isZero(), false);
@@ -729,16 +729,16 @@
 //        Test("SparseTensor getFillRate() 5", s2.getFillRate(), fr);
 //        Test("SparseTensor isPositive() 5", s2.isPositive(), false);
 //        Test("SparseTensor isNonNegative() 5", s2.isNonNegative(), true);
-//      }  
+//      }
 //
 //      { // Sparse tensor 2 (negative tensor)
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
 //          if (o % 2 == 0) { s2.set(i2, -1); ++nnz; }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros() 6", s2.getNNonZeros(), nnz);
 //        Test("SparseTensor getNZeros() 6", s2.getNZeros(), ub2.product() - nnz);
 //        Test("SparseTensor isZero() 6", s2.isZero(), false);
@@ -748,22 +748,22 @@
 //        Test("SparseTensor getFillRate() 6", s2.getFillRate(), fr);
 //        Test("SparseTensor isPositive() 6", s2.isPositive(), false);
 //        Test("SparseTensor isNonNegative() 6", s2.isNonNegative(), false);
-//      }  
+//      }
 //
 //      { // Sparse tensor 3 (mixed positive and negative tensor)
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
-//          if (o % 2 == 0) { 
+//          if (o % 2 == 0) {
 //            if (o % 3 == 0)
-//              s2.set(i2, -1); 
+//              s2.set(i2, -1);
 //            else
 //              s2.set(i2, Real(o));
-//            ++nnz; 
+//            ++nnz;
 //          }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros() 7", s2.getNNonZeros(), nnz);
 //        Test("SparseTensor getNZeros() 7", s2.getNZeros(), ub2.product() - nnz);
 //        Test("SparseTensor isZero() 7", s2.isZero(), false);
@@ -773,7 +773,7 @@
 //        Test("SparseTensor getFillRate() 7", s2.getFillRate(), fr);
 //        Test("SparseTensor isPositive() 7", s2.isPositive(), false);
 //        Test("SparseTensor isNonNegative() 7", s2.isNonNegative(), false);
-//      }  
+//      }
 //    }
 //
 //    { // Domain tests (with full domain)
@@ -788,7 +788,7 @@
 //        Test("SparseTensor isDense(d2) 1", s2.isDense(d2), false);
 //        Test("SparseTensor getFillRate(d2) 1", s2.getFillRate(d2), (Real)0);
 //      }
-//       
+//
 //      { // Full (dense) tensor 1
 //        S2 s2(ub2); s2.setAll(1);
 //        Test("SparseTensor getNNonZeros(d2) 2", s2.getNNonZeros(d2), ub2.product());
@@ -797,9 +797,9 @@
 //        Test("SparseTensor isSparse(d2) 2", s2.isSparse(d2), false);
 //        Test("SparseTensor isDense(d2) 2", s2.isDense(d2), true);
 //        Test("SparseTensor getFillRate(d2) 2", s2.getFillRate(d2), (Real)1);
-//      }  
+//      }
 //
-//      { // Full (dense) tensor 2 (negative tensor) 
+//      { // Full (dense) tensor 2 (negative tensor)
 //        S2 s2(ub2); s2.setAll(-1);
 //        Test("SparseTensor getNNonZeros(d2) 3", s2.getNNonZeros(d2), ub2.product());
 //        Test("SparseTensor getNZeros(d2) 3", s2.getNZeros(d2), (UInt)0);
@@ -807,31 +807,31 @@
 //        Test("SparseTensor isSparse(d2) 3", s2.isSparse(d2), false);
 //        Test("SparseTensor isDense(d2) 3", s2.isDense(d2), true);
 //        Test("SparseTensor getFillRate(d2) 3", s2.getFillRate(d2), (Real)1);
-//      }  
+//      }
 //
-//      { // Full (dense) tensor 2 (mixed positive and negative tensor) 
-//        S2 s2(ub2); 
+//      { // Full (dense) tensor 2 (mixed positive and negative tensor)
+//        S2 s2(ub2);
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
-//          if (o % 2 == 0) s2.set(i2, Real(o+1)); else s2.set(i2, Real(-1)); 
-//        } 
+//          if (o % 2 == 0) s2.set(i2, Real(o+1)); else s2.set(i2, Real(-1));
+//        }
 //        Test("SparseTensor getNNonZeros(d2) 4", s2.getNNonZeros(d2), ub2.product());
 //        Test("SparseTensor getNZeros(d2) 4", s2.getNZeros(d2), (UInt)0);
 //        Test("SparseTensor isZero(d2) 4", s2.isZero(d2), false);
 //        Test("SparseTensor isSparse(d2) 4", s2.isSparse(d2), false);
 //        Test("SparseTensor isDense(d2) 4", s2.isDense(d2), true);
 //        Test("SparseTensor getFillRate(d2) 4", s2.getFillRate(d2), (Real)1);
-//      }  
+//      }
 //
 //      { // Sparse tensor 1
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
 //          if (o % 2 == 0) { s2.set(i2, Real(o+1)); ++nnz; }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros(d2) 5", s2.getNNonZeros(d2), nnz);
 //        Test("SparseTensor getNZeros(d2) 5", s2.getNZeros(d2), ub2.product() - nnz);
 //        Test("SparseTensor isZero(d2) 5", s2.isZero(d2), false);
@@ -839,16 +839,16 @@
 //        Test("SparseTensor isDense(d2) 5", s2.isDense(d2), false);
 //        Real fr = (Real)nnz / (Real)d2.size_elts();
 //        Test("SparseTensor getFillRate(d2) 5", s2.getFillRate(d2), fr);
-//      }  
+//      }
 //
 //      { // Sparse tensor 2 (negative tensor)
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
 //          if (o % 2 == 0) { s2.set(i2, -1); ++nnz; }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros(d2) 6", s2.getNNonZeros(d2), nnz);
 //        Test("SparseTensor getNZeros(d2) 6", s2.getNZeros(d2), ub2.product() - nnz);
 //        Test("SparseTensor isZero(d2) 6", s2.isZero(d2), false);
@@ -856,22 +856,22 @@
 //        Test("SparseTensor isDense(d2) 6", s2.isDense(d2), false);
 //        Real fr = (Real)nnz / (Real)d2.size_elts();
 //        Test("SparseTensor getFillRate(d2) 6", s2.getFillRate(d2), fr);
-//      }     
+//      }
 //
 //      { // Sparse tensor 3 (mixed positive and negative tensor)
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
-//          if (o % 2 == 0) { 
+//          if (o % 2 == 0) {
 //            if (o % 3 == 0)
-//              s2.set(i2, -1); 
+//              s2.set(i2, -1);
 //            else
 //              s2.set(i2, Real(o));
-//            ++nnz; 
+//            ++nnz;
 //          }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros(d2) 7", s2.getNNonZeros(d2), nnz);
 //        Test("SparseTensor getNZeros(d2) 7", s2.getNZeros(d2), ub2.product() - nnz);
 //        Test("SparseTensor isZero(d2) 7", s2.isZero(d2), false);
@@ -879,7 +879,7 @@
 //        Test("SparseTensor isDense(d2) 7", s2.isDense(d2), false);
 //        Real fr = (Real)nnz / (Real)d2.size_elts();
 //        Test("SparseTensor getFillRate(d2) 7", s2.getFillRate(d2), fr);
-//      }  
+//      }
 //    }
 //
 //    { // Domain tests (with partial domain)
@@ -894,7 +894,7 @@
 //        Test("SparseTensor isDense(d2p) 1", s2.isDense(d2p), false);
 //        Test("SparseTensor getFillRate(d2p) 1", s2.getFillRate(d2p), (Real)0);
 //      }
-//       
+//
 //      { // Full (dense) tensor 1
 //        S2 s2(ub2); s2.setAll(1);
 //        Test("SparseTensor getNNonZeros(d2p) 2", s2.getNNonZeros(d2p), d2p.size_elts());
@@ -903,9 +903,9 @@
 //        Test("SparseTensor isSparse(d2p) 2", s2.isSparse(d2p), false);
 //        Test("SparseTensor isDense(d2p) 2", s2.isDense(d2p), true);
 //        Test("SparseTensor getFillRate(d2p) 2", s2.getFillRate(d2p), (Real)1);
-//      }  
+//      }
 //
-//      { // Full (dense) tensor 2 (negative tensor) 
+//      { // Full (dense) tensor 2 (negative tensor)
 //        S2 s2(ub2); s2.setAll(-1);
 //        Test("SparseTensor getNNonZeros(d2p) 3", s2.getNNonZeros(d2p), d2p.size_elts());
 //        Test("SparseTensor getNZeros(d2p) 3", s2.getNZeros(d2p), (UInt)0);
@@ -913,31 +913,31 @@
 //        Test("SparseTensor isSparse(d2p) 3", s2.isSparse(d2p), false);
 //        Test("SparseTensor isDense(d2p) 3", s2.isDense(d2p), true);
 //        Test("SparseTensor getFillRate(d2p) 3", s2.getFillRate(d2p), (Real)1);
-//      }  
+//      }
 //
-//      { // Full (dense) tensor 2 (mixed positive and negative tensor) 
-//        S2 s2(ub2); 
+//      { // Full (dense) tensor 2 (mixed positive and negative tensor)
+//        S2 s2(ub2);
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
-//          if (o % 2 == 0) s2.set(i2, Real(o+1)); else s2.set(i2, Real(-1)); 
-//        } 
+//          if (o % 2 == 0) s2.set(i2, Real(o+1)); else s2.set(i2, Real(-1));
+//        }
 //        Test("SparseTensor getNNonZeros(d2p) 4", s2.getNNonZeros(d2p), d2p.size_elts());
 //        Test("SparseTensor getNZeros(d2p) 4", s2.getNZeros(d2p), (UInt)0);
 //        Test("SparseTensor isZero(d2p) 4", s2.isZero(d2p), false);
 //        Test("SparseTensor isSparse(d2p) 4", s2.isSparse(d2p), false);
 //        Test("SparseTensor isDense(d2p) 4", s2.isDense(d2p), true);
 //        Test("SparseTensor getFillRate(d2p) 4", s2.getFillRate(d2p), (Real)1);
-//      }  
+//      }
 //
 //      { // Sparse tensor 1
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
 //          if (o % 2 == 0) { s2.set(i2, Real(o+1)); if (d2p.includes(i2)) ++nnz; }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros(d2p) 5", s2.getNNonZeros(d2p), nnz);
 //        Test("SparseTensor getNZeros(d2p) 5", s2.getNZeros(d2p), d2p.size_elts() - nnz);
 //        Test("SparseTensor isZero(d2p) 5", s2.isZero(d2p), false);
@@ -945,16 +945,16 @@
 //        Test("SparseTensor isDense(d2p) 5", s2.isDense(d2p), false);
 //        Real fr = (Real)nnz / (Real)d2p.size_elts();
 //        Test("SparseTensor getFillRate(d2p) 5", s2.getFillRate(d2p), fr);
-//      }  
+//      }
 //
 //      { // Sparse tensor 2 (negative tensor)
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
 //          if (o % 2 == 0) { s2.set(i2, -1); if (d2p.includes(i2)) ++nnz; }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros(d2p) 6", s2.getNNonZeros(d2p), nnz);
 //        Test("SparseTensor getNZeros(d2p) 6", s2.getNZeros(d2p), d2p.size_elts() - nnz);
 //        Test("SparseTensor isZero(d2p) 6", s2.isZero(d2p), false);
@@ -962,23 +962,23 @@
 //        Test("SparseTensor isDense(d2p) 6", s2.isDense(d2p), false);
 //        Real fr = (Real)nnz / (Real)d2p.size_elts();
 //        Test("SparseTensor getFillRate(d2p) 6", s2.getFillRate(d2p), fr);
-//      }  
+//      }
 //
 //      { // Sparse tensor 3 (mixed positive and negative tensor)
-//        S2 s2(ub2); 
+//        S2 s2(ub2);
 //        UInt nnz = 0;
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
 //          UInt o = i2.ordinal(ub2);
-//          if (o % 2 == 0) { 
+//          if (o % 2 == 0) {
 //            if (o % 3 == 0)
-//              s2.set(i2, -1); 
+//              s2.set(i2, -1);
 //            else
 //              s2.set(i2, Real(o));
 //            if (d2p.includes(i2))
-//              ++nnz; 
+//              ++nnz;
 //          }
-//        } 
+//        }
 //        Test("SparseTensor getNNonZeros(d2p) 7", s2.getNNonZeros(d2p), nnz);
 //        Test("SparseTensor getNZeros(d2p) 7", s2.getNZeros(d2p), d2p.size_elts() - nnz);
 //        Test("SparseTensor isZero(d2p) 7", s2.isZero(d2p), false);
@@ -986,7 +986,7 @@
 //        Test("SparseTensor isDense(d2p) 7", s2.isDense(d2p), false);
 //        Real fr = (Real)nnz / (Real)d2p.size_elts();
 //        Test("SparseTensor getFillRate(d2p) 7", s2.getFillRate(d2p), fr);
-//      }  
+//      }
 //    }
 //
 //    { // Sparse tensor - domain contains only zeros
@@ -1015,7 +1015,7 @@
 //        if (j > ub2[1]/2) {
 //          s2.set(i2, Real(o+1));
 //          ++nnz;
-//        }      
+//        }
 //      }
 //      Domain<UInt> d2f(I2(0, ub2[1]/2+1), I2(ub2[0], ub2[1]));
 //      Test("SparseTensor getNNonZeros(d2f)", s2.getNNonZeros(d2f), nnz);
@@ -1027,7 +1027,7 @@
 //    }
 //
 //    { // getNNonZeros per sub-space, sparse tensor
-//      S2 s2(ub2); 
+//      S2 s2(ub2);
 //      S1 s1ref1nz(ub2[0]), s1ref2nz(ub2[1]);
 //      S1 s1ref1z(ub2[0]), s1ref2z(ub2[1]);
 //      ITER_2(ub2[0], ub2[1]) {
@@ -1040,11 +1040,11 @@
 //        } else {
 //          s1ref1z.update(I1(UInt(i)), Real(1), std::plus<Real>());
 //          s1ref2z.update(I1(UInt(j)), Real(1), std::plus<Real>());
-//        }    
+//        }
 //      }
 //
 //      // Non-zeros/zeros per row
-//      S1 s11nz(ub2[0]), s11z(ub2[0]), fr1(ub2[0]), fr1ref(ub2[0]);    
+//      S1 s11nz(ub2[0]), s11z(ub2[0]), fr1(ub2[0]), fr1ref(ub2[0]);
 //      s2.getNNonZeros(I1(UInt(1)), s11nz);
 //      Test("SparseTensor sub-space getNNonZeros 1", s11nz == s1ref1nz, true);
 //      s2.getNZeros(I1(UInt(1)), s11z);
@@ -1055,7 +1055,7 @@
 //      Test("SparseTensor sub-space getFillRate 1", fr1 == fr1ref, true);
 //
 //      // Non-zeros/zeros per column
-//      S1 s12nz(ub2[1]), s12z(ub2[1]), fr2(ub2[1]), fr2ref(ub2[1]); 
+//      S1 s12nz(ub2[1]), s12z(ub2[1]), fr2(ub2[1]), fr2ref(ub2[1]);
 //      s2.getNNonZeros(I1(UInt(0)), s12nz);
 //      Test("SparseTensor sub-space getNZeros 2", s12nz == s1ref2nz, true);
 //      s2.getNZeros(I1(UInt(0)), s12z);
@@ -1077,10 +1077,10 @@
 //      S3 s32(5, 3, 3);
 //      Test("SparseTensor isSymmetric 2", s32.isSymmetric(I3(0, 2, 1)), true);
 //      Test("SparseTensor isSymmetric 3", s32.isSymmetric(I3(1, 2, 0)), false);
-//    
+//
 //      s32.set(I3(0, 0, 1), (Real).5);
 //      Test("SparseTensor isSymmetric 4", s32.isSymmetric(I3(0, 2, 1)), false);
-//    
+//
 //      s32.set(I3(0, 1, 0), (Real).5);
 //      Test("SparseTensor isSymmetric 5", s32.isSymmetric(I3(0, 2, 1)), true);
 //
@@ -1104,7 +1104,7 @@
 //
 //      s32.set(I3(0, 0, 1), (Real).5);
 //      Test("SparseTensor isAntiSymmetric 4", s32.isAntiSymmetric(I3(0, 2, 1)), false);
-//    
+//
 //      s32.set(I3(0, 1, 0), (Real)-.5);
 //      Test("SparseTensor isAntiSymmetric 5", s32.isAntiSymmetric(I3(0, 2, 1)), true);
 //
@@ -1128,7 +1128,7 @@
 //  void SparseTensorUnitTest::unitTestToFromDense()
 //  {
 //    I4 ub(5, 4, 3, 2);
-//    
+//
 //    {
 //      S4 s4(ub);
 //      D4 d4(ub);
@@ -1136,8 +1136,8 @@
 //      ITER_4(ub[0], ub[1], ub[2], ub[3]) {
 //        I4 idx(i, j, k, l);
 //        s4.setNonZero(idx, Real(idx.ordinal(ub)+1));
-//      }  
-//        
+//      }
+//
 //      Real array[5*4*3*2];
 //      s4.toDense(array);
 //      d4.clear();
@@ -1145,15 +1145,15 @@
 //      Test("SparseTensor toDense 2", Compare(s4, d4), true);
 //    }
 //
-//    {   
+//    {
 //      S4 s4(ub);
 //      D4 d4(ub);
-//      
+//
 //      ITER_4(ub[0], ub[1], ub[2], ub[3]) {
 //        I4 idx(i, j, k, l);
 //        d4.set(idx, Real(idx.ordinal(ub)+1));
 //      }
-//      
+//
 //      Real array[5*4*3*2];
 //      d4.toDense(array);
 //      s4.clear();
@@ -1167,55 +1167,55 @@
 //  {
 //    D2 d2(5, 4);
 //    S2 s2(5, 4);
-//    
+//
 //    ITER_2(5, 4) {
 //      d2.set(I2(i, j), Real(i*4+j+1));
 //      s2.set(I2(i, j), Real(i*4+j+1));
 //    }
-//        
+//
 //    d2.permute(I2(1, 0));
 //    s2.permute(I2(1, 0));
-//    
+//
 //    Test("SparseTensor permute 1", Compare(s2, d2), true);
 //
 //    D3 d3(5, 4, 3);
 //    S3 s3(5, 4, 3);
-//    
+//
 //    ITER_3(5, 4, 3) {
 //      d3.set(I3(i, j, k), (i*12+j*3+k) % 2 == 0 ? Real(i*12*j*3+k) : Real(0));
 //      s3.set(I3(i, j, k), d3.get(i, j, k));
 //    }
-//    
+//
 //    d3.permute(I3(1, 0, 2));
 //    s3.permute(I3(1, 0, 2));
-//    
+//
 //    Test("SparseTensor permute 2", Compare(s3, d3), true);
 //
 //    d3.permute(I3(2, 0, 1));
 //    s3.permute(I3(2, 0, 1));
-//    
+//
 //    Test("SparseTensor permute 3", Compare(s3, d3), true);
 //
 //    d3.permute(I3(1, 2, 0));
 //    s3.permute(I3(1, 2, 0));
-//    
+//
 //    Test("SparseTensor permute 4", Compare(s3, d3), true);
 //
 //    d3.permute(I3(2, 1, 0));
 //    s3.permute(I3(2, 1, 0));
-//    
+//
 //    Test("SparseTensor permute 5", Compare(s3, d3), true);
 //
 //    d3.permute(I3(0, 2, 1));
 //    s3.permute(I3(0, 2, 1));
-//    
+//
 //    Test("SparseTensor permute 6", Compare(s3, d3), true);
 //  }
 //
 //  //--------------------------------------------------------------------------------
 //  void SparseTensorUnitTest::unitTestResize()
 //  {
-//    {   
+//    {
 //      D2 d2(3, 4); S2 s2(3, 4);
 //      ITER_2(3, 4) {
 //        d2.set(I2(i, j), Real(i*4+j));
@@ -1254,12 +1254,12 @@
 //    {
 //      D2 d2(3, 4), d2r(3, 4);
 //      S2 s2(3, 4), s2r(3, 4);
-//      
+//
 //      ITER_2(3, 4) {
 //        d2.set(I2(i, j), Real(i*4+j));
 //        s2.set(I2(i, j), d2(i, j));
 //      }
-//      
+//
 //      d2.reshape(d2r);
 //      s2.reshape(s2r);
 //      Test("SparseTensor reshape 0", Compare(s2r, d2r), true);
@@ -1268,12 +1268,12 @@
 //    {
 //      D2 d2(3, 4), d2r(2, 6);
 //      S2 s2(3, 4), s2r(2, 6);
-//      
+//
 //      ITER_2(3, 4) {
 //        d2.set(I2(i, j), Real(i*4+j));
 //        s2.set(I2(i, j), d2(i, j));
 //      }
-//  
+//
 //      d2.reshape(d2r);
 //      s2.reshape(s2r);
 //      Test("SparseTensor reshape 1", Compare(s2r, d2r), true);
@@ -1282,12 +1282,12 @@
 //    {
 //      D2 d2(3, 4); S2 s2(3, 4);
 //      D3 d3r(2, 2, 3); S3 s3r(2, 2, 3);
-//      
+//
 //      ITER_2(3, 4) {
 //        d2.set(I2(i, j), Real(i*4+j));
 //        s2.set(I2(i, j), d2(i, j));
 //      }
-//      
+//
 //      d2.reshape(d3r);
 //      s2.reshape(s3r);
 //      Test("SparseTensor reshape 2", Compare(s3r, d3r), true);
@@ -1296,12 +1296,12 @@
 //    {
 //      D3 d3(2, 2, 3); S3 s3(2, 2, 3);
 //      D2 d2r(3, 4); S2 s2r(3, 4);
-//      
+//
 //      ITER_3(2, 2, 3) {
 //        d3.set(I3(i, j, k), Real(i*6+j*3+k));
 //        s3.set(I3(i, j, k), d3(i, j, k));
 //      }
-//      
+//
 //      d3.reshape(d2r);
 //      s3.reshape(s2r);
 //      Test("SparseTensor reshape 3", Compare(s2r, d2r), true);
@@ -1314,18 +1314,18 @@
 //    { // All possible slicings in 3D
 //      I3 ub(5, 4, 3);
 //      S3 s3(ub);
-//      
+//
 //      ITER_3(ub[0], ub[1], ub[2]) {
 //        I3 i3(i, j, k);
 //        s3.set(i3, (Real)(i3.ordinal(ub)));
 //      }
-//      
+//
 //      for (UInt m = 1; m <= 2; ++m) {
-//      
+//
 //        { // Extract a vector from the S3
 //          S1 s1(ub[0]/m), ref(ub[0]/m);
 //          ITER_2(ub[1], ub[2]) {
-//            for (UInt n = 0; n < ub[0]/m; ++n) 
+//            for (UInt n = 0; n < ub[0]/m; ++n)
 //              ref.set(I1((UInt)n), Real(n*ub[2]*ub[1] + i*ub[2]+j));
 //            Domain<UInt> d(I3(0, i, j), I3(ub[0]/m, i, j));
 //            s3.getSlice(d, s1);
@@ -1397,15 +1397,15 @@
 //        s3.getSlice(d, s32);
 //        Test("SparseTensor getSlice 7", s32, ref);
 //      }
-//    } 
-//    
-//    { // Make sure the slice is correctly situated   
+//    }
+//
+//    { // Make sure the slice is correctly situated
 //      I2 ub2(4, 5);
 //      S2 s2a(ub2), s2b(I2(2, 2)); GenerateOrdered(s2a);
 //      Domain<UInt> d2(I2(2, 2), I2(4, 4));
 //      s2a.getSlice(d2, s2b);
 //    }
-//  
+//
 //    { // Make sure the slice is correctly situated
 //      I2 ub2(4, 5);
 //      S2 s2a(ub2), s2b(I2(2, 2)); GenerateOrdered(s2b);
@@ -1427,7 +1427,7 @@
 //      }
 //
 //      for (UInt i = 0; i < nreps; ++i) {
-//        
+//
 //        I4 lb, ub;
 //        for (UInt j = 0; j < 4; ++j) {
 //          lb[j] = rng_->getUInt32(ub4[j]);
@@ -1439,8 +1439,8 @@
 //        Domain<UInt> d(lb, ub);
 //
 //        switch (d.getNOpenDims()) {
-//        
-//        case 4: 
+//
+//        case 4:
 //          {
 //            S4 s4B(ub4); D4 d4B(ub4);
 //            // put garbage in the slices
@@ -1448,8 +1448,8 @@
 //            Test("SparseTensor getSlice 8-1", Compare(s4B, d4B), true);
 //            break;
 //          }
-//          
-//        case 3:   
+//
+//        case 3:
 //          {
 //            UInt M = ub.max();
 //            I3 ub3(M, M, M);
@@ -1484,19 +1484,19 @@
 //    }
 //
 //    // setSlice
-//    {    
-//      I3 ub3(3, 3, 2);   
+//    {
+//      I3 ub3(3, 3, 2);
 //      S3 s3A(ub3);
 //
 //      // Setting 1D slices of zeros on empty
 //      S1 empty(ub3[2]);
-//      for (UInt i = 0; i < ub3[0]; ++i) 
+//      for (UInt i = 0; i < ub3[0]; ++i)
 //        s3A.setSlice(Domain<UInt>(I3(i,i,0), I3(i,i,ub3[2])), empty);
 //      Test("SparseTensor setSlice 1", s3A.isZero(), true);
 //
 //      // Setting 1D slices of zeros on non-empty
-//      GenerateRandRand01(rng_, s3A);    
-//      for (UInt i = 0; i < ub3[0]; ++i) 
+//      GenerateRandRand01(rng_, s3A);
+//      for (UInt i = 0; i < ub3[0]; ++i)
 //        for (UInt j = 0; j < ub3[1]; ++j)
 //          s3A.setSlice(Domain<UInt>(I3(i,j,0), I3(i,j,ub3[2])), empty);
 //      Test("SparseTensor setSlice 2", s3A.isZero(), true);
@@ -1504,13 +1504,13 @@
 //      // Setting 2D slices of zeros on empty
 //      s3A.setAll(0);
 //      S2 empty2(ub3[1], ub3[2]);
-//      for (UInt i = 0; i < ub3[0]; ++i) 
+//      for (UInt i = 0; i < ub3[0]; ++i)
 //        s3A.setSlice(Domain<UInt>(I3(i,0,0), I3(i,ub3[1],ub3[2])), empty2);
 //      Test("SparseTensor setSlice 3", s3A.isZero(), true);
 //
 //      // Setting 2D slices of zeros on non-empty
 //      GenerateRandRand01(rng_, s3A);
-//      for (UInt i = 0; i < ub3[0]; ++i) 
+//      for (UInt i = 0; i < ub3[0]; ++i)
 //        s3A.setSlice(Domain<UInt>(I3(i,0,0), I3(i,ub3[1],ub3[2])), empty2);
 //      Test("SparseTensor setSlice 4", s3A.isZero(), true);
 //
@@ -1524,10 +1524,10 @@
 //      GenerateRandRand01(rng_, s3A);
 //      s3A.setSlice(Domain<UInt>(I3(0,0,0), ub3), empty3);
 //      Test("SparseTensor setSlice 6", s3A.isZero(), true);
-//         
+//
 //      // Setting 1D slices of non-zeros
 //      S1 s1(ub3[2]); s1.setAll(1);
-//      for (UInt i = 0; i < ub3[0]; ++i) 
+//      for (UInt i = 0; i < ub3[0]; ++i)
 //        s3A.setSlice(Domain<UInt>(I3(i,i,0), I3(i,i,ub3[2])), s1);
 //      I3 idx;
 //      do {
@@ -1536,7 +1536,7 @@
 //        else
 //          Test("SparseTensor setSlice 8", s3A.isZero(idx), true);
 //      } while (increment(ub3, idx));
-//      
+//
 //      s3A.setAll(0); setToZero(idx);
 //
 //      // Setting 2D slices of non-zeros
@@ -1578,10 +1578,10 @@
 //  void SparseTensorUnitTest::unitTestElementApply()
 //  {
 //    I3 ub(3, 4, 2);
-//    
+//
 //    S3 s3A(ub), s3B(ub), s3C(ub);
 //    D3 d3A(ub), d3B(ub), d3C(ub);
-//    
+//
 //    ITER_3(ub[0], ub[1], ub[2]) {
 //      Real v = Real(i*ub[1]*ub[2]+j*ub[2]+k);
 //      if (I3(i, j, k).ordinal(ub) % 2 == 0) {
@@ -1591,7 +1591,7 @@
 //        s3B.set(I3(i, j, k), v+1);
 //        d3B.set(I3(i, j, k), v+1);
 //      }
-//    }    
+//    }
 //
 //    { // Test with functor that introduces new zeros
 //      // (to exercise deletion in map/set and iterator invalidation)
@@ -1614,7 +1614,7 @@
 //      Test("SparseTensor unary element_apply 4A", Compare(s3A, d3A), true);
 //
 //      /*
-//      try {   
+//      try {
 //        s3A.element_apply_fast(Plus3());
 //        Test("SparseTensor unary element_apply 4B", 0, 1);
 //      } catch (std::runtime_error& e) {
@@ -1673,7 +1673,7 @@
 //      d3A.element_apply(d3B, d3A, nupic::Multiplies<Real>());
 //      s3A.element_apply(s3B, s3A, nupic::Multiplies<Real>());
 //      Test("SparseTensor element_apply 4", Compare(s3A, d3A), true);
-//      
+//
 //      s3A.element_apply(s3B, s3C, BinaryPlus3());
 //      d3A.element_apply(d3B, d3C, BinaryPlus3());
 //      Test("SparseTensor element_apply 5", Compare(s3A, d3A), true);
@@ -1681,13 +1681,13 @@
 //
 //    { // With lots of zeros
 //      I2 ub(3, 4);
-//          
+//
 //      S2 s2(ub), sc2(ub);
 //      D2 d2(ub), dc2(ub);
 //
 //      s2.set(I2(1, 1), (Real)1);
 //      d2.set(I2(1, 1), (Real)1);
-//        
+//
 //      S2 s2B(ub); s2B.set(I2(2, 2), (Real)1);
 //      D2 d2B(ub); d2B.set(I2(2, 2), (Real)1);
 //
@@ -1696,7 +1696,7 @@
 //      Test("SparseTensor element_apply 5A1", Compare(sc2, dc2), true);
 //      Test("SparseTensor element_apply 5A2", sc2.isZero(), true);
 //      Test("SparseTensor element_apply 5A3", dc2.isZero(), true);
-//   
+//
 //      s2.element_apply_nz(s2B, sc2, nupic::Multiplies<Real>());
 //      Test("SparseTensor element_apply 6A1", Compare(sc2, dc2), true);
 //      Test("SparseTensor element_apply 6A2", sc2.isZero(), true);
@@ -1725,7 +1725,7 @@
 //
 //      S2 s2(ub), sc2(ub);
 //      D2 d2(ub), dc2(ub);
-//        
+//
 //      ITER_2(ub[0], ub[1]) {
 //        if (I2(i, j).ordinal(ub) % 2 == 0) {
 //          d2.set(I2(i, j), Real(i*ub[1]+j));
@@ -1734,10 +1734,10 @@
 //      }
 //
 //      for (UInt n = 0; n < 2; ++n) {
-//        
-//        S1 s1(ub[n]); 
-//        D1 d1(ub[n]); 
-//        
+//
+//        S1 s1(ub[n]);
+//        D1 d1(ub[n]);
+//
 //        ITER_1(ub[n]) {
 //          if (i % 2 == 0) {
 //            s1.set(I1((UInt)i), Real(i+2));
@@ -1756,7 +1756,7 @@
 //        d2.factor_apply(I1(n), d1, dc2, nupic::Multiplies<Real>());
 //        s2.factor_apply(I1(n), s1, sc2, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 1C", Compare(sc2, dc2), true);
-//        
+//
 //        d2.factor_apply(I1(n), d1, d2, nupic::Multiplies<Real>());
 //        s2.factor_apply(I1(n), s1, s2, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 2A", Compare(s2, d2), true);
@@ -1777,9 +1777,9 @@
 //      {
 //        s2.clear();
 //        d2.clear();
-//        s2.set(1, 1, (Real)1);   
+//        s2.set(1, 1, (Real)1);
 //        d2.set(1, 1, (Real)1);
-//        
+//
 //        S1 s1(ub[1]); s1.set(2, (Real)1);
 //        D1 d1(ub[1]); d1.set(2, (Real)1);
 //
@@ -1811,28 +1811,28 @@
 //      I3 ub(5, 4, 3);
 //      D3 d3(ub), dc3(ub);
 //      S3 s3(ub), sc3(ub);
-//        
-//      ITER_3(ub[0], ub[1], ub[2]) { 
-//        I3 i3(i, j, k); 
+//
+//      ITER_3(ub[0], ub[1], ub[2]) {
+//        I3 i3(i, j, k);
 //        if (i3.ordinal(ub) % 2 == 0) {
-//          d3.set(i3, Real(i3.ordinal(ub))); 
-//          s3.set(i3, Real(i3.ordinal(ub))); 
+//          d3.set(i3, Real(i3.ordinal(ub)));
+//          s3.set(i3, Real(i3.ordinal(ub)));
 //        }
 //      }
 //
 //      // 3X1
 //      for (UInt n = 0; n < 3; ++n) {
 //
-//        D1 d1(ub[n]); 
+//        D1 d1(ub[n]);
 //        S1 s1(ub[n]);
-//        
+//
 //        ITER_1(ub[n]) {
 //          if (n % 2 == 0) {
 //            d1.set(I1((UInt)i), Real(i+2));
 //            s1.set(I1((UInt)i), Real(i+2));
 //          }
 //        }
-//        
+//
 //        d3.factor_apply(I1((UInt)n), d1, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply_fast(I1((UInt)n), s1, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 10A", Compare(sc3, dc3), true);
@@ -1862,18 +1862,18 @@
 //        Test("SparseTensor factor_apply 13A", Compare(s3, d3), true);
 //      }
 //
-//      { // 3X2   
+//      { // 3X2
 //        I2 ub2(ub[1], ub[2]);
-//        D2 d2(ub2); 
+//        D2 d2(ub2);
 //        S2 s2(ub2);
-//        
+//
 //        ITER_2(ub[1], ub[2]) {
 //          if (I2(i, j).ordinal(ub2) % 2 == 0) {
 //            d2.set(I2(i, j), Real(i*ub[2]+j+2));
 //            s2.set(I2(i, j), Real(i*ub[2]+j+2));
 //          }
 //        }
-//        
+//
 //        d3.factor_apply(I2(1, 2), d2, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply_fast(I2(1, 2), s2, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 14A", Compare(sc3, dc3), true);
@@ -1881,7 +1881,7 @@
 //        d3.factor_apply(I2(1, 2), d2, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply_nz(I2(1, 2), s2, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 14B", Compare(sc3, dc3), true);
-//        
+//
 //        d3.factor_apply(I2(1, 2), d2, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply(I2(1, 2), s2, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 14C", Compare(sc3, dc3), true);
@@ -1903,18 +1903,18 @@
 //        Test("SparseTensor factor_apply 17A", Compare(s3, d3), true);
 //      }
 //
-//      { // 3X2   
+//      { // 3X2
 //        I2 ub2(ub[0], ub[2]);
-//        D2 d2(ub2); 
+//        D2 d2(ub2);
 //        S2 s2(ub2);
-//        
+//
 //        ITER_2(ub[0], ub[2]) {
 //          if (I2(i, j).ordinal(ub2) % 2 == 0) {
 //            d2.set(I2(i, j), Real(i*ub[2]+j+2));
 //            s2.set(I2(i, j), Real(i*ub[2]+j+2));
 //          }
 //        }
-//        
+//
 //        d3.factor_apply(I2(0, 2), d2, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply(I2(0, 2), s2, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 18", Compare(sc3, dc3), true);
@@ -1932,18 +1932,18 @@
 //        Test("SparseTensor factor_apply 21", Compare(s3, d3), true);
 //      }
 //
-//      { // 3X2   
+//      { // 3X2
 //        I2 ub2(ub[0], ub[1]);
-//        D2 d2(ub2); 
+//        D2 d2(ub2);
 //        S2 s2(ub2);
-//        
+//
 //        ITER_2(ub[0], ub[1]) {
 //          if (I2(i, j).ordinal(ub2) % 2 == 0) {
 //            d2.set(I2(i, j), Real(i*ub[2]+j+2));
 //            s2.set(I2(i, j), Real(i*ub[2]+j+2));
 //          }
 //        }
-//        
+//
 //        d3.factor_apply(I2(0, 1), d2, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply(I2(0, 1), s2, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 22", Compare(sc3, dc3), true);
@@ -1962,13 +1962,13 @@
 //      }
 //
 //      { // 3X3
-//        D3 d32(ub);    
+//        D3 d32(ub);
 //        S3 s32(ub);
 //
-//        ITER_3(ub[0], ub[1], ub[2]) { 
-//          I3 i3(i, j, k); 
+//        ITER_3(ub[0], ub[1], ub[2]) {
+//          I3 i3(i, j, k);
 //          if (i3.ordinal(ub) % 2 == 0) {
-//            d32.set(i3, Real(i3.ordinal(ub)+1));     
+//            d32.set(i3, Real(i3.ordinal(ub)+1));
 //            s32.set(i3, Real(i3.ordinal(ub)+1));
 //          }
 //        }
@@ -1980,7 +1980,7 @@
 //        d3.factor_apply(I3(0, 1, 2), d32, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply_nz(I3(0, 1, 2), s32, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 26B", Compare(sc3, dc3), true);
-//        
+//
 //        d3.factor_apply(I3(0, 1, 2), d32, dc3, nupic::Multiplies<Real>());
 //        s3.factor_apply(I3(0, 1, 2), s32, sc3, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply 26C", Compare(sc3, dc3), true);
@@ -2001,8 +2001,8 @@
 //        s3.factor_apply(I3(0, 1, 2), s32, s3, std::plus<Real>());
 //        Test("SparseTensor factor_apply 29A", Compare(s3, d3), true);
 //      }
-//    }           
-//    
+//    }
+//
 //    { // Random multiplications
 //      for (UInt m = 0; m < 10; ++m) {
 //
@@ -2020,7 +2020,7 @@
 //        }
 //
 //        I3 ub3(ub4[1], ub4[2], ub4[3]);
-//           
+//
 //        S3 s3B(ub3); D3 d3B(ub3);
 //        ITER_3(ub3[0], ub3[1], ub3[2]) {
 //          I3 i3(i, j, k);
@@ -2051,7 +2051,7 @@
 //      for (UInt m = 0; m < 10; ++m) {
 //
 //        I2 ub2;
-//        for (UInt j = 0; j < 2; ++j) 
+//        for (UInt j = 0; j < 2; ++j)
 //          ub2[j] = 1 + (rng_->getUInt32(5));
 //
 //        S2 s2A(ub2); D2 d2A(ub2);
@@ -2065,14 +2065,14 @@
 //        }
 //
 //        I1 ub1(ub2[1]);
-//        
+//
 //        S1 s1B(ub1); D1 d1B(ub1);
 //        ITER_1(ub1[0]) {
 //          if (i % 2 == 1) {
 //            d1B.set(I1((UInt)i), rng_->getReal64());
 //            s1B.set(I1((UInt)i), d1B.get(i));
 //          }
-//        }  
+//        }
 //
 //        I1 dim1(1);
 //        d2A.factor_apply(dim1, d1B, nupic::Multiplies<Real>());
@@ -2084,7 +2084,7 @@
 //      for (UInt m = 0; m < 10; ++m) {
 //
 //        I4 ub4;
-//        for (UInt j = 0; j < 4; ++j) 
+//        for (UInt j = 0; j < 4; ++j)
 //          ub4[j] = 1 + (rng_->getUInt32(5));
 //
 //        S4 s4A(ub4); D4 d4A(ub4);
@@ -2095,10 +2095,10 @@
 //            d4A.set(i4, rng_->getReal64());
 //            s4A.set(i4, d4A.get(i4));
 //          }
-//        }    
+//        }
 //
 //        I2 ub2(ub4[1], ub4[2]);
-//        
+//
 //        S2 s2B(ub2); D2 d2B(ub2);
 //        ITER_2(ub2[0], ub2[1]) {
 //          I2 i2(i, j);
@@ -2125,7 +2125,7 @@
 //        GenerateRandRand01(rng_, C); // noise in C
 //        Aref = A;
 //        B.setAll(Real(1));
-//      
+//
 //        I2 dims(0, 1);
 //        A.factor_apply_fast(dims, B, C, nupic::Multiplies<Real>());
 //        Test("SparseTensor factor_apply_fast K11", C == Aref, true);
@@ -2141,7 +2141,7 @@
 //      S3 A(ub3), Aref(ub3), C(ub3);
 //      I2 ub2(ub3[1], ub3[2]);
 //      S2 B(ub2);
-//      
+//
 //      for (UInt i = 0; i < 20; ++i) {
 //        GenerateRandRand01(rng_, A);
 //        Aref = A;
@@ -2168,7 +2168,7 @@
 //      S2 s2(ub); ITER_2(ub[0], ub[1]) s2.set(I2(i, j), Real(i*4+j+1));
 //
 //      for (UInt n = 0; n < 2; ++n) {
-//        D1 d1(ub[n]); S1 s1(ub[n]); 
+//        D1 d1(ub[n]); S1 s1(ub[n]);
 //        d2.accumulate(I1((UInt)(1-n)), d1, std::plus<Real>());
 //        s2.accumulate(I1((UInt)(1-n)), s1, std::plus<Real>());
 //        Test("SparseTensor accumulate 1", Compare(s1, d1), true);
@@ -2178,16 +2178,16 @@
 //    {
 //      I3 ub3(3, 4, 5);
 //
-//      D3 d3(ub3); 
-//      S3 s3(ub3); 
-//      
+//      D3 d3(ub3);
+//      S3 s3(ub3);
+//
 //      ITER_3(ub3[0], ub3[1], ub3[2]) {
 //        if (I3(i, j, k).ordinal(ub3) % 2 == 0) {
 //          s3.set(I3(i, j, k), Real(i*4*5+j*5+k+1));
 //          d3.set(I3(i, j, k), Real(i*4*5+j*5+k+1));
 //        }
 //      }
-//      
+//
 //      {
 //        D2 d2(4, 5); S2 s2(4, 5);
 //        d3.accumulate(I1((UInt)0), d2, std::plus<Real>());
@@ -2208,7 +2208,7 @@
 //        s3.accumulate(I1((UInt)2), s2, std::plus<Real>());
 //        Test("SparseTensor accumulate 4", Compare(s2, d2), true);
 //      }
-//   
+//
 //      {
 //        D1 d1(3); S1 s1(3);
 //        d3.accumulate(I2(1, 2), d1, std::plus<Real>());
@@ -2240,7 +2240,7 @@
 //        d2.accumulate(I1((UInt)1), d1, nupic::Max<Real>());
 //        s2.accumulate(I1((UInt)1), s1, nupic::Max<Real>());
 //        Test("SparseTensor max 1", Compare(s1, d1), true);
-//      }   
+//      }
 //
 //      {
 //        D1 d1(4); S1 s1(4);
@@ -2252,7 +2252,7 @@
 //
 //    { // Multiplication
 //      I2 ub2(7, 5);
-//      D2 d2(ub2); S2 s2(ub2); 
+//      D2 d2(ub2); S2 s2(ub2);
 //
 //      ITER_2(ub2[0], ub2[1]) {
 //        if (I2(i, j).ordinal(ub2) % 2 == 0) {
@@ -2260,7 +2260,7 @@
 //          s2.set(i, j, (Real)(i*4+j+1));
 //        }
 //      }
-//      
+//
 //      D1 d1(ub2[0]); S1 s1(ub2[0]);
 //
 //      d2.accumulate_nz(I1((UInt)1), d1, nupic::Multiplies<Real>(), 1);
@@ -2280,7 +2280,7 @@
 //          I2 ub2;
 //          for (UInt i = 0; i < ub2.size(); ++i)
 //            ub2[i] = 1 + (rng_->getUInt32(5));
-//        
+//
 //          S2 s2A(ub2); D2 d2A(ub2);
 //          ITER_2(ub2[0], ub2[1]) {
 //            I2 i2(i, j);
@@ -2290,11 +2290,11 @@
 //              d2A.set(i2, s2A.get(i2));
 //            }
 //          }
-//        
+//
 //          I1 dims1((UInt)0), ub1(ub2[dims1[0]]);
 //          I1 compDims; dims1.complement(compDims);
 //          S1 s1C(ub1); D1 d1C(ub1);
-//        
+//
 //          s2A.accumulate_nz(compDims, s1C, nupic::Multiplies<Real>(), 1);
 //          d2A.accumulate_nz(compDims, d1C, nupic::Multiplies<Real>(), 1);
 //          Test("SparseTensor accumulate 10A", Compare(s1C, d1C), true);
@@ -2316,11 +2316,11 @@
 //              d4A.set(i4, s4A.get(i4));
 //            }
 //          }
-//      
+//
 //          I2 dims2(0, 1), ub2(ub4[dims2[0]], ub4[dims2[1]]);
 //          I2 compDims; dims2.complement(compDims);
 //          S2 s2C(ub2); D2 d2C(ub2);
-//      
+//
 //          s4A.accumulate_nz(compDims, s2C, std::plus<Real>(), 0);
 //          d4A.accumulate(compDims, d2C, std::plus<Real>(), 0);
 //          Test("SparseTensor accumulate 11A", Compare(s2C, d2C), true);
@@ -2337,7 +2337,7 @@
 //          s2C.clear();
 //          s4A.accumulate_nz(compDims, s2C, nupic::Multiplies<Real>(), 1);
 //          Test("SparseTensor accumulate 11D", Compare(s2C, d2C), true);
-//        
+//
 //          s2C.clear();
 //          s4A.accumulate_nz(compDims, s2C, nupic::Max<Real>());
 //          d4A.accumulate(compDims, d2C, nupic::Max<Real>());
@@ -2350,8 +2350,8 @@
 //      }
 //    }
 //
-//    { // accumulate and boost::lambda: check that it compiles and 
-//      // returns appropriate result for lerp 
+//    { // accumulate and boost::lambda: check that it compiles and
+//      // returns appropriate result for lerp
 //      I1 ub1(5);
 //      S1 s1A(ub1), s1B(ub1); GenerateOrdered(s1A); GenerateOrdered(s1B);
 //      s1A.element_apply(1 - _1);
@@ -2369,21 +2369,21 @@
 //    S1 s1A(ub1A), s1B(ub1B);
 //
 //    D2 d2(ub1A[0], ub1B[0]); S2 s2(d2.getBounds());
-//      
+//
 //    ITER_1(ub1A[0]) {
 //      if (i % 4 == 0) {
 //        d1A.set(I1(UInt(i)), (Real)(i+1));
 //        s1A.set(I1(UInt(i)), d1A(i));
 //      }
 //    }
-//    
+//
 //    ITER_1(ub1B[0]) {
 //      if (i % 2 == 0) {
 //        d1B.set(I1(UInt(i)), (Real)(i+1));
 //        s1B.set(I1(UInt(i)), d1B(i));
 //      }
 //    }
-//    
+//
 //    //1X1
 //    d1A.outer_product(d1B, d2, nupic::Multiplies<Real>());
 //    s1A.outer_product_nz(s1B, s2, nupic::Multiplies<Real>());
@@ -2405,7 +2405,7 @@
 //    Test("SparseTensor outer_product 2B", Compare(s3, d3), true);
 //
 //    // 2X2
-//    D4 d4(ub1A[0], ub1B[0], ub1A[0], ub1B[0]); 
+//    D4 d4(ub1A[0], ub1B[0], ub1A[0], ub1B[0]);
 //    S4 s4(ub1A[0], ub1B[0], ub1A[0], ub1B[0]);
 //
 //    d2.outer_product(d2, d4, std::plus<Real>());
@@ -2418,13 +2418,13 @@
 //  {
 //    I3 ub3(4, 3, 3);
 //
-//    D3 d3(ub3); S3 s3(ub3);       
-//    
+//    D3 d3(ub3); S3 s3(ub3);
+//
 //    ITER_3(ub3[0], ub3[1], ub3[2]) {
 //      if (I3(i, j, k).ordinal(ub3) % 2 == 0) {
 //        d3.set(I3(i, j, k), (Real)(I3(i, j, k).ordinal(ub3)+1));
 //        s3.set(I3(i, j, k), d3(i, j, k));
-//      }   
+//      }
 //    }
 //
 //    {
@@ -2441,27 +2441,27 @@
 //
 //    {
 //      D1 d1(ub3[0]); S1 s1(ub3[0]);
-//      
+//
 //      d3.contract(1, 2, d1, std::plus<Real>());
 //      s3.contract(1, 2, s1, std::plus<Real>());
 //      Test("SparseTensor contract 1", Compare(s1, d1), true);
-//    }   
+//    }
 //  }
 //
 // //--------------------------------------------------------------------------------
 //  void SparseTensorUnitTest::unitTestInnerProduct()
 //  {
-//    D2 d2A(3, 4), d2B(4, 3), d2C(3, 3);     
+//    D2 d2A(3, 4), d2B(4, 3), d2C(3, 3);
 //    S2 s2A(3, 4), s2B(4, 3), s2C(3, 3);
-//    
+//
 //    ITER_2(3, 4) {
 //      if (I2(i, j).ordinal(I2(3, 4)) % 2 == 0) {
 //        d2A(i, j) = d2B(j, i) = Real(i*4+j+1);
 //        s2A.set(I2(i, j), d2A(i, j));
-//        s2B.set(I2(j, i), d2A(i, j));    
-//      }    
+//        s2B.set(I2(j, i), d2A(i, j));
+//      }
 //    }
-//    
+//
 //    d2A.inner_product(1, 0, d2B, d2C, nupic::Multiplies<Real>(), std::plus<Real>(), 0);
 //    s2A.inner_product_nz(1, 0, s2B, s2C, nupic::Multiplies<Real>(), std::plus<Real>(), 0);
 //    Test("SparseTensor inner product 1A", Compare(s2C, d2C), true);
@@ -2470,7 +2470,7 @@
 //    s2A.inner_product(1, 0, s2B, s2C, nupic::Multiplies<Real>(), std::plus<Real>(), 0);
 //    Test("SparseTensor inner product 1B", Compare(s2C, d2C), true);
 //
-//    S4 o(3, 4, 4, 3); 
+//    S4 o(3, 4, 4, 3);
 //    s2A.outer_product(s2B, o, nupic::Multiplies<Real>());
 //
 //    S2 s2D(3, 3);
@@ -2483,7 +2483,7 @@
 //
 //    S5 o2(3, 4, 3, 4, 5);
 //    s2A.outer_product(s3A, o2, nupic::Multiplies<Real>());
-//    
+//
 //    S3 s3D(3, 3, 5);
 //    o2.contract(1, 3, s3D, std::plus<Real>());
 //    Test("SparseTensor inner product 3", s3B, s3D);
@@ -2529,7 +2529,7 @@
 //
 //      Test("SparseTensor nz_intersection 3C", Compare(inter1, inter2), true);
 //    }
-//   
+//
 //    { // 1 zero/1 zero
 //      S3 s3A(ub3), s3B(ub3);
 //      ITER_3(ub3[0], ub3[1], ub3[2]) {
@@ -2554,9 +2554,9 @@
 //        UInt n2 = n % 2 == 0 ? 0 : n;
 //        s3A.set(I3(i, j, k), (Real) n1);
 //        s3B.set(I3(i, j, k), (Real) n2);
-//      }     
+//      }
 //      std::vector<I3> inter;
-//      s3A.nz_intersection(s3B, inter);   
+//      s3A.nz_intersection(s3B, inter);
 //      Test("SparseTensor nz_intersection 5", inter.empty(), true);
 //    }
 //
@@ -2579,9 +2579,9 @@
 //    }
 //
 //    { // 1 out of 4, matching
-//      S3 s3A(ub3), s3B(ub3);     
+//      S3 s3A(ub3), s3B(ub3);
 //      ITER_3(ub3[0], ub3[1], ub3[2]) {
-//        UInt n = I3(i, j, k).ordinal(ub3);     
+//        UInt n = I3(i, j, k).ordinal(ub3);
 //        UInt nA = n % 2 == 0 ? n : 0;
 //        UInt nB = n % 4 == 0 ? n : 0;
 //        s3A.set(I3(i, j, k), (Real) nA);
@@ -2591,7 +2591,7 @@
 //      std::vector<I3> inter1, inter2;
 //      s3A.nz_intersection(s3B, inter1);
 //      Test("SparseTensor nz_intersection 7A", inter1.size(), (ub3.product()-1)/4);
-//  
+//
 //      s3B.nz_intersection(s3A, inter2);
 //      Test("SparseTensor nz_intersection 7B", inter2.size(), (ub3.product()-1)/4);
 //
@@ -2599,14 +2599,14 @@
 //    }
 //
 //    // projections
-//    I2 ub2(2, 5);  
+//    I2 ub2(2, 5);
 //
 //    { // Intersection between a non-empty S2 and a non-empty S1
 //      S2 s2A(ub2); S1 s1B(ub2[1]);
 //      s1B.set(1, (Real)1);
 //      s1B.set(3, (Real)2);
 //      ITER_2(ub2[0], ub2[1]) s2A.set(I2(i, j), (Real)(I2(i, j).ordinal(ub2)+1));
-//      
+//
 //      S2::NonZeros<I2, I1> inter1, ans;
 //      inter1.push_back(S2::Elt<I2, I1>(I2(0, 0), 1, I1(1), 2)); // fake, to see if we clean up
 //      I2 i2; I1 i1;
@@ -2667,7 +2667,7 @@
 //      S2 s2A(ub2); S1 s1B(ub2[1]);
 //      ITER_1(ub2[1]) s1B.set(I1(i), (Real)i+1);
 //      ITER_2(ub2[0], ub2[1]) s2A.set(I2(i, j), (Real)(I2(i, j).ordinal(ub2)+1));
-//      
+//
 //      S2::NonZeros<I2, I1> inter1, ans;
 //      inter1.push_back(S2::Elt<I2, I1>(I2(0, 0), 1, I1(1), 2)); // fake, to see if we clean up
 //      I2 i2; I1 i1;
@@ -2705,7 +2705,7 @@
 //      S3 s3A(ub3), s3B(ub3);
 //      ITER_3(ub3[0], ub3[1], ub3[2])
 //        s3A.set(I3(i, j, k), (Real) I3(i, j, k).ordinal(ub3)+1);
-//   
+//
 //      std::vector<I3> u1, u2;
 //      s3A.nz_union(s3B, u1);
 //      Test("SparseTensor nz_union 2A", u1.size(), ub3.product());
@@ -2722,7 +2722,7 @@
 //        s3A.set(I3(i, j, k), (Real) I3(i, j, k).ordinal(ub3)+1);
 //        s3B.set(I3(i, j, k), (Real) I3(i, j, k).ordinal(ub3)+1);
 //      }
-//      
+//
 //      std::vector<I3> u1, u2;
 //      s3A.nz_union(s3B, u1);
 //      Test("SparseTensor nz_union 3A", u1.size(), ub3.product());
@@ -2732,14 +2732,14 @@
 //
 //      Test("SparseTensor nz_union 3C", Compare(u1, u2), true);
 //    }
-//   
+//
 //    { // 1 zero/1 zero
 //      S3 s3A(ub3), s3B(ub3);
 //      ITER_3(ub3[0], ub3[1], ub3[2]) {
 //        s3A.set(I3(i, j, k), (Real) I3(i, j, k).ordinal(ub3));
 //        s3B.set(I3(i, j, k), (Real) I3(i, j, k).ordinal(ub3));
 //      }
-//      
+//
 //      std::vector<I3> u1, u2;
 //      s3A.nz_union(s3B, u1);
 //      Test("SparseTensor nz_union 4A", u1.size(), ub3.product()-1);
@@ -2759,7 +2759,7 @@
 //        s3A.set(I3(i, j, k), (Real) n1);
 //        s3B.set(I3(i, j, k), (Real) n2);
 //      }
-//      
+//
 //      std::vector<I3> u1, u2;
 //      s3A.nz_union(s3B, u1);
 //      Test("SparseTensor nz_union 5A", u1.size(), ub3.product()-1);
@@ -2802,22 +2802,22 @@
 //      std::vector<I3> u1, u2;
 //      s3A.nz_union(s3B, u1);
 //      Test("SparseTensor nz_union 7A", u1.size(), (ub3.product()-1)/2);
-//  
+//
 //      s3B.nz_union(s3A, u2);
 //      Test("SparseTensor nz_union 7B", u2.size(), (ub3.product()-1)/2);
 //
 //      Test("SparseTensor nz_union 7C", Compare(u1, u2), true);
-//    }   
+//    }
 //
 //    // projections
-//    I2 ub2(2, 5);     
+//    I2 ub2(2, 5);
 //
 //    { // Union between a non-empty S2 and a non-empty S1
 //      S2 s2A(ub2); S1 s1B(ub2[1]);
 //      s1B.set(1, (Real)1);
 //      s1B.set(3, (Real)2);
 //      ITER_2(ub2[0], ub2[1]) s2A.set(I2(i, j), (Real)(I2(i, j).ordinal(ub2)+1));
-//      
+//
 //      S2::NonZeros<I2, I1> u1, ans;
 //      u1.push_back(S2::Elt<I2, I1>(I2(0, 0), 1, I1(1), 2)); // fake, to see if we clean up
 //      I2 i2; I1 i1;
@@ -2836,11 +2836,11 @@
 //        Test("SparseTensor nz_union 8D", u1[i].getValA(), ans[i].getValA());
 //        Test("SparseTensor nz_union 8E", u1[i].getValB(), ans[i].getValB());
 //      }
-//    }   
+//    }
 //
 //    { // Union between an empty S2 and a non-empty S1
 //      S2 s2A(ub2); S1 s1B(ub2[1]);
-//      s1B.set(1, (Real)1);  
+//      s1B.set(1, (Real)1);
 //      s1B.set(3, (Real)2);
 //
 //      S2::NonZeros<I2, I1> u1, ans;
@@ -2902,17 +2902,17 @@
 //      S2 s2A(ub2); S1 s1B(ub2[1]);
 //      ITER_1(ub2[1]) s1B.set(I1(i), (Real)i+1);
 //      ITER_2(ub2[0], ub2[1]) s2A.set(I2(i, j), (Real)(I2(i, j).ordinal(ub2)+1));
-//      
+//
 //      S2::NonZeros<I2, I1> u1, ans;
 //      u1.push_back(S2::Elt<I2, I1>(I2(0, 0), 1, I1(1), 2)); // fake, to see if we clean up
-//      I2 i2; I1 i1;    
+//      I2 i2; I1 i1;
 //      do {
 //        i2.project(I1(1), i1);
 //        if (!nearlyZero(s2A.get(i2)) || !nearlyZero(s1B.get(i1)))
 //          ans.push_back(S2::Elt<I2, I1>(i2, s2A.get(i2), i1, s1B.get(i1)));
 //      } while (i2.increment(ub2));
 //
-//      s2A.nz_union(I1(1), s1B, u1);  
+//      s2A.nz_union(I1(1), s1B, u1);
 //
 //      Test("SparseTensor nz_union 12A", u1.size(), ans.size());
 //      for (UInt i = 0; i < ans.size(); ++i) {
@@ -2921,7 +2921,7 @@
 //        Test("SparseTensor nz_union 12D", u1[i].getValA(), ans[i].getValA());
 //        Test("SparseTensor nz_union 12E", u1[i].getValB(), ans[i].getValB());
 //      }
-//    }   
+//    }
 //  }
 //
 //  //--------------------------------------------------------------------------------
@@ -2949,7 +2949,7 @@
 //      st3.clear();
 //      Test("SparseTensor dynamic 8", st3 == st, true);
 //
-//      std::vector<UInt> perm(3); 
+//      std::vector<UInt> perm(3);
 //      perm[0] = 1; perm[1] = 2; perm[2] = 0;
 //      Test("SparseTensor dynamic 9", st.isSymmetric(perm), false);
 //      Test("SparseTensor dynamic 10", st.isAntiSymmetric(perm), false);
@@ -2969,26 +2969,26 @@
 //            Test("SparseTensor dynamic 11E", st.get(idx), o);
 //            Test("SparseTensor dynamic 11F", st.isZero(idx), false);
 //          }
-//          Test("SparseTensor dynamic 1G", 
+//          Test("SparseTensor dynamic 1G",
 //               st.update(idx, (double)-o, std::plus<double>()), (double)0);
 //          Test("SparseTensor dynamic 11H", st.get(idx), (double)0);
 //          Test("SparseTensor dynamic 11I", st.isZero(idx), true);
-//          Test("SparseTensor dynamic 11J", 
+//          Test("SparseTensor dynamic 11J",
 //               st.update(idx, (double)o, std::plus<double>()), (double)o);
 //          Test("SparseTensor dynamic 11K", st.get(idx), (double)o);
 //          Test("SparseTensor dynamic 11L", st.isZero(idx), o == 0);
 //        }
 //      } while (increment(st.getBounds(), idx));
-//      
+//
 //      Test("SparseTensor dynamic 12", st.getNNonZeros(), product(st.getBounds())/2-1);
 //      Test("SparseTensor dynamic 13", st.isZero(), false);
 //      Test("SparseTensor dynamic 14", st.isDense(), false);
-//      
+//
 //      st.setAll(1);
 //      Test("SparseTensor dynamic 15", st.getNNonZeros(), product(st.getBounds()));
 //      Test("SparseTensor dynamic 16", st.isZero(), false);
 //      Test("SparseTensor dynamic 17", st.isDense(), true);
-//      
+//
 //      st.clear();
 //      Test("SparseTensor dynamic 18", st.getNNonZeros(), (UInt)0);
 //      Test("SparseTensor dynamic 19", st.isZero(), true);
@@ -3024,7 +3024,7 @@
 //  {
 //    I2 ub2(4, 4);
 //    S2 s2(ub2), ref(ub2);
-//    
+//
 //    ITER_2(ub2[0], ub2[1]) {
 //      I2 i2(i, j);
 //      UInt o = i2.ordinal(ub2);
@@ -3044,17 +3044,17 @@
 //
 //  //--------------------------------------------------------------------------------
 //  void SparseTensorUnitTest::unitTestNormalize()
-//  {   
+//  {
 //    I2 ub2(4, 3);
 //    S2 s2(ub2);
-//    
+//
 //    { // Matrix of zeros should "normalize" to zeros
 //      s2.normalize(I1(UInt(0)));
 //      Test("SparseTensor normalize zero 1", s2.isZero(), true);
-//      
+//
 //      s2.normalize(I1(UInt(0)));
 //      Test("SparseTensor normalize zero 2", s2.isZero(), true);
-//      
+//
 //      s2.normalize();
 //      Test("SparseTensor normalize zero 3", s2.isZero(), true);
 //    }
@@ -3084,12 +3084,12 @@
 //      Test("SparseTensor normalize uniform 3B", t, true);
 //      Test("SparseTensor normalize uniform 3C", vals.begin()->second, product(ub2));
 //    }
-//    
+//
 //    { // Matrix with empty rows should not crash
 //      s2.setAll(1.0);
 //      for (UInt i = 0; i < ub2[1]; ++i)
 //        s2.set(I2(0, i), 0);
-//      
+//
 //      s2.normalize(I1(UInt(1)));
 //    }
 //
@@ -3097,7 +3097,7 @@
 //      s2.setAll(1.0);
 //      for (UInt i = 0; i < ub2[0]; ++i)
 //        s2.set(I2(i, 0), 0);
-//      
+//
 //      s2.normalize(I1(UInt(0)));
 //    }
 //
@@ -3137,13 +3137,13 @@
 //          s1_max_col.update(I1((UInt)j), Real(o), nupic::Max<Real>());
 //          if (o > M) { M = Real(o); idxmax = i2; }
 //          S += o;
-//        }      
-//      }       
+//        }
+//      }
 //
-//      S1 s10(ub2[1]);  
+//      S1 s10(ub2[1]);
 //      s2.max(I1((UInt)0), s10); // max of each column, in a vector
 //      Test("SparseTensor max 1", s10 == s1_max_col, true);
-//     
+//
 //      S1 s11(ub2[0]);
 //      s2.max(I1((UInt)1), s11); // max of each row, in a vector
 //      Test("SparseTensor max 2", s11 == s1_max_row, true);
@@ -3156,13 +3156,13 @@
 //      Test("SparseTensor sum 1", S, SS);
 //    }
 //
-//    { // specific tensor 
+//    { // specific tensor
 //      S2 s2(I2(2, 1));
 //      s2.set(I2(0,0), 70);
 //      s2.set(I2(1,0), 10);
 //      Test("SparseTensor max 3", s2.max().first, I2(0,0));
 //      Test("SparseTensor max 4", s2.max().second, Real(70));
-//    }  
+//    }
 //
 //    { // empty tensor
 //      S2 s2(I2(2, 1));
@@ -3174,12 +3174,12 @@
 //      S2 s2(I2(2, 1));
 //      Test("SparseTensor sum 2", s2.sum(), 0);
 //    }
-//  }     
+//  }
 //
 //  //--------------------------------------------------------------------------------
 //  void SparseTensorUnitTest::unitTestAxby()
 //  {
-//  
+//
 //  }
 //
 //  //--------------------------------------------------------------------------------
@@ -3195,7 +3195,7 @@
 //      // from the map, which invalidates iterator!
 //      for (Real k = -2; k < 2.25; k += .25) {
 //        {
-//          GenerateRandRand01(rng_, A); 
+//          GenerateRandRand01(rng_, A);
 //          Cref.clear();
 //          setToZero(idx);
 //          do {
@@ -3204,9 +3204,9 @@
 //          A.multiply(k);
 //          Test("SparseTensor in place * k", A, Cref);
 //        }
-//      
+//
 //        {
-//          GenerateRandRand01(rng_, A); 
+//          GenerateRandRand01(rng_, A);
 //          GenerateRandRand01(rng_, C); // noise in C
 //          Cref.clear();
 //          setToZero(idx);
@@ -3225,7 +3225,7 @@
 //      s1.multiply(Real(1e-12));
 //      Test("SparseTensor multiply micromegas", s1.sum(), Real(1.0));
 //    }
-//  }   
+//  }
 //
 //  //--------------------------------------------------------------------------------
 //  void SparseTensorUnitTest::unitTestPerformance()
@@ -3233,17 +3233,17 @@
 //    /*
 //    typedef Index<unsigned long, 4> IL4;
 //    typedef SparseTensor<IL4, Real> SL4;
-//   
+//
 //    IL4 ub(100000, 100000, 100000, 100000);
-//    SL4 a(ub), b(ub), c(ub);    
-//    UInt nnz = 500000;      
+//    SL4 a(ub), b(ub), c(ub);
+//    UInt nnz = 500000;
 //    GenerateRand01(rng_, nnz, a);
 //    GenerateRand01(rng_, nnz, b);
 //
-//    timer t;  
-//    a.add(b, c);         
+//    timer t;
+//    a.add(b, c);
 //    */
-//  }    
+//  }
 //
 //  //--------------------------------------------------------------------------------
 //  void SparseTensorUnitTest::unitTestNumericalStability()
@@ -3262,41 +3262,37 @@
 //    }
 //  }
 //
-  //--------------------------------------------------------------------------------
-  // void SparseTensorUnitTest::RunTests()
-  // {
-    //
-    //unitTestConstruction();
-    //unitTestGetSet();
-    //unitTestExtract();
-    //unitTestReduce();
-    //unitTestNonZeros();
-    //unitTestIsSymmetric();
-    //unitTestToFromDense();   
-    //unitTestPermute();
-    //unitTestResize();
-    //unitTestReshape();   
-    //unitTestSlice();           
-    //unitTestElementApply();  
-    //unitTestFactorApply();
-    //unitTestAccumulate();   
-    //unitTestOuterProduct();      
-    //unitTestContract();   
-    //unitTestInnerProduct();   
-    //unitTestIntersection();
-    //unitTestUnion();
-    //unitTestDynamicIndex();
-    //unitTestToFromStream();
-    //unitTestNormalize();
-    //unitTestMaxSum();
-    //unitTestAxby();
-    //unitTestMultiply();
-    ////unitTestNumericalStability();
-    ////unitTestPerformance();
-  // } 
-
-  //--------------------------------------------------------------------------------
-  
+// --------------------------------------------------------------------------------
+// void SparseTensorUnitTest::RunTests()
+// {
+//
+// unitTestConstruction();
+// unitTestGetSet();
+// unitTestExtract();
+// unitTestReduce();
+// unitTestNonZeros();
+// unitTestIsSymmetric();
+// unitTestToFromDense();
+// unitTestPermute();
+// unitTestResize();
+// unitTestReshape();
+// unitTestSlice();
+// unitTestElementApply();
+// unitTestFactorApply();
+// unitTestAccumulate();
+// unitTestOuterProduct();
+// unitTestContract();
+// unitTestInnerProduct();
+// unitTestIntersection();
+// unitTestUnion();
+// unitTestDynamicIndex();
+// unitTestToFromStream();
+// unitTestNormalize();
+// unitTestMaxSum();
+// unitTestAxby();
+// unitTestMultiply();
+//// unitTestNumericalStability();
+//// unitTestPerformance();
+// }
+// --------------------------------------------------------------------------------
 // } // namespace nupic
-
-

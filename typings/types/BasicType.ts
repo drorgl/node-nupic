@@ -37,7 +37,7 @@ import { bool, NTA_BasicType, size_t } from "../types/Types";
 // - getName()
 // - getSize() and parse().
 //
-interface BasicType_Static {
+export interface BasicType_Static {
 	// Check if the provided basic type os in the proper range.
 	//
 	// In C++ enums are just glorified integers and you can cast

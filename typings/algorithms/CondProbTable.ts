@@ -51,7 +51,7 @@ import {  Real, UInt } from "../types/Types";
 
 export enum inferType { inferViterbi, inferMarginal, inferMaxProd, inferRowEvidence }
 
-interface CondProbTable_Static {
+export interface CondProbTable_Static {
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	/// Constructor
@@ -153,7 +153,7 @@ export interface CondProbTable {
 	///
 	/// @retval pointer to the table
 	///////////////////////////////////////////////////////////////////////////////////
-	getTable(): SparseMatrix<UInt, Real>;
+	// getTable(): SparseMatrix<UInt, Real>;
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	/// Save state to a stream
