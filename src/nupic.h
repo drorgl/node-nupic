@@ -15,7 +15,10 @@
 
 #include <unordered_map>
 
-using namespace v8;
+#undef VOID 
+#undef ERROR
+
+//using namespace v8;
 
 
 
@@ -39,10 +42,10 @@ inline void SetObjectProperty(v8::Local<v8::Object> obj, std::string propertyNam
 
 
 
-inline bool file_exists(const std::string& name) {
-	std::ifstream f(name.c_str());
-	return f.good();
-}
+//inline bool file_exists(const std::string& name) {
+//	std::ifstream f(name.c_str());
+//	return f.good();
+//}
 
 inline std::string string_replace(std::string subject, const std::string& search, const std::string& replace) {
 	size_t pos = 0;

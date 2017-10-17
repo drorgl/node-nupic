@@ -1,93 +1,28 @@
 #ifndef _NUPIC_NTYPES_COLLECTION_H_
 #define _NUPIC_NTYPES_COLLECTION_H_
 
-#include "../nupic.h"
-
-
 #include "nupic/ntypes/Collection.hpp"
+
+#include "../nupic.h"
 
 class Collection : public overres::ObjectWrap {
 public:
-	static void Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload);
+	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
+	static Nan::Persistent<v8::FunctionTemplate> constructor;
 	virtual v8::Local<v8::Function> get_constructor();
 
-	static std::unordered_map<nupic::algorithms::ArrayBuffer*, std::weak_ptr<Input>> _inputs;
+	static std::unordered_map<nupic::Collection<void>*, std::weak_ptr<Collection>> _collections;
 
-	std::shared_ptr<nupic::Input> _input;
+	std::shared_ptr<nupic::Collection<void>> _collection;
 
 	static POLY_METHOD(New);
-	static POLY_METHOD(compute);*/
+	static POLY_METHOD(getCount		);
+	static POLY_METHOD(getByIndex	);
+	static POLY_METHOD(contains		);
+	static POLY_METHOD(add			);
+	static POLY_METHOD(remove		);
 };
 
-// /* ---------------------------------------------------------------------
-//  * Numenta Platform for Intelligent Computing (NuPIC)
-//  * Copyright (C) 2013, Numenta, Inc.  Unless you have an agreement
-//  * with Numenta, Inc., for a separate license for this software code, the
-//  * following terms and conditions apply:
-//  *
-//  * This program is free software: you can redistribute it and/or modify
-//  * it under the terms of the GNU Affero Public License version 3 as
-//  * published by the Free Software Foundation.
-//  *
-//  * This program is distributed in the hope that it will be useful,
-//  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-//  * See the GNU Affero Public License for more details.
-//  *
-//  * You should have received a copy of the GNU Affero Public License
-//  * along with this program.  If not, see http://www.gnu.org/licenses.
-//  *
-//  * http://numenta.org/licenses/
-//  * ---------------------------------------------------------------------
-//  */
-import nupic_module from "../bindings";
-import { bool, pair, size_t } from "../types/Types";
-import { NTA_CHECK, NTA_THROW } from "../utils/Log";
-// #ifndef NTA_COLLECTION_HPP
-// #define NTA_COLLECTION_HPP
-
-// #include <nupic/ntypes/Collection.hpp>
-// #include <nupic/utils/Log.hpp>
-// #include <string>
-// #include <vector>
-
-// namespace nupic
-// {
-//   // A collection is a templated class that contains items of type t.
-//   // It supports lookup by name and by index. The items are stored in a map
-//   // and copies are also stored in a vector (it's Ok to use pointers).
-//   // You can add items using the add() method.
-//   //
-
-export interface Collection<T> {
-
-	getCount(): size_t;
-
-	// This method provides access by index to the contents of the collection
-	// The indices are in insertion order.
-	//
-
-	getByIndex(index: size_t): pair<string, T>;
-
-	contains(name: string): bool;
-
-	getByName(name: string): T;
-
-	// TODO: move add/remove to a ModifiableCollection subclass
-	// This method should be internal but is currently tested
-	// in net_test.py in test_node_spec
-	add(name: string, item: T): void;
-
-	remove(name: string): void;
-
-	// #ifdef NTA_INTERNAL
-	//    pair<string, T>& getByIndex(size_t index);
-	// #endif
-
-}
-// }
-
-// #endif
+	
 #endif

@@ -1,14 +1,14 @@
 #ifndef _NUPIC_MATH_EROSION_H_
 #define _NUPIC_MATH_EROSION_H_
 
-#include "../nupic.h"
-
 
 #include "nupic/math/Erosion.hpp"
 
-class Erosion : public overres::ObjectWrap {
+#include "../nupic.h"
+
+class Erosion_ : public overres::ObjectWrap {
 public:
-	static void Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload);
+	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
 	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
 	virtual v8::Local<v8::Function> get_constructor();

@@ -1,7 +1,7 @@
 ﻿#include "region.h"
 
 #include "dimensions.h"
-#include "network.h"
+//#include "network.h"
 
 //namespace input_general_callback {
 //	std::shared_ptr<overload_resolution> overload;
@@ -14,7 +14,7 @@
 //}
 
 void
-Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Region::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
 	auto class_overload = overload->add_class("Input");
@@ -256,7 +256,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//void setParameterInt32(const std::string& name, Int32 value);
 	class_overload->add_overload("setParameterInt32", {
 		make_param<std::string>("name","string"),
-		make_param<Int32>("value","Int32")
+		make_param<nupic::Int32>("value","Int32")
 	}, setParameterInt32);
 
 	/**
@@ -271,7 +271,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//void setParameterUInt32(const std::string& name, UInt32 value);
 	class_overload->add_overload("setParameterUInt32", {
 		make_param<std::string>("name","string"),
-		make_param<UInt32>("value","UInt32")
+		make_param<nupic::UInt32>("value","UInt32")
 	}, setParameterUInt32);
 
 	/**
@@ -286,7 +286,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//void setParameterInt64(const std::string& name, Int64 value);
 	class_overload->add_overload("setParameterInt64", {
 		make_param<std::string>("name","string"),
-		make_param<Int64>("value","Int64")
+		make_param<nupic::Int64>("value","Int64")
 	}, setParameterInt64);
 
 	/**
@@ -301,7 +301,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//void setParameterUInt64(const std::string& name, UInt64 value);
 	class_overload->add_overload("setParameterUInt64", {
 		make_param<std::string>("name","string"),
-		make_param<UInt64>("value","UInt64")
+		make_param<nupic::UInt64>("value","UInt64")
 	}, setParameterUInt64);
 
 	/**
@@ -316,7 +316,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//void setParameterReal32(const std::string& name, Real32 value);
 	class_overload->add_overload("setParameterReal32", {
 		make_param<std::string>("name","string"),
-		make_param<Real32>("value","Real32")
+		make_param<nupic::Real32>("value","Real32")
 	}, setParameterReal32);
 
 	/**
@@ -331,7 +331,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//void setParameterReal64(const std::string& name, Real64 value);
 	class_overload->add_overload("setParameterReal64", {
 		make_param<std::string>("name","string"),
-		make_param<Real64>("value","Real64")
+		make_param<nupic::Real64>("value","Real64")
 	}, setParameterReal64);
 
 	/**
@@ -346,7 +346,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//void setParameterHandle(const std::string& name, Handle value);
 	class_overload->add_overload("setParameterHandle", {
 		make_param<std::string>("name","string"),
-		make_param<Handle>("value","Handle")
+		make_param<nupic::Handle>("value","Handle")
 	}, setParameterHandle);
 
 	/**
@@ -400,11 +400,11 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	*
 	*/
 	//void getParameterArray(const std::string& name, Array & array) const;
-	class_overload->add_overload("getParameterArray", {
+	/*class_overload->add_overload("getParameterArray", {
 		make_param<std::string>("name","string"),
 		make_param<Array*>("value","Array")
 	}, getParameterArray);
-
+*/
 	/**
 	* Set the parameter to an @c Array value.
 	*
@@ -419,11 +419,11 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	*
 	*/
 	//void setParameterArray(const std::string& name, const Array & array);
-	class_overload->add_overload("setParameterArray", {
+	/*class_overload->add_overload("setParameterArray", {
 		make_param<std::string>("name","string"),
 		make_param<Array*>("value","Array")
 	}, setParameterArray);
-
+*/
 	/**
 	* Set the parameter to a @c std::string value.
 	*
@@ -694,12 +694,12 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 		const std::string& nodeParams,
 		Network * network = nullptr);
 */
-	class_overload->add_overload_constructor({
-		make_param<std::string>("name","string"),
-		make_param<std::string>("type","string"),
-		make_param<std::string>("nodeParams","string"),
-		make_param<Network*>("network","Network", nullptr)
-	}, New_params);
+	//class_overload->add_overload_constructor({
+	//	make_param<std::string>("name","string"),
+	//	make_param<std::string>("type","string"),
+	//	make_param<std::string>("nodeParams","string"),
+	//	make_param<Network*>("network","Network", nullptr)
+	//}, New_params);
 
 	// New region from serialized state
 	/*Region(std::string name,
@@ -707,22 +707,22 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 		const Dimensions& dimensions,
 		BundleIO& bundle,
 		Network * network = nullptr);*/
-	class_overload->add_overload_constructor({
+	/*class_overload->add_overload_constructor({
 		make_param<std::string>("name","string"),
 		make_param<std::string>("type","string"),
 		make_param<Dimensions*>("dimensions","Dimensions"),
 		make_param<BundleIO*>("bundle","BundleIO"),
 		make_param<Network*>("network","Network", nullptr)
-	}, New_dimensions);
+	}, New_dimensions);*/
 
 	// New region from capnp struct
 	/*Region(std::string name, RegionProto::Reader& proto,
 		Network* network = nullptr);*/
-	class_overload->add_overload_constructor({
+	/*class_overload->add_overload_constructor({
 		make_param<std::string>("name","string"),
 		make_param<RegionProto::Reader>("proto","RegionProto::Reader"),
 		make_param<Network*>("network","Network",nullptr)
-	}, New_proto);
+	}, New_proto);*/
 
 	//virtual ~Region();
 
@@ -822,7 +822,7 @@ Region::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	// and it is here for serialization only.
 	//void setPhases(std::set<UInt32>& phases);
 	class_overload->add_overload("setPhases", {
-		make_param<std::shared_ptr<std::set<UInt32>>>("phases","Set<UInt32>")
+		make_param<std::shared_ptr<std::set<nupic::UInt32>>>("phases","Set<UInt32>")
 	}, setPhases);
 
 	//std::set<UInt32>& getPhases();

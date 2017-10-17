@@ -1,3 +1,5 @@
+#include "MovingAverage.hpp"
+
 // /* ---------------------------------------------------------------------
 //  * Numenta Platform for Intelligent Computing (NuPIC)
 //  * Copyright (C) 2016, Numenta, Inc.  Unless you have an agreement

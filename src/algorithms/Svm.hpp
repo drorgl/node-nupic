@@ -1,15 +1,13 @@
 #ifndef _NUPIC_ALGORITHMS_SVM_H_
 #define _NUPIC_ALGORITHMS_SVM_H_
 
+//#include "nupic/algorithms/Svm.hpp"
 
 #include "../nupic.h"
 
-
-#include "nupic/algorithms/Svm.hpp"
-
 class Svm : public overres::ObjectWrap {
 public:
-	static void Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload);
+	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
 	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
 	virtual v8::Local<v8::Function> get_constructor();
@@ -42,12 +40,12 @@ public:
 //  *
 //  * http://numenta.org/licenses/
 //  * ---------------------------------------------------------------------
-//  */
-import nupic_module from "../bindings";
-
-import { bool, float, int } from "../types/Types";
-
-// /*
+////  */
+//import nupic_module from "../bindings";
+//
+//import { bool, float, int } from "../types/Types";
+//
+//// /*
 // Copyright (c) 2000-2007 Chih-Chung Chang and Chih-Jen Lin
 // All rights reserved.
 
@@ -359,102 +357,25 @@ import { bool, float, int } from "../types/Types";
 //  * n_sv = n_sv[n_class], number of SVs for each class
 //  * probA, probB = [n_class*(n_class-1)/2]
 //  */
-export interface svm_model_Static {
-	new(): svm_model;
-}
+	//new(): svm_model;
+	//n_dims_: int;
+	//// 	sv_mem: float *;
+	//// sv: Array < float * > ;
+	//// sv_coef: Array < float *> ;
+	//rho: float[];
+	//label: int[];
+	//n_sv: int[];
+	//probA: float[];
+	//probB: float[];
+	//w: float[][];
 
-export interface svm_model {// : public Serializable<SvmModelProto> {
-	n_dims_: int;
-	// 	sv_mem: float *;
-	// sv: Array < float * > ;
-	// sv_coef: Array < float *> ;
-	rho: float[];
-	label: int[];
-	n_sv: int[];
-	probA: float[];
-	probB: float[];
-	w: float[][];
-
-	size(): int;
-	n_dims(): int;
-	n_class(): int;
-
-	//   svm_model()
-	//       : n_dims_(0), sv_mem(nullptr), sv(), sv_coef(), rho(), label(), n_sv(),
-	//         probA(), probB(), w() {}
-
-	// ~svm_model();
-
-	persistent_size(): int;
-
-	// void save(std::ostream &outStream) const;
-	save(): Buffer;
-	// void load(std::istream &inStream);
-	load(state: Buffer): void;
-	// using Serializable::read;
-	// virtual void read(SvmModelProto::Reader &proto) override;
-	// using Serializable::write;
-	// virtual void write(SvmModelProto::Builder &proto) const override;
-	print(): void;
-
-}
-
-export let svm_model: svm_model_Static = nupic_module.x;
-// //------------------------------------------------------------------------------
-// template <typename TQ> class Solver {
-// public:
-//   Solver()
-//       : active_size(0), y(nullptr), G(nullptr), alpha_status(nullptr),
-//         alpha(nullptr), Q(nullptr), QD(nullptr), eps(0), C(0), p(nullptr),
-//         active_set(nullptr), G_bar(nullptr), l(0), unshrinked(false) {}
-
-//   ~Solver() {}
-
-//   float solve(int l, TQ &Q, const signed char *y_, float *alpha_, float C,
-//               float eps, int shrinking);
-
-// private:
-//   int active_size;
-//   signed char *y;
-//   float *G; // gradient of objective function
-//   // typedef enum { LOWER_BOUND, UPPER_BOUND, FREE } AlphaStatus;
-//   int *alpha_status; // LOWER_BOUND, UPPER_BOUND, FREE
-//   float *alpha;
-//   TQ *Q;
-//   float *QD;
-//   float eps;
-//   float C;
-//   float *p;
-//   int *active_set;
-//   float *G_bar; // gradient, if we treat free variables as 0
-//   int l;
-//   bool unshrinked;
-
-//   float get_C(int i) { return C; }
-
-//   void update_alpha_status(int i) {
-//     NTA_ASSERT(0 <= i);
-
-//     if (alpha[i] >= get_C(i))
-//       alpha_status[i] = 1; // UPPER_BOUND;
-//     else if (alpha[i] <= 0)
-//       alpha_status[i] = 0; // LOWER_BOUND;
-//     else
-//       alpha_status[i] = 2; // FREE;
-//   }
-
-//   bool is_upper_bound(int i) { return alpha_status[i] == 1; /*UPPER_BOUND;*/ }
-//   bool is_lower_bound(int i) { return alpha_status[i] == 0; /*LOWER_BOUND;*/ }
-//   bool is_free(int i) { return alpha_status[i] == 2; /*FREE;*/ }
-//   void swap_index(int i, int j);
-//   void reconstruct_gradient();
-//   int select_working_set(int &i, int &j);
-//   float calculate_rho();
-//   void do_shrinking();
-//   bool be_shrunken(int i, float Gmax1, float Gmax2);
-// };
-
-// //------------------------------------------------------------------------------
+	//size(): int;
+	//n_dims(): int;
+	//n_class(): int;
+	//persistent_size(): int;
+	//save(): Buffer;
+	//load(state: Buffer): void;
+	//print(): void;
 // //
 // // Kernel Cache
 // //
@@ -785,36 +706,36 @@ export let svm_model: svm_model_Static = nupic_module.x;
 //     return v;
 //   }
 // };
-
-// ------------------------------------------------------------------------------
-export interface svm_parameter_Static {
-	new(k: int, p: bool, g: float, c: float, e: float, cs: int, s: int): svm_parameter;
-}
-export interface svm_parameter {// : public Serializable<SvmParameterProto> {
-	kernel: int; // 0 = linear, 1 = rbf
-	probability: bool;
-	gamma: float;
-	C: float;
-	eps: float;      /* stopping criteria */
-	cache_size: int; /* in MB */
-	shrinking: int;  /* use the shrinking heuristics */
-	weight_label: int[];
-	weight: float[];
-
-	persistent_size(): int;
-	save(): Buffer;
-	// void save(std::ostream &outStream) const;
-	load(state: Buffer): void;
-	// void load(std::istream &inStream);
-
-	//   using Serializable::read;
-	//   virtual void read(SvmParameterProto::Reader &proto) override;
-	//   using Serializable::write;
-	//   virtual void write(SvmParameterProto::Builder &proto) const override;
-
-	print(): void;
-}
-export let svm_parameter: svm_parameter_Static = nupic_module.x;
+//
+//// ------------------------------------------------------------------------------
+//export interface svm_parameter_Static {
+//	new(k: int, p: bool, g: float, c: float, e: float, cs: int, s: int): svm_parameter;
+//}
+//export interface svm_parameter {// : public Serializable<SvmParameterProto> {
+//	kernel: int; // 0 = linear, 1 = rbf
+//	probability: bool;
+//	gamma: float;
+//	C: float;
+//	eps: float;      /* stopping criteria */
+//	cache_size: int; /* in MB */
+//	shrinking: int;  /* use the shrinking heuristics */
+//	weight_label: int[];
+//	weight: float[];
+//
+//	persistent_size(): int;
+//	save(): Buffer;
+//	// void save(std::ostream &outStream) const;
+//	load(state: Buffer): void;
+//	// void load(std::istream &inStream);
+//
+//	//   using Serializable::read;
+//	//   virtual void read(SvmParameterProto::Reader &proto) override;
+//	//   using Serializable::write;
+//	//   virtual void write(SvmParameterProto::Builder &proto) const override;
+//
+//	print(): void;
+//}
+//export let svm_parameter: svm_parameter_Static = nupic_module.x;
 
 // //------------------------------------------------------------------------------
 // struct svm_std_traits {

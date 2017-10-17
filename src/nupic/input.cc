@@ -15,7 +15,7 @@
 #include "output.h"
 
 void
-Input::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Input::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
 	auto class_overload = overload->add_class("Input");
@@ -125,7 +125,7 @@ Input::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
 	// 	void
 	// 	removeLink(Link*& link);
 	class_overload->add_overload("removeLink", {
-		make_param<Link>("link", "Link")
+		make_param<Link*>("link", "Link")
 	}, removeLink);
 	
 	// 	/**
@@ -273,12 +273,13 @@ POLY_METHOD(Input::New_region_type_level) {
 	auto isRegionLevel = info.at<bool>(2);
 
 	Input *pt;
-
+	throw std::runtime_error("not implemented");
+/*
 	pt = new Input();
 	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
 
 	pt->Wrap(info.This());
-	info.GetReturnValue().Set(info.This());
+	info.GetReturnValue().Set(info.This());*/
 }
 
 POLY_METHOD(Input::setName) {
@@ -322,7 +323,8 @@ POLY_METHOD(Input::removeLink) {
 	auto this_ = info.This<Input*>();
 	auto link = info.at<Link*>(0)->_link;
 
-	this_->_input->removeLink(link.get());
+	//this_->_input->removeLink(link.get());
+	throw std::runtime_error("not implemented");
 }
 
 POLY_METHOD(Input::prepare) {

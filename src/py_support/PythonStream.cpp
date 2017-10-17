@@ -1,3 +1,5 @@
+#include "PythonStream.hpp"
+
 // #ifndef NTA_PYTHON_STREAM_HPP
 // #define NTA_PYTHON_STREAM_HPP
 

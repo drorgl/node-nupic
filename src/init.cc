@@ -1,4 +1,4 @@
-#include "nupic.h"
+
 
 
 //#include "nupic/input.h"
@@ -113,38 +113,38 @@
 #include "utils/TRandom.hpp",
 #include "utils/Watcher.hpp",
 
+#include "nupic.h"
 
+namespace tracer {
+	#include <tracer.h>
+}
 
+extern "C" {
+	void init(v8::Handle<v8::Object> target) {
+		//assert(false);
+		tracer::tracer::Init(target);
 
-#include <tracer.h>
+		auto overload = std::make_shared<overload_resolution>();
+		auto base_overload = overload->register_module(target);
 
-extern "C"{ 
-void
-init(Handle<Object> target) {
-	//assert(false);
-	tracer::Init(target);
+		overload->add_type_alias("int", "Number");
+		overload->add_type_alias("double", "Number");
+		overload->add_type_alias("float", "Number");
+		//Register
 
-	auto overload = std::make_shared<overload_resolution>();
-	auto base_overload = overload->register_module(target);
+		//input::Init(target, base_overload);
 
-	overload->add_type_alias("int", "Number");
-	overload->add_type_alias("double", "Number");
-	overload->add_type_alias("float", "Number");
-	//Register
+		//photo::Init(target, overload);
 
-	input::Init(target, base_overload);
+		//Init
 
-	//photo::Init(target, overload);
+		//IOArray::Init(target, overload);
 
-	//Init
+		target->Set(Nan::New("version").ToLocalChecked(), Nan::New("1.0.0").ToLocalChecked());
 
-	//IOArray::Init(target, overload);
-
-	target->Set(Nan::New("version").ToLocalChecked(), Nan::New("1.0.0").ToLocalChecked());
-
-	//validate type/overload registrations
-	assert(overload->validate_type_registrations());
-};
+		//validate type/overload registrations
+		assert(overload->validate_type_registrations());
+	};
 }
 
 NODE_MODULE(nupic, init)

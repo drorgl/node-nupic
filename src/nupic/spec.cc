@@ -1,4 +1,4 @@
-﻿#include "input.h"
+﻿#include "spec.h"
 
 //namespace input_general_callback {
 //	std::shared_ptr<overload_resolution> overload;
@@ -11,10 +11,10 @@
 //}
 
 void
-input::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Spec::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
-	auto class_overload = overload->add_class("Input");
+	auto class_overload = overload->add_class("Spec");
 	
 
 }

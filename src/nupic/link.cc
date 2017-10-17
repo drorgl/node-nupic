@@ -15,7 +15,7 @@
 //}
 
 void
-Link::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Link::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
 	auto class_overload = overload->add_class("Link");
@@ -427,7 +427,8 @@ v8::Local<v8::Function> Input::get_constructor() {
 
 
 POLY_METHOD(Link::New) {
-	if (!info.IsConstructCall())
+	throw std::runtime_error("not implemented");
+	/*if (!info.IsConstructCall())
 		return Nan::ThrowTypeError("Cannot call constructor as function");
 
 	auto region = info.at<Region*>(0);
@@ -440,7 +441,7 @@ POLY_METHOD(Link::New) {
 	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
 
 	pt->Wrap(info.This());
-	info.GetReturnValue().Set(info.This());
+	info.GetReturnValue().Set(info.This());*/
 }
 POLY_METHOD(Link::New_type) {
 

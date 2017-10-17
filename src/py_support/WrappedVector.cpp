@@ -1,3 +1,5 @@
+#include "WrappedVector.hpp"
+
 // #ifndef NTA_WRAPPED_VECTOR_HPP
 // #define NTA_WRAPPED_VECTOR_HPP
 

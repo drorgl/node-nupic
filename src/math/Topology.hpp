@@ -1,107 +1,20 @@
 #ifndef _NUPIC_MATH_TOPOLOGY_H_
 #define _NUPIC_MATH_TOPOLOGY_H_
 
+#include "nupic/math/Topology.hpp"
 
 #include "../nupic.h"
 
-
-#include "nupic/math/Topology.hpp"
-
 class Topology : public overres::ObjectWrap {
 public:
-	static void Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload);
+	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
-	virtual v8::Local<v8::Function> get_constructor();
+	static POLY_METHOD(coordinatesFromIndex);
+	static POLY_METHOD(indexFromCoordinates);
 
-	static std::unordered_map<nupic::algorithms::ArrayBuffer*, std::weak_ptr<Input>> _inputs;
-
-	std::shared_ptr<nupic::Input> _input;
-
-	static POLY_METHOD(New);
-	static POLY_METHOD(compute);*/
 };
 
-// /* ---------------------------------------------------------------------
-//  * Numenta Platform for Intelligent Computing (NuPIC)
-//  * Copyright (C) 2016, Numenta, Inc.  Unless you have an agreement
-//  * with Numenta, Inc., for a separate license for this software code, the
-//  * following terms and conditions apply:
-//  *
-//  * This program is free software: you can redistribute it and/or modify
-//  * it under the terms of the GNU Affero Public License version 3 as
-//  * published by the Free Software Foundation.
-//  *
-//  * This program is distributed in the hope that it will be useful,
-//  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-//  * See the GNU Affero Public License for more details.
-//  *
-//  * You should have received a copy of the GNU Affero Public License
-//  * along with this program.  If not, see http://www.gnu.org/licenses.
-//  *
-//  * http://numenta.org/licenses/
-//  * ----------------------------------------------------------------------
-//  */
-import nupic_module from "../bindings";
-import { UInt } from "../types/Types";
-// /** @file
-//  * Topology helpers
-//  */
 
-// #ifndef NTA_TOPOLOGY_HPP
-// #define NTA_TOPOLOGY_HPP
-
-// #include <vector>
-
-// #include <nupic/types/Types.hpp>
-
-// namespace nupic
-// {
-//   namespace math
-//   {
-//     namespace topology
-//     {
-
-//       /**
-//        * Translate an index into coordinates, using the given coordinate system.
-//        *
-//        * @param index
-//        * The index of the point. The coordinates are expressed as a single index
-//        * by using the dimensions as a mixed radix definition. For example, in
-//        * dimensions 42x10, the point [1, 4] is index 1*420 + 4*10 = 460.
-//        *
-//        * @param dimensions
-//        * The coordinate system.
-//        *
-//        * @returns
-//        * A vector of coordinates of length dimensions.size().
-//        */
-
-export type IcoordinatesFromIndex = (
-	index: UInt,
-	dimensions: UInt[]) => UInt[];
-
-export let coordinatesFromIndex: IcoordinatesFromIndex = nupic_module.x;
-
-//       /**
-//        * Translate coordinates into an index, using the given coordinate system.
-//        *
-//        * @param coordinates
-//        * A vector of coordinates of length dimensions.size().
-//        *
-//        * @param dimensions
-//        * The coordinate system.
-//        *
-//        * @returns
-//        * The index of the point. The coordinates are expressed as a single index
-//        * by using the dimensions as a mixed radix definition. For example, in
-//        * dimensions 42x10, the point [1, 4] is index 1*420 + 4*10 = 460.
-//        */
-export type IindexFromCoordinates = (
-	coordinates: UInt[],
-	dimensions: UInt[]) => UInt;
-export let indexFromCoordinates: IindexFromCoordinates = nupic_module.x;
 
 //       /**
 //        * A class that lets you iterate over all points within the neighborhood

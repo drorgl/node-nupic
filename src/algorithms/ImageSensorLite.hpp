@@ -1,15 +1,13 @@
 #ifndef _NUPIC_ALGORITHMS_IMAGESENSORLITE_H_
 #define _NUPIC_ALGORITHMS_IMAGESENSORLITE_H_
 
+#include "nupic/algorithms/ImageSensorLite.hpp"
 
 #include "../nupic.h"
 
-
-#include "nupic/algorithms/ImageSensorLite.hpp"
-
 class ImageSensorLite : public overres::ObjectWrap {
 public:
-	static void Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload);
+	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
 	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
 	virtual v8::Local<v8::Function> get_constructor();
@@ -20,6 +18,12 @@ public:
 
 	static POLY_METHOD(New);
 	static POLY_METHOD(compute);*/
+
+	static POLY_METHOD(adjustBox	 );
+	static POLY_METHOD(accessPixels	 );
+	static POLY_METHOD(extractAuxInfo);
+	static POLY_METHOD(formHistogramX);
+	static POLY_METHOD(formHistogramY);
 };
 
 // /* ---------------------------------------------------------------------

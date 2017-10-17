@@ -1,15 +1,13 @@
 #ifndef _NUPIC_UTILS_GROUPBY_H_
 #define _NUPIC_UTILS_GROUPBY_H_
 
+#include "nupic/utils/GroupBy.hpp"
 
 #include "../nupic.h"
 
-
-#include "nupic/utils/GroupBy.hpp"
-
 class GroupBy : public overres::ObjectWrap {
 public:
-	static void Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload);
+	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
 	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
 	virtual v8::Local<v8::Function> get_constructor();

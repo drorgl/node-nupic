@@ -1,3 +1,5 @@
+#include "OS.hpp"
+
 // /* ---------------------------------------------------------------------
 //  * Numenta Platform for Intelligent Computing (NuPIC)
 //  * Copyright (C) 2013, Numenta, Inc.  Unless you have an agreement

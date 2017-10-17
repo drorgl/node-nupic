@@ -14,7 +14,7 @@
 //}
 
 void
-Output::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Output::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
 	auto class_overload = overload->add_class("Output");

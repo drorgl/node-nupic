@@ -11,7 +11,7 @@
 //}
 
 void
-Dimensions::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+Dimensions::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
 	auto class_overload = overload->add_class("Dimensions");
@@ -244,9 +244,9 @@ Dimensions::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload
 	*/
 	/*size_t
 		getIndex(const Coordinate& coordinate) const;*/
-	class_overload->add_overload("getIndex", {
+	/*class_overload->add_overload("getIndex", {
 		make_param<Coordinate*>("coordinate","Coordinate")
-	}, getIndex);
+	}, getIndex);*/
 
 	/**
 	* Convert a linear index (in lower-major order) to a Coordinate.
@@ -347,7 +347,8 @@ Dimensions::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload
 
 
 POLY_METHOD(Dimensions::New) {
-	if (!info.IsConstructCall())
+	throw std::runtime_error("not implemented");
+	/*if (!info.IsConstructCall())
 		return Nan::ThrowTypeError("Cannot call constructor as function");
 
 	auto region = info.at<Region*>(0);
@@ -360,10 +361,11 @@ POLY_METHOD(Dimensions::New) {
 	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
 
 	pt->Wrap(info.This());
-	info.GetReturnValue().Set(info.This());
+	info.GetReturnValue().Set(info.This());*/
 }
 POLY_METHOD(Dimensions::New_v) {
-	if (!info.IsConstructCall())
+	throw std::runtime_error("not implemented");
+	/*if (!info.IsConstructCall())
 		return Nan::ThrowTypeError("Cannot call constructor as function");
 
 	auto region = info.at<Region*>(0);
@@ -376,10 +378,11 @@ POLY_METHOD(Dimensions::New_v) {
 	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
 
 	pt->Wrap(info.This());
-	info.GetReturnValue().Set(info.This());
+	info.GetReturnValue().Set(info.This());*/
 }
 POLY_METHOD(Dimensions::New_x) {
-	if (!info.IsConstructCall())
+	throw std::runtime_error("not implemented");
+	/*if (!info.IsConstructCall())
 		return Nan::ThrowTypeError("Cannot call constructor as function");
 
 	auto region = info.at<Region*>(0);
@@ -392,10 +395,11 @@ POLY_METHOD(Dimensions::New_x) {
 	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
 
 	pt->Wrap(info.This());
-	info.GetReturnValue().Set(info.This());
+	info.GetReturnValue().Set(info.This());*/
 }
 POLY_METHOD(Dimensions::New_x_y) {
-	if (!info.IsConstructCall())
+	throw std::runtime_error("not implemented");
+	/*if (!info.IsConstructCall())
 		return Nan::ThrowTypeError("Cannot call constructor as function");
 
 	auto region = info.at<Region*>(0);
@@ -408,10 +412,11 @@ POLY_METHOD(Dimensions::New_x_y) {
 	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
 
 	pt->Wrap(info.This());
-	info.GetReturnValue().Set(info.This());
+	info.GetReturnValue().Set(info.This());*/
 }
 POLY_METHOD(Dimensions::New_x_y_z) {
-	if (!info.IsConstructCall())
+	throw std::runtime_error("not implemented");
+	/*if (!info.IsConstructCall())
 		return Nan::ThrowTypeError("Cannot call constructor as function");
 
 	auto region = info.at<Region*>(0);
@@ -424,7 +429,7 @@ POLY_METHOD(Dimensions::New_x_y_z) {
 	pt->_input = std::make_shared<nupic::Input>(*region, type, isRegionLevel);
 
 	pt->Wrap(info.This());
-	info.GetReturnValue().Set(info.This());
+	info.GetReturnValue().Set(info.This());*/
 }
 POLY_METHOD(Dimensions::getCount) {
 	auto this_ = info.This<Dimensions*>();

@@ -1,3 +1,5 @@
+#include "NumpyVector.hpp"
+
 // #ifndef NTA_NUMPY_VECTOR_HPP
 // #define NTA_NUMPY_VECTOR_HPP
 

@@ -11,7 +11,7 @@
 //}
 
 void
-NuPIC::Init(Handle<Object> target, std::shared_ptr<namespace_wrap> overload) {
+NuPIC::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
 	//input_general_callback::overload = overload;
 
 	auto namespace_overload = overload->add_namespace("NuPIC");
