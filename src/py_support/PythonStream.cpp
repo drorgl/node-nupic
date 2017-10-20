@@ -1,5 +1,13 @@
 #include "PythonStream.hpp"
 
+namespace node_nupic {
+	namespace py_support {
+		void PythonStream::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
+		}
+	}
+
+}
+
 // #ifndef NTA_PYTHON_STREAM_HPP
 // #define NTA_PYTHON_STREAM_HPP
 

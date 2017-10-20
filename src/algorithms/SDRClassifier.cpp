@@ -1,5 +1,14 @@
 #include "SDRClassifier.hpp"
-//
+
+
+namespace node_nupic {
+	namespace algorithms {
+		void SDRClassifier::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
+		}
+	}
+
+}
+
 ///* ---------------------------------------------------------------------
 // * Numenta Platform for Intelligent Computing (NuPIC)
 // * Copyright (C) 2016, Numenta, Inc.  Unless you have an agreement

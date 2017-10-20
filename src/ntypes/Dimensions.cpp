@@ -1,5 +1,13 @@
 #include "Dimensions.hpp"
 
+namespace node_nupic {
+	namespace ntypes {
+		void Dimensions::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
+		}
+	}
+
+}
+
 //
 ///* ---------------------------------------------------------------------
 // * Numenta Platform for Intelligent Computing (NuPIC)

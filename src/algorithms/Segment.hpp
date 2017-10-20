@@ -6,55 +6,57 @@
 #include "../nupic.h"
 
 namespace node_nupic {
-	class Segment : public overres::ObjectWrap {
-	public:
-		static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
+	namespace algorithms {
+		class Segment : public overres::ObjectWrap {
+		public:
+			static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-		static Nan::Persistent<v8::FunctionTemplate> constructor;
-		virtual v8::Local<v8::Function> get_constructor();
+			static Nan::Persistent<v8::FunctionTemplate> constructor;
+			virtual v8::Local<v8::Function> get_constructor();
 
-		static std::unordered_map<nupic::algorithms::Cells4::Segment*, std::weak_ptr<Segment>> _segments;
+			static std::unordered_map<nupic::algorithms::Cells4::Segment*, std::weak_ptr<Segment>> _segments;
 
-		std::shared_ptr<nupic::algorithms::Cells4::Segment> _segment;
-
-
-		static POLY_METHOD(New);
-		static POLY_METHOD(New_detail);
-		static POLY_METHOD(atDutyCycleTier);
-		static POLY_METHOD(invariants);
-		static POLY_METHOD(checkConnected);
-		static POLY_METHOD(empty);
-		static POLY_METHOD(size);
-		static POLY_METHOD(isSequenceSegment);
-		static POLY_METHOD(frequency);
-		static POLY_METHOD(getFrequency);
-		static POLY_METHOD(nConnected);
-		static POLY_METHOD(getTotalActivations);
-		static POLY_METHOD(getPositiveActivations);
-		static POLY_METHOD(getLastActiveIteration);
-		static POLY_METHOD(getLastPosDutyCycle);
-		static POLY_METHOD(getLastPosDutyCycleIteration);
-		static POLY_METHOD(has);
-		static POLY_METHOD(setPermanence);
-		static POLY_METHOD(getPermanence);
-		static POLY_METHOD(getSrcCellIdx);
-		static POLY_METHOD(getSrcCellIndices);
-		static POLY_METHOD(clear);
-		//static POLY_METHOD([idx:number]: InSynapse;			);
-		static POLY_METHOD(addSynapses);
-		static POLY_METHOD(recomputeConnected);
-		static POLY_METHOD(decaySynapses2);
-		static POLY_METHOD(decaySynapses);
-		static POLY_METHOD(freeNSynapses);
-		static POLY_METHOD(isActive);
-		static POLY_METHOD(computeActivity);
-		static POLY_METHOD(dutyCycle);
-		static POLY_METHOD(persistentSize);
-		static POLY_METHOD(save);
-		static POLY_METHOD(load);
+			std::shared_ptr<nupic::algorithms::Cells4::Segment> _segment;
 
 
-	};
+			static POLY_METHOD(New);
+			static POLY_METHOD(New_detail);
+			static POLY_METHOD(atDutyCycleTier);
+			static POLY_METHOD(invariants);
+			static POLY_METHOD(checkConnected);
+			static POLY_METHOD(empty);
+			static POLY_METHOD(size);
+			static POLY_METHOD(isSequenceSegment);
+			static POLY_METHOD(frequency);
+			static POLY_METHOD(getFrequency);
+			static POLY_METHOD(nConnected);
+			static POLY_METHOD(getTotalActivations);
+			static POLY_METHOD(getPositiveActivations);
+			static POLY_METHOD(getLastActiveIteration);
+			static POLY_METHOD(getLastPosDutyCycle);
+			static POLY_METHOD(getLastPosDutyCycleIteration);
+			static POLY_METHOD(has);
+			static POLY_METHOD(setPermanence);
+			static POLY_METHOD(getPermanence);
+			static POLY_METHOD(getSrcCellIdx);
+			static POLY_METHOD(getSrcCellIndices);
+			static POLY_METHOD(clear);
+			//static POLY_METHOD([idx:number]: InSynapse;			);
+			static POLY_METHOD(addSynapses);
+			static POLY_METHOD(recomputeConnected);
+			static POLY_METHOD(decaySynapses2);
+			static POLY_METHOD(decaySynapses);
+			static POLY_METHOD(freeNSynapses);
+			static POLY_METHOD(isActive);
+			static POLY_METHOD(computeActivity);
+			static POLY_METHOD(dutyCycle);
+			static POLY_METHOD(persistentSize);
+			static POLY_METHOD(save);
+			static POLY_METHOD(load);
+
+
+		};
+	}
 }
 //
 //interface CState_Static {

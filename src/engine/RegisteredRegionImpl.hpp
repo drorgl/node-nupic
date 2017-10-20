@@ -1,24 +1,29 @@
 #ifndef _NUPIC_ENGINE_REGISTEREDREGIONIMPL_H_
 #define _NUPIC_ENGINE_REGISTEREDREGIONIMPL_H_
 
-#include "nupic/engine/RegisteredRegionImpl.hpp"
+//#include "nupic/engine/RegisteredRegionImpl.hpp"
 
 #include "../nupic.h"
 
-class RegisteredRegionImpl : public overres::ObjectWrap {
-public:
-	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
+namespace node_nupic {
+	namespace engine {
 
-	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
-	virtual v8::Local<v8::Function> get_constructor();
+		class RegisteredRegionImpl : public overres::ObjectWrap {
+		public:
+			static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-	static std::unordered_map<nupic::algorithms::ArrayBuffer*, std::weak_ptr<Input>> _inputs;
+			/*static Nan::Persistent<v8::FunctionTemplate> constructor;
+			virtual v8::Local<v8::Function> get_constructor();
 
-	std::shared_ptr<nupic::Input> _input;
+			static std::unordered_map<nupic::algorithms::ArrayBuffer*, std::weak_ptr<Input>> _inputs;
 
-	static POLY_METHOD(New);
-	static POLY_METHOD(compute);*/
-};
+			std::shared_ptr<nupic::Input> _input;
+
+			static POLY_METHOD(New);
+			static POLY_METHOD(compute);*/
+		};
+	}
+}
 
 // // /* ---------------------------------------------------------------------
 // //  * Numenta Platform for Intelligent Computing (NuPIC)

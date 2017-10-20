@@ -5,29 +5,33 @@
 
 #include "../nupic.h"
 
-class SDRClassifier : public overres::ObjectWrap {
-public:
-	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
+namespace node_nupic {
+	namespace algorithms {
+		class SDRClassifier : public overres::ObjectWrap {
+		public:
+			static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
-	virtual v8::Local<v8::Function> get_constructor();
+			static Nan::Persistent<v8::FunctionTemplate> constructor;
+			virtual v8::Local<v8::Function> get_constructor();
 
-	//static std::unordered_map<nupic::algorithms::sdr_classifier::SDRClassifier*, std::weak_ptr<SDRClassifier>> _sdr_classifiers;
+			//static std::unordered_map<nupic::algorithms::sdr_classifier::SDRClassifier*, std::weak_ptr<SDRClassifier>> _sdr_classifiers;
 
-	//std::shared_ptr<nupic::algorithms::sdr_classifier::SDRClassifier> _sdrclassifier;
+			//std::shared_ptr<nupic::algorithms::sdr_classifier::SDRClassifier> _sdrclassifier;
 
 
-	static POLY_METHOD(New				);
-	static POLY_METHOD(New_steps		);
-	static POLY_METHOD(compute			);
-	static POLY_METHOD(version			);
-	static POLY_METHOD(getVerbosity		);
-	static POLY_METHOD(setVerbosity		);
-	static POLY_METHOD(getAlpha			);
-	static POLY_METHOD(persistentSize	);
-	static POLY_METHOD(save				);
-	static POLY_METHOD(load				);
-};
+			static POLY_METHOD(New);
+			static POLY_METHOD(New_steps);
+			static POLY_METHOD(compute);
+			static POLY_METHOD(version);
+			static POLY_METHOD(getVerbosity);
+			static POLY_METHOD(setVerbosity);
+			static POLY_METHOD(getAlpha);
+			static POLY_METHOD(persistentSize);
+			static POLY_METHOD(save);
+			static POLY_METHOD(load);
+		};
+	}
+}
 		/*new(): SDRClassifier;
 		new(
 			steps: UInt[], alpha: Real64, actValueAlpha: Real64,

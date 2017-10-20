@@ -1,5 +1,13 @@
 #include "WrappedVector.hpp"
 
+namespace node_nupic {
+	namespace py_support {
+		void WrappedVector::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
+		}
+	}
+
+}
+
 // #ifndef NTA_WRAPPED_VECTOR_HPP
 // #define NTA_WRAPPED_VECTOR_HPP
 

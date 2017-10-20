@@ -5,14 +5,19 @@
 
 #include "../nupic.h"
 
-class Topology : public overres::ObjectWrap {
-public:
-	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-	static POLY_METHOD(coordinatesFromIndex);
-	static POLY_METHOD(indexFromCoordinates);
+namespace node_nupic {
+	namespace math {
+		class Topology : public overres::ObjectWrap {
+		public:
+			static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-};
+			static POLY_METHOD(coordinatesFromIndex);
+			static POLY_METHOD(indexFromCoordinates);
+
+		};
+	}
+}
 
 
 

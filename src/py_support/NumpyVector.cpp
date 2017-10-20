@@ -1,5 +1,13 @@
 #include "NumpyVector.hpp"
 
+namespace node_nupic {
+	namespace py_support {
+		void NumpyVector::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
+		}
+	}
+
+}
+
 // #ifndef NTA_NUMPY_VECTOR_HPP
 // #define NTA_NUMPY_VECTOR_HPP
 

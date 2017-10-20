@@ -14,54 +14,56 @@ namespace nupic {
 }
 
 namespace node_nupic {
+	namespace algorithms {
 
-	class Connections : public overres::ObjectWrap {
-	public:
-		static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
+		class Connections : public overres::ObjectWrap {
+		public:
+			static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-		static Nan::Persistent<v8::FunctionTemplate> constructor;
-		virtual v8::Local<v8::Function> get_constructor();
+			static Nan::Persistent<v8::FunctionTemplate> constructor;
+			virtual v8::Local<v8::Function> get_constructor();
 
-		static std::unordered_map<nupic::algorithms::connections::Connections*, std::weak_ptr<Connections>> _inputs;
+			static std::unordered_map<nupic::algorithms::connections::Connections*, std::weak_ptr<Connections>> _inputs;
 
-		std::shared_ptr<nupic::algorithms::connections::Connections> _input;
+			std::shared_ptr<nupic::algorithms::connections::Connections> _input;
 
 
-		static POLY_METHOD(New);
-		static POLY_METHOD(New_numCells);
-		static POLY_METHOD(initialize);
-		static POLY_METHOD(createSegment);
-		static POLY_METHOD(createSynapse);
-		static POLY_METHOD(destroySegment);
-		static POLY_METHOD(destroySynapse);
-		static POLY_METHOD(updateSynapsePermanence);
-		static POLY_METHOD(segmentsForCell);
-		static POLY_METHOD(synapsesForSegment);
-		static POLY_METHOD(cellForSegment);
-		static POLY_METHOD(idxOnCellForSegment);
-		static POLY_METHOD(mapSegmentsToCells);
-		static POLY_METHOD(segmentForSynapse);
-		static POLY_METHOD(dataForSegment);
-		static POLY_METHOD(dataForSynapse);
-		static POLY_METHOD(getSegment);
-		static POLY_METHOD(segmentFlatListLength);
-		static POLY_METHOD(compareSegments);
-		static POLY_METHOD(synapsesForPresynapticCell);
-		static POLY_METHOD(computeActivity_cells);
-		static POLY_METHOD(computeActivity_cell);
-		static POLY_METHOD(save);
-		static POLY_METHOD(load);
-		static POLY_METHOD(numCells);
-		static POLY_METHOD(numSegments);
-		static POLY_METHOD(numSegments_cell);
-		static POLY_METHOD(numSynapses);
-		static POLY_METHOD(numSynapses_segments);
-		static POLY_METHOD(op_Equals);
-		static POLY_METHOD(op_NotEquals);
-		static POLY_METHOD(subscribe);
-		static POLY_METHOD(unsubscribe);
+			static POLY_METHOD(New);
+			static POLY_METHOD(New_numCells);
+			static POLY_METHOD(initialize);
+			static POLY_METHOD(createSegment);
+			static POLY_METHOD(createSynapse);
+			static POLY_METHOD(destroySegment);
+			static POLY_METHOD(destroySynapse);
+			static POLY_METHOD(updateSynapsePermanence);
+			static POLY_METHOD(segmentsForCell);
+			static POLY_METHOD(synapsesForSegment);
+			static POLY_METHOD(cellForSegment);
+			static POLY_METHOD(idxOnCellForSegment);
+			static POLY_METHOD(mapSegmentsToCells);
+			static POLY_METHOD(segmentForSynapse);
+			static POLY_METHOD(dataForSegment);
+			static POLY_METHOD(dataForSynapse);
+			static POLY_METHOD(getSegment);
+			static POLY_METHOD(segmentFlatListLength);
+			static POLY_METHOD(compareSegments);
+			static POLY_METHOD(synapsesForPresynapticCell);
+			static POLY_METHOD(computeActivity_cells);
+			static POLY_METHOD(computeActivity_cell);
+			static POLY_METHOD(save);
+			static POLY_METHOD(load);
+			static POLY_METHOD(numCells);
+			static POLY_METHOD(numSegments);
+			static POLY_METHOD(numSegments_cell);
+			static POLY_METHOD(numSynapses);
+			static POLY_METHOD(numSynapses_segments);
+			static POLY_METHOD(op_Equals);
+			static POLY_METHOD(op_NotEquals);
+			static POLY_METHOD(subscribe);
+			static POLY_METHOD(unsubscribe);
 
-	};
+		};
+	}
 }
 
 	//export interface Synapse {

@@ -6,20 +6,24 @@
 
 #include "../nupic.h"
 
-class NumpyArrayObject : public overres::ObjectWrap {
-public:
-	static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
+namespace node_nupic {
+	namespace py_support {
+		class NumpyArrayObject : public overres::ObjectWrap {
+		public:
+			static void Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload);
 
-	/*static Nan::Persistent<v8::FunctionTemplate> constructor;
-	virtual v8::Local<v8::Function> get_constructor();
+			/*static Nan::Persistent<v8::FunctionTemplate> constructor;
+			virtual v8::Local<v8::Function> get_constructor();
 
-	static std::unordered_map<nupic::algorithms::ArrayBuffer*, std::weak_ptr<Input>> _inputs;
+			static std::unordered_map<nupic::algorithms::ArrayBuffer*, std::weak_ptr<Input>> _inputs;
 
-	std::shared_ptr<nupic::Input> _input;
+			std::shared_ptr<nupic::Input> _input;
 
-	static POLY_METHOD(New);
-	static POLY_METHOD(compute);*/
-};
+			static POLY_METHOD(New);
+			static POLY_METHOD(compute);*/
+		};
+	}
+}
 
 // /* ---------------------------------------------------------------------
 //  * Numenta Platform for Intelligent Computing (NuPIC)

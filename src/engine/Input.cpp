@@ -1,5 +1,13 @@
 #include "Input.hpp"
 
+namespace node_nupic {
+	namespace engine {
+		void Input::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
+		}
+	}
+
+}
+
 //
 //
 ///* ---------------------------------------------------------------------

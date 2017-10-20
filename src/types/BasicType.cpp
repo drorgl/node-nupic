@@ -1,4 +1,14 @@
 #include "BasicType.hpp"
+
+
+namespace node_nupic {
+	namespace types {
+		void BasicType::Init(v8::Handle<v8::Object> target, std::shared_ptr<namespace_wrap> overload) {
+		}
+	}
+
+}
+
 //// /* ---------------------------------------------------------------------
 ////  * Numenta Platform for Intelligent Computing (NuPIC)
 ////  * Copyright (C) 2013, Numenta, Inc.  Unless you have an agreement
